@@ -27,6 +27,8 @@ export class StTwoListSelection {
    public copySelectedElements: List = [];
 
    public allSearch: string = '';
+   public numItemsSelectedAll: EventEmitter <number>;
+   public numItemsSelectedSelected: EventEmitter <number>;
    public selectedSearch: string = '';
 
    public searchBy: string = 'name';
@@ -41,6 +43,7 @@ export class StTwoListSelection {
       if (this.canSelect(selection, this.copyAllElement)) {
          selection.selected = !selection.selected;
       }
+      this.numItemsSelectedAll.emit(this.getNumItemsSelected(this.copyAllElement));
    }
 
    // Check selected element
@@ -48,6 +51,7 @@ export class StTwoListSelection {
       if (this.canSelect(selection, this.copySelectedElements)) {
          selection.selected = !selection.selected;
       }
+      this.numItemsSelectedSelected.emit(this.getNumItemsSelected(this.copySelectedElements));
    }
 
    // Update search filter
@@ -84,7 +88,6 @@ export class StTwoListSelection {
       this.emitter.emit([]);
    }
 
-
    init(all: List, selected: List, changeEmitter: EventEmitter<List>, sorted: 'id' | 'name'): void {
       this.emitter = changeEmitter;
       this.sortLists = sorted;
@@ -103,6 +106,13 @@ export class StTwoListSelection {
       if (changes[allList] !== undefined || changes[selectedList] !== undefined) {
          this.generateWorkLists();
       }
+   }
+
+   private getNumItemsSelected(list: List): number {
+      const reducer = (accumulator: number, currentValue: StTwoListSelectionElement) => {
+         return  (currentValue.selected) ? accumulator + 1 : accumulator + 0;
+      };
+      return list.reduce(reducer, 0);
    }
 
    private generateWorkLists(): void {

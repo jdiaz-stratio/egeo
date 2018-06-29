@@ -51,6 +51,8 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
          (moveToAll)="onMoveToAll($event)"
          (moveAllToSelected)="onMoveAllToSelected($event)"
          (moveAllToAll)="onMoveAllToAll($event)"
+         (numItemsSelectedAll)="numItemsSelectedAll.emit($event)"
+         (numItemsSelectedSelected)="numItemsSelectedSelected.emit($event)"
          (selectExtraLabelAll)="selectExtraLabelAll.emit($event)"
          (selectExtraLabelSelected)="selectExtraLabelAll.emit($event)"
          (changeOrderAll)="changeOrderAll.emit($event)"
@@ -66,6 +68,8 @@ export class StTwoListSelectionComponent extends StTwoListSelection implements O
    @Input() @StRequired() selectedElements: StTwoListSelectionElement[];
    @Output() selectedElementsChange: EventEmitter<StTwoListSelectionElement[]> = new EventEmitter<StTwoListSelectionElement[]>();
 
+   @Output() numItemsSelectedAll: EventEmitter<any> = new EventEmitter<any>();
+   @Output() numItemsSelectedSelected: EventEmitter<any> = new EventEmitter<any>();
    @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() changeOrderAll: EventEmitter<any> = new EventEmitter<any>();

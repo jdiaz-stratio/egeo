@@ -56,4 +56,21 @@
          mode="compact"
       ></st-two-list-selection-view>
    </div>
+
+   <h2>Full component, view component and behaviour class</h2>
+   <div style="width: 100%; height: 500px">
+      <st-two-list-selection
+         [allElements]="completeUserList"
+         [(selectedElements)]="selectedUserList"
+         (selectExtraLabelAll)="selectExtraLabel($event)"
+         (selectExtraLabelSelected)="selectExtraLabel($event)"
+         [config]="config"
+         [editable]="true"
+         (numItemsSelectedAll)="onNumItemsSelected($event)"
+         (numItemsSelectedSelected)="onNumItemsSelected($event)"
+         qaTag="container-list"
+      ></st-two-list-selection>
+   </div>
+   <br><br><br>
+
 </section>

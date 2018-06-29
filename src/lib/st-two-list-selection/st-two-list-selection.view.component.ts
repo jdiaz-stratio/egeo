@@ -31,6 +31,8 @@ export class StTwoListSelectionViewComponent {
    @Input() editable: boolean = false;
    @Input() moveAllToSelectedButton: boolean = false;
    @Input() moveAllToAllButton: boolean = false;
+   @Input() hasAllListSelected: boolean = false;
+   @Input() hasAllListAll: boolean = false;
    @Input() hasSearch: boolean = true;
    @Input() orderSelectedOptions: StDropDownMenuItem[] = [];
    @Input() orderAllOptions: StDropDownMenuItem[] = [];

@@ -51,6 +51,10 @@ export class StTwoListSelectionDemoComponent {
       this.fillLists();
    }
 
+   onNumItemsSelected(event: Event): void {
+      console.log('Number of elements selected', event);
+   }
+
    showSelectedElements(): void {
       console.log(JSON.stringify(this.selectedUserList.map(item => item.name)));
    }
