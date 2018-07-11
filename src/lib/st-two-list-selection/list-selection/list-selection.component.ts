@@ -28,7 +28,9 @@ export class ListSelectionComponent {
    @Input() @StRequired() searchPlaceholder: string;
    @Input() @StRequired() qaTag: string;
    @Input() important: boolean = false;
+   @Input() hasAllList: boolean = false;
    @Input() hasSearch: boolean = true;
+   @Input() itemAll?: StTwoListSelectionElement;
    @Input() orderOptions: StDropDownMenuItem[] = [];
    @Input() mode: 'compact' | 'normal' = 'normal';
 

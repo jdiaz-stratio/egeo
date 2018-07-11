@@ -28,6 +28,7 @@ export class StTwoListSelectionDemoComponent {
 
    completeUserList: Array<StTwoListSelectionElement> = [];
    selectedUserList: Array<StTwoListSelectionElement> = [];
+   itemAll: StTwoListSelectionElement;
 
    config: StTwoListSelectionConfig = {
       allElementsListTitle: 'All element',
@@ -79,5 +80,7 @@ export class StTwoListSelectionDemoComponent {
             }
          }
       }
+
+      this.itemAll = {id: this.completeUserList.length, name : 'All', itemAll: true};
    }
 }
