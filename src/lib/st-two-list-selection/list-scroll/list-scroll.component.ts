@@ -42,7 +42,7 @@ export class ListScrollComponent {
    }
 
    get listCheckAllQaTag(): string {
-      return this.qaTag + 'check-all-scroll-list';
+      return this.qaTag + '-check-all-scroll-list';
    }
 
 }

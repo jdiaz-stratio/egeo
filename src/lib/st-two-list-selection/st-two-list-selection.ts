@@ -30,8 +30,8 @@ export class StTwoListSelection {
    public hasCheckboxAllList: boolean = false;
    public hasCheckboxSelectedList: boolean = false;
    public itemAll?: StTwoListSelectionElement;
-   public numItemsSelectedAll: EventEmitter<number>;
-   public numItemsSelectedSelected: EventEmitter<number>;
+   public numItemsSelectedAll: EventEmitter<number> = new EventEmitter<number>();
+   public numItemsSelectedSelected: EventEmitter<number> = new EventEmitter<number>();
    public selectedSearch: string = '';
 
    public searchBy: string = 'name';
@@ -55,7 +55,7 @@ export class StTwoListSelection {
             selection.selected = !selection.selected;
          }
       }
-      this.numItemsSelectedAll.emit(this.getNumItemsSelected(this.copyAllElement));
+      if (this.copyAllElement) this.numItemsSelectedAll.emit(this.getNumItemsSelected(this.copyAllElement));
    }
 
    // Check selected element
@@ -72,7 +72,7 @@ export class StTwoListSelection {
             selection.selected = !selection.selected;
          }
       }
-      this.numItemsSelectedSelected.emit(this.getNumItemsSelected(this.copySelectedElements));
+      if (this.copySelectedElements) this.numItemsSelectedSelected.emit(this.getNumItemsSelected(this.copySelectedElements));
    }
 
    // Update search filter
