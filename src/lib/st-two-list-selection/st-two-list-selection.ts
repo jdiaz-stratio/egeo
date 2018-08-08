@@ -44,35 +44,31 @@ export class StTwoListSelection {
    // Check selected element
    onSelectAllElement(selection: StTwoListSelectionElement): void {
       if (this.hasCheckboxAllList && selection.itemAll) {
-         if (!selection.selected) {
-            this.copyAllElement = _.cloneDeep(this.changeSelectedItemList(this.copyAllElement, true));
-         } else {
-            this.copyAllElement = _.cloneDeep(this.changeSelectedItemList(this.copyAllElement, false));
-         }
+         this.copyAllElement = _.cloneDeep(this.changeSelectedItemList(this.copyAllElement, !selection.selected));
          selection.selected = !selection.selected;
       } else {
          if (this.canSelect(selection, this.copyAllElement)) {
             selection.selected = !selection.selected;
          }
       }
-      if (this.copyAllElement) this.numItemsSelectedAll.emit(this.getNumItemsSelected(this.copyAllElement));
+      if (this.copyAllElement) {
+         this.numItemsSelectedAll.emit(this.getNumItemsSelected(this.copyAllElement));
+      }
    }
 
    // Check selected element
    onSelectSelectedElement(selection: StTwoListSelectionElement): void {
       if (this.hasCheckboxSelectedList && selection.itemAll) {
-         if (!selection.selected) {
-            this.copySelectedElements = _.cloneDeep(this.changeSelectedItemList(this.copySelectedElements, true));
-         } else {
-            this.copySelectedElements = _.cloneDeep(this.changeSelectedItemList(this.copySelectedElements, false));
-         }
+         this.copyAllElement = _.cloneDeep(this.changeSelectedItemList(this.copySelectedElements, !selection.selected));
          selection.selected = !selection.selected;
       } else {
          if (this.canSelect(selection, this.copySelectedElements)) {
             selection.selected = !selection.selected;
          }
       }
-      if (this.copySelectedElements) this.numItemsSelectedSelected.emit(this.getNumItemsSelected(this.copySelectedElements));
+      if (this.copySelectedElements) {
+         this.numItemsSelectedSelected.emit(this.getNumItemsSelected(this.copySelectedElements));
+      }
    }
 
    // Update search filter
