@@ -12,8 +12,8 @@
 -->
 <div class="st-two-list sth-two-list">
    <!--ALL ELEMENTS-->
-   <list-selection *ngIf="editable" class="list sth-two-list__list sth-two-list__all-list" [list]="allElements" [title]="allTitle" [searchPlaceholder]="allPlaceholder"
-       [qaTag]="allQaTag" [editable]="editable" (search)="searchOverAll.emit($event)" (selectItem)="selectAllElement.emit($event)" [important]="false" [hasSearch]="hasSearch"
+   <list-selection *ngIf="editable" class="list sth-two-list__list sth-two-list__all-list" [list]="allElements" [itemAll]="itemAll" [title]="allTitle" [searchPlaceholder]="allPlaceholder"
+       [qaTag]="allQaTag" [editable]="editable" [showSearchNumber]="showSearchNumber" (search)="searchOverAll.emit($event)" (selectItem)="selectAllElement.emit($event)" [hasAllList]="hasAllListAll" [important]="false" [hasSearch]="hasSearch"
        (selectExtraLabel)="selectExtraLabelAll.emit($event)" [orderOptions]="orderAllOptions" (changeOrder)="changeOrderAll.emit($event)" [mode]="mode">
    </list-selection>
 
@@ -26,8 +26,8 @@
    </div>
 
    <!--SELECTED ELEMENTS-->
-   <list-selection class="list sth-two-list__list sth-two-list__selected-list" [ngClass]="{'not-editable': !editable}" [list]="selectedElements" [title]="selectedTitle"
-       [searchPlaceholder]="selectedPlaceholder" [qaTag]="selectedQaTag" [editable]="editable" (search)="searchOverSelected.emit($event)" (selectItem)="selectSelectedElement.emit($event)"
-       [important]="true" [hasSearch]="hasSearch" (selectExtraLabel)="selectExtraLabelSelected.emit($event)" [orderOptions]="orderSelectedOptions" (changeOrder)="changeOrderSelected.emit($event)" [mode]="mode">
+   <list-selection class="list sth-two-list__list sth-two-list__selected-list" [ngClass]="{'not-editable': !editable}" [list]="selectedElements" [itemAll]="itemAll" [title]="selectedTitle"
+       [searchPlaceholder]="selectedPlaceholder" [showSearchNumber]="showSearchNumber" [qaTag]="selectedQaTag" [editable]="editable" (search)="searchOverSelected.emit($event)" (selectItem)="selectSelectedElement.emit($event)"
+       [important]="true" [hasSearch]="hasSearch" [hasAllList]="hasAllListSelected" (selectExtraLabel)="selectExtraLabelSelected.emit($event)" [orderOptions]="orderSelectedOptions" (changeOrder)="changeOrderSelected.emit($event)" [mode]="mode">
    </list-selection>
 </div>

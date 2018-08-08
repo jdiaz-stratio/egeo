@@ -28,6 +28,7 @@ export class StTwoListSelectionDemoComponent {
 
    completeUserList: Array<StTwoListSelectionElement> = [];
    selectedUserList: Array<StTwoListSelectionElement> = [];
+   itemAll: StTwoListSelectionElement;
 
    config: StTwoListSelectionConfig = {
       allElementsListTitle: 'All element',
@@ -51,6 +52,10 @@ export class StTwoListSelectionDemoComponent {
       this.fillLists();
    }
 
+   onNumItemsSelected(event: Event): void {
+      console.log('Number of elements selected', event);
+   }
+
    showSelectedElements(): void {
       console.log(JSON.stringify(this.selectedUserList.map(item => item.name)));
    }
@@ -65,15 +70,15 @@ export class StTwoListSelectionDemoComponent {
    }
 
    private fillLists(): void {
-      for (let i = 0; i < 300; i++) {
-         if (i === 2) {
-            this.completeUserList.push({id: i, name: null });
-         } else {
+      for (let i = 0; i < 10; i++) {
+
             this.completeUserList.push({ id: i, name: `User-${i}` });
             if (i % 4 === 0) {
                this.selectedUserList.push(_.clone(this.completeUserList[i]));
             }
-         }
+
       }
+
+      this.itemAll = {id: this.completeUserList.length, name : 'All', itemAll: true};
    }
 }

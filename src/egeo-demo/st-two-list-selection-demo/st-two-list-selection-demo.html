@@ -56,4 +56,26 @@
          mode="compact"
       ></st-two-list-selection-view>
    </div>
+
+   <br><br><br>
+   <h2>Checkbox all, and condition show search</h2>
+   <div style="width: 100%; height: 500px">
+      <st-two-list-selection
+         [allElements]="completeUserList"
+         [(selectedElements)]="selectedUserList"
+         [config]="config"
+         [editable]="true"
+         (numItemsSelectedAll)="onNumItemsSelected($event)"
+         (numItemsSelectedSelected)="onNumItemsSelected($event)"
+         qaTag="container-list"
+         [hasAllListAll]="true"
+         [hasAllListSelected]="true"
+         [itemAll]="itemAll"
+         [moveAllToSelectedButton]="false"
+         [moveAllToAllButton]="false"
+         [showSearchNumber]="30"
+      ></st-two-list-selection>
+   </div>
+   <br><br><br>
+
 </section>

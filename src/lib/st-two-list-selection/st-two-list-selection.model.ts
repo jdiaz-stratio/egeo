@@ -15,6 +15,7 @@ export interface StTwoListSelectionElement {
    name: string;
    selected?: boolean;
    extraLabel?: string;
+   itemAll?: boolean;
 }
 
 export interface StTwoListSelectExtraLabelAction {

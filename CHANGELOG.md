@@ -8,6 +8,9 @@
 * st-button: Add small button style
 * st-input, st-textarea, st-select, st-radio-button, st-checkbox, st-tag-input: Change disabled style
 
+**Breaking changes:**
+* st-two-list: Includes checkbox all button in list-scroll component. Emits new event with number of elements selected.
+
 **Others**
 
 * Update version of the Stratio Icon Font
