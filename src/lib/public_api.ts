@@ -194,6 +194,9 @@ export { StSearchModule } from './st-search/st-search.module';
 // Select
 export { StSelectModule } from './st-select/st-select.module';
 
+// Select
+export { StSelectSearchableModule } from './st-select-searchable/st-select-searchable.module';
+
 // Sidebar
 export { StSidebarModule } from './st-sidebar/st-sidebar.module';
 export { StSidebarItem } from './st-sidebar/st-sidebar-item.interface';
