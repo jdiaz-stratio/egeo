@@ -5,6 +5,7 @@
 **New features:**
 
 * st-button: Add small toolbar button style
+* st-two-list: Adds new styles. Change position of check all button on scroll bar.
 
 **Others:**
 
