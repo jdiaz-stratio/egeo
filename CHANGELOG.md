@@ -5,13 +5,12 @@
 **New features:**
 
 * st-button: Add small toolbar button style
-* st-two-list: Adds new styles. Change position of check all button on scroll bar.
 
 **Others:**
 
 * Update to angular 6 (angular, angular-cli, rxjs, typescript)
 * st-footer: Apply new design according to UX specifications
-
+* st-two-list: Adds new styles. Change position of check all button on scroll bar.
 
 ## 13.0.0 (September 06, 2018)
 
