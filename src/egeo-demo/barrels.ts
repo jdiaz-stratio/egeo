@@ -40,6 +40,7 @@ import { StRadioDemoModule } from './st-radio-demo/st-radio-demo.module';
 import { StRadioMenuDemoModule } from './st-radio-menu-demo/st-radio-menu-demo.module';
 import { StSearchDemoModule } from './st-search-demo/st-search-demo.module';
 import { StSelectDemoModule } from './st-select-demo/select-demo.module';
+import { StSelectSearchableDemoModule } from './st-select-searchable-demo/st-select-searchable-demo.module';
 import { StSidebarDemoModule } from './st-sidebar-demo/st-sidebar-demo.module';
 import { StSpinnerDemoModule } from './st-spinner-demo/st-spinner-demo.module';
 import { StSwitchDemoModule } from './st-switch-demo/st-switch-demo.module';
@@ -90,6 +91,7 @@ export const EGEO_DEMO_MODULES: any[] = [
    StRadioMenuDemoModule,
    StSearchDemoModule,
    StSelectDemoModule,
+   StSelectSearchableDemoModule,
    StSidebarDemoModule,
    StSpinnerDemoModule,
    StSwitchDemoModule,
