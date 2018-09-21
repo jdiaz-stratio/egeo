@@ -211,14 +211,14 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
       }
    }
 
-   ngOnInit(): void {
-      this._searchInputSubscription = this.searchInput.valueChanges.subscribe(this.onSearch.bind(this));
-   }
-
    ngOnDestroy(): void {
       if (this._searchInputSubscription) {
          this._searchInputSubscription.unsubscribe();
       }
+   }
+
+   ngOnInit(): void {
+      this._searchInputSubscription = this.searchInput.valueChanges.subscribe(this.onSearch.bind(this));
    }
 
    onButtonKeyPress(event: KeyboardEvent): void {
@@ -261,6 +261,9 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor, O
    }
 
    onChangeOption(option: StDropDownMenuItem): void {
+      if (option && (option as any).isTrusted) {
+         return;
+      }
       this.selected = option && option.value !== undefined ? option : undefined;
       const value: any = option && option.value !== undefined ? option.value : undefined;
       if (this.onChange) {
