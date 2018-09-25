@@ -2,7 +2,10 @@
 
 ## 14.0.0 (upcoming)
 
-* Pending changelog
+
+**Fixed bugs:**
+
+* st-two-list: fix bad behavior with virtual scroll and checklist all, when added a item to selected list.
 
 ## 13.1.0 (September 25, 2018)
 
