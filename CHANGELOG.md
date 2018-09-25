@@ -14,6 +14,9 @@
 * st-two-list: Adds new styles. Change position of check all button on scroll bar.
 * st-select: Add the possibility to search and filter options
 
+**Fixed bugs:**
+ * st-two-list: fix bad behavior with virtual scroll and checklist all, when added a item to selected list.
+
 ## 13.0.0 (September 06, 2018)
 
 **New features:**
