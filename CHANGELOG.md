@@ -1,5 +1,10 @@
 # Changelog
 
+## 13.1.1 (upcoming)
+
+**Fixed bugs:**
+ * st-two-list: fix bad behavior with virtual scroll and checkbox all, when an item is added to selected list
+
 ## 13.1.0 (September 25, 2018)
 
 **New features:**
@@ -13,6 +18,7 @@
 * st-footer: Apply new design according to UX specifications
 * st-two-list: Adds new styles. Change position of check all button on scroll bar.
 * st-select: Add the possibility to search and filter options
+
 
 ## 13.0.0 (September 06, 2018)
 
