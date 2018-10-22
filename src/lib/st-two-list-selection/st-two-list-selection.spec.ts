@@ -264,6 +264,52 @@ describe('[StTwoListSelection]', () => {
          expect(elem.selected).toBe(false);
       });
 
+
+   });
+
+   it('If a search is active only have  to apply mark/unmark all elements over filtered list', () => {
+      let el1: StTwoListSelectionElement = {
+         id: 1,
+         name: 'test1',
+         selected: false
+      };
+      let el2: StTwoListSelectionElement = {
+         id: 2,
+         name: 'test2',
+         selected: false
+      };
+      let elemAll: StTwoListSelectionElement = {
+         id: 0,
+         name: 'All',
+         itemAll: true,
+         selected: false
+      };
+
+      twoListSelection.init([el1], [el2], changeEmitter, 'id', true, true, elemAll);
+      spyOn(twoListSelection.numItemsSelectedAll, 'emit');
+      spyOn(twoListSelection.numItemsSelectedSelected, 'emit');
+
+      let searchData: any = {text: 'test1'};
+      twoListSelection.onSearchOverAll(searchData);
+      twoListSelection.onSelectAllElement(elemAll);
+      expect(twoListSelection.numItemsSelectedAll.emit).toHaveBeenCalled();
+      expect(twoListSelection.numItemsSelectedAll.emit).toHaveBeenCalledWith(1);
+
+      searchData = {text: 'test2'};
+      elemAll.selected = false;
+      twoListSelection.onSearchOverSelected(searchData);
+      twoListSelection.onSelectSelectedElement(elemAll);
+      expect(twoListSelection.numItemsSelectedSelected.emit).toHaveBeenCalled();
+      expect(twoListSelection.numItemsSelectedSelected.emit).toHaveBeenCalledWith(1);
+
+      searchData = {text: 'not-found'};
+      twoListSelection.onSearchOverAll(searchData);
+      twoListSelection.onSearchOverSelected(searchData);
+      twoListSelection.onSelectAllElement(elemAll);
+      twoListSelection.onSelectSelectedElement(elemAll);
+      expect(twoListSelection.numItemsSelectedAll.emit).toHaveBeenCalledWith(0);
+      expect(twoListSelection.numItemsSelectedSelected.emit).toHaveBeenCalledWith(0);
+
    });
 
 });

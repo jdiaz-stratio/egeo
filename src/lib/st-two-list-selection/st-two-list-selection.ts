@@ -12,6 +12,7 @@ import { ChangeDetectorRef, EventEmitter, SimpleChanges } from '@angular/core';
 import * as _ from 'lodash';
 
 import { StTwoListSelectionElement } from './st-two-list-selection.model';
+import { StFilterList } from '../pipes/search-filter/search-filter.pipe';
 
 export type List = StTwoListSelectionElement[];
 export type IdList = Array<string | number>;
@@ -44,13 +45,14 @@ export class StTwoListSelection {
    // Check selected element
    onSelectAllElement(selection: StTwoListSelectionElement): void {
       if (this.hasCheckboxAllList && selection.itemAll) {
-         this.copyAllElement = _.cloneDeep(this.changeSelectedItemList(this.copyAllElement, !selection.selected));
+         this.copyAllElement = this.applySelectAll(this.copyAllElement, this.allSearch, selection.selected);
          selection.selected = !selection.selected;
       } else {
          if (this.canSelect(selection, this.copyAllElement)) {
             selection.selected = !selection.selected;
          }
       }
+      this.copyAllElement = _.cloneDeep(this.copyAllElement);
       if (this.copyAllElement) {
          this.numItemsSelectedAll.emit(this.getNumItemsSelected(this.copyAllElement));
       }
@@ -59,13 +61,14 @@ export class StTwoListSelection {
    // Check selected element
    onSelectSelectedElement(selection: StTwoListSelectionElement): void {
       if (this.hasCheckboxSelectedList && selection.itemAll) {
-         this.copySelectedElements = _.cloneDeep(this.changeSelectedItemList(this.copySelectedElements, !selection.selected));
+         this.copySelectedElements =  this.applySelectAll(this.copySelectedElements, this.selectedSearch, selection.selected);
          selection.selected = !selection.selected;
       } else {
          if (this.canSelect(selection, this.copySelectedElements)) {
             selection.selected = !selection.selected;
          }
       }
+      this.copySelectedElements = _.cloneDeep(this.copySelectedElements);
       if (this.copySelectedElements) {
          this.numItemsSelectedSelected.emit(this.getNumItemsSelected(this.copySelectedElements));
       }
@@ -108,7 +111,7 @@ export class StTwoListSelection {
    }
 
    init(all: List, selected: List, changeEmitter: EventEmitter<List>, sorted: 'id' | 'name',
-      hasCheckboxAllList: boolean = false, hasCheckboxSelectedList: boolean = false, itemAll: StTwoListSelectionElement= <any> null): void {
+      hasCheckboxAllList: boolean = false, hasCheckboxSelectedList: boolean = false, itemAll: StTwoListSelectionElement = <any>null): void {
       this.emitter = changeEmitter;
       this.sortLists = sorted;
       this.originalAll = all;
@@ -129,6 +132,25 @@ export class StTwoListSelection {
       if (changes[allList] !== undefined || changes[selectedList] !== undefined) {
          this.generateWorkLists();
       }
+   }
+
+   private applySelectAll(twoList: StTwoListSelectionElement[], elemSearched: string, allSelected: boolean): StTwoListSelectionElement[] {
+      let filterPipe = new StFilterList();
+      let filteredBySearch = filterPipe.transform(twoList, 'name', elemSearched);
+      if (elemSearched) {
+         twoList.forEach((elem) => {
+            elem.selected = false;
+            if (filteredBySearch.find(function (filtered: any): boolean { return filtered.name === elem.name; }) !== undefined) {
+               elem.selected = !allSelected;
+            } else {
+              elem.selected = false;
+            }
+         });
+         this._cd.markForCheck();
+      } else {
+         twoList = _.cloneDeep(this.changeSelectedItemList(twoList, !allSelected));
+      }
+      return twoList;
    }
 
    private changeSelectedItemList(list: StTwoListSelectionElement[], selected: boolean): StTwoListSelectionElement[] {

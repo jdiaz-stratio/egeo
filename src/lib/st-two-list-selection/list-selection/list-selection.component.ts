@@ -48,6 +48,10 @@ export class ListSelectionComponent {
       return this.qaTag + '-search';
    }
 
+   get listCheckAllQaTag(): string {
+      return this.qaTag + '-all-checkbox';
+   }
+
    get listQaTag(): string {
       return this.qaTag + '-list';
    }

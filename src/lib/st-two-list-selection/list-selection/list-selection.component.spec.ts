@@ -72,6 +72,7 @@ describe('StTwoListSelectionComponent', () => {
          fixture.detectChanges();
          expect(comp.searchQaTag).toEqual(qaTag + '-search');
          expect(comp.listQaTag).toEqual(qaTag + '-list');
+         expect(comp.listCheckAllQaTag).toEqual(qaTag + '-all-checkbox');
          expect(comp.hasOrder).toBeFalsy();
       });
    });
