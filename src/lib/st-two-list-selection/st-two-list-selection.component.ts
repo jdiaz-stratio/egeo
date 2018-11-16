@@ -38,12 +38,15 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
          [hasAllListSelected]="hasAllListSelected"
          [itemAll]="itemAll"
          [qaTag]="qaTag"
+         [isLoading]="isLoading"
          [hasSearch]="hasSearch"
          [orderAllOptions]="orderAllOptions"
          [orderSelectedOptions]="orderSelectedOptions"
          [mode]="mode"
          [moveAllToSelectedButton]="moveAllToSelectedButton"
          [moveAllToAllButton]="moveAllToAllButton"
+         [moveToAllButton]="moveToAllButton"
+         [moveToSelectedButton]="moveToSelectedButton"
          [showSearchNumber]="showSearchNumber"
 
          (selectAllElement)="onSelectAllElement($event)"
@@ -60,6 +63,7 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
          (selectExtraLabelSelected)="selectExtraLabelAll.emit($event)"
          (changeOrderAll)="changeOrderAll.emit($event)"
          (changeOrderSelected)="changeOrderSelected.emit($event)"
+         (scrollBottomAll)="scrollBottomAll.emit($event)"
       ></st-two-list-selection-view>
    `,
    changeDetection: ChangeDetectionStrategy.OnPush
@@ -73,25 +77,31 @@ export class StTwoListSelectionComponent extends StTwoListSelection implements O
    @Input() hasAllListAll?: boolean = false;
    @Input() hasAllListSelected?: boolean = false;
    @Input() hasSearch: boolean = true;
+   @Input() isLoading?: boolean = false;
    @Input() itemAll?: StTwoListSelectionElement;
    @Input() mode: 'compact' | 'normal' = 'normal';
    @Input() moveAllToSelectedButton: boolean = true;
    @Input() moveAllToAllButton: boolean = true;
+   @Input() moveToSelectedButton: boolean = true;
+   @Input() moveToAllButton: boolean = true;
    @Input() orderAllOptions: StDropDownMenuItem[] = [];
    @Input() orderSelectedOptions: StDropDownMenuItem[] = [];
    @Input() @StRequired() qaTag: string;
    @Input() @StRequired() selectedElements: StTwoListSelectionElement[];
    @Input() showSearchNumber: number;
-   @Input() sortBy: 'id' | 'name' = 'id';
+   @Input() sortBy: 'id' | 'name' | 'notOrder' = 'id';
 
+   @Output() change: EventEmitter<any> = new EventEmitter<any>();
    @Output() changeOrderAll: EventEmitter<any> = new EventEmitter<any>();
    @Output() changeOrderSelected: EventEmitter<any> = new EventEmitter<any>();
    @Output() numItemsSelectedAll: EventEmitter<any> = new EventEmitter<any>();
    @Output() numItemsSelectedSelected: EventEmitter<any> = new EventEmitter<any>();
+   @Output() scrollBottomAll: EventEmitter<any> = new EventEmitter<any>();
+   @Output() searchOverAll: EventEmitter<string> = new EventEmitter<string>();
+   @Output() searchOverSelected: EventEmitter<string> = new EventEmitter<string>();
    @Output() selectedElementsChange: EventEmitter<StTwoListSelectionElement[]> = new EventEmitter<StTwoListSelectionElement[]>();
    @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
-   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
    constructor(private cd: ChangeDetectorRef) {
       super(cd);

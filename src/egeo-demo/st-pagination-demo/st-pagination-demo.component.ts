@@ -52,4 +52,8 @@ export class StPaginationDemoComponent implements OnInit {
       this.perPage = changePageEvent.perPage;
       this.page = changePageEvent.currentPage;
    }
+
+   onChangePerPage(changePerPageEvent: number): void {
+      console.log(`Current items per page selected ${changePerPageEvent}`);
+   }
 }

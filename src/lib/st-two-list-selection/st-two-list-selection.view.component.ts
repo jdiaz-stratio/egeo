@@ -32,10 +32,13 @@ export class StTwoListSelectionViewComponent {
    @Input() hasAllListAll?: boolean = false;
    @Input() hasAllListSelected?: boolean = false;
    @Input() hasSearch: boolean = true;
+   @Input() isLoading?: boolean = false;
    @Input() itemAll?: StTwoListSelectionElement;
    @Input() mode: 'compact' | 'normal' = 'normal';
    @Input() moveAllToSelectedButton: boolean = false;
    @Input() moveAllToAllButton: boolean = false;
+   @Input() moveToSelectedButton: boolean = false;
+   @Input() moveToAllButton: boolean = false;
    @Input() orderSelectedOptions: StDropDownMenuItem[] = [];
    @Input() orderAllOptions: StDropDownMenuItem[] = [];
    @Input() showSearchNumber?: number;
@@ -46,6 +49,7 @@ export class StTwoListSelectionViewComponent {
    @Output() moveAllToSelected: EventEmitter<Event> = new EventEmitter<Event>();
    @Output() moveToAll: EventEmitter<Event> = new EventEmitter<Event>();
    @Output() moveToSelected: EventEmitter<Event> = new EventEmitter<Event>();
+   @Output() scrollBottomAll: EventEmitter<any> = new EventEmitter<any>();
    @Output() searchOverAll: EventEmitter<string> = new EventEmitter<string>();
    @Output() searchOverSelected: EventEmitter<string> = new EventEmitter<string>();
    @Output() selectAllElement: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
@@ -63,6 +67,10 @@ export class StTwoListSelectionViewComponent {
 
    get allPlaceholder(): string {
       return this.config && this.config.allElementsSearchPlaceholder || '';
+   }
+
+   get fetchingDataText(): string {
+      return this.config && this.config.fetchingDataText || '';
    }
 
    get orderPlaceholder(): string {

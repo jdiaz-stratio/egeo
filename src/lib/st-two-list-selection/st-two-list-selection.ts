@@ -33,12 +33,13 @@ export class StTwoListSelection {
    public itemAll?: StTwoListSelectionElement;
    public numItemsSelectedAll: EventEmitter<number> = new EventEmitter<number>();
    public numItemsSelectedSelected: EventEmitter<number> = new EventEmitter<number>();
+   public searchBy: string = 'name';
+   public searchOverAll: EventEmitter<string> = new EventEmitter<string>();
+   public searchOverSelected: EventEmitter<string> = new EventEmitter<string>();
    public selectedSearch: string = '';
 
-   public searchBy: string = 'name';
-
    private emitter: EventEmitter<List>;
-   private sortLists: 'id' | 'name';
+   private sortLists: 'id' | 'name' | 'notOrder';
 
    constructor(private _cd: ChangeDetectorRef) { }
 
@@ -77,11 +78,13 @@ export class StTwoListSelection {
    // Update search filter
    onSearchOverAll(search: { text: string }): void {
       this.allSearch = search.text;
+      this.searchOverAll.emit(this.allSearch);
    }
 
    // Update search filter
    onSearchOverSelected(search: { text: string }): void {
       this.selectedSearch = search.text;
+      this.searchOverSelected.emit(this.selectedSearch);
    }
 
    // Move from all to selected
@@ -110,7 +113,7 @@ export class StTwoListSelection {
       this.emitter.emit([]);
    }
 
-   init(all: List, selected: List, changeEmitter: EventEmitter<List>, sorted: 'id' | 'name',
+   init(all: List, selected: List, changeEmitter: EventEmitter<List>, sorted: 'id' | 'name' | 'notOrder',
       hasCheckboxAllList: boolean = false, hasCheckboxSelectedList: boolean = false, itemAll: StTwoListSelectionElement = <any>null): void {
       this.emitter = changeEmitter;
       this.sortLists = sorted;

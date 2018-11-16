@@ -13,7 +13,7 @@
 
 <div class="pagination">
    <st-pagination [total]="items.length" [perPage]="perPage" [currentPage]="page" [id]="'pagination-demo'"
-                  (change)="onChangePage($event)">
+                  (change)="onChangePage($event)" (changePerPage)="onChangePerPage($event)">
    </st-pagination>
 </div>
 

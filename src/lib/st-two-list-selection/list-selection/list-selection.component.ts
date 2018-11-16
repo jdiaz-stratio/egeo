@@ -31,12 +31,15 @@ export class ListSelectionComponent {
    @Input() important: boolean = false;
    @Input() hasAllList?: boolean = false;
    @Input() hasSearch: boolean = true;
+   @Input() isLoading?: boolean = false;
    @Input() itemAll?: StTwoListSelectionElement;
    @Input() orderOptions: StDropDownMenuItem[] = [];
    @Input() orderPlaceholder?: string;
    @Input() mode: 'compact' | 'normal' = 'normal';
    @Input() showSearchNumber?: number;
+   @Input() fetchingDataText: string;
 
+   @Output() scrollBottom: EventEmitter<any> = new EventEmitter<any>();
    @Output() selectItem: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
    @Output() selectExtraLabel: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() search: EventEmitter<string> = new EventEmitter<string>();

@@ -39,6 +39,7 @@ let config: StTwoListSelectionConfig = {
    allElementsListTitle: 'All',
    allElementsListSubtitle: 'All subtitle',
    allElementsSearchPlaceholder: 'Search all',
+   fetchingDataText: 'Fetching more data',
    selectedElementsListTitle: 'Selected',
    selectedElementsListSubtitle: 'Selected subtitle',
    selectedElementsSearchPlaceholder: 'Search selected',
@@ -87,6 +88,7 @@ describe('StTwoListSelectionComponent', () => {
          expect(comp.orderPlaceholder).toEqual(config.orderPlaceholder);
          expect(comp.allQaTag).toContain(qaTag);
          expect(comp.selectedQaTag).toContain(qaTag);
+         expect(comp.fetchingDataText).toContain(config.fetchingDataText);
       });
 
       it('Should init default', () => {
@@ -101,6 +103,7 @@ describe('StTwoListSelectionComponent', () => {
          expect(comp.allQaTag).toContain(qaTag);
          expect(comp.selectedQaTag).toContain(qaTag);
          expect(comp.orderPlaceholder).toEqual('');
+         expect(comp.fetchingDataText).toEqual('');
       });
    });
 });

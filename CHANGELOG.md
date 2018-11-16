@@ -8,6 +8,8 @@
 * st-tag-input: Allow to be configured to allow or avoid to type a free text
 * Replace deprecated dependency with ngx-virtual-scroller.
 * st-tag-input: Allow to force validations
+* st-two-list: Improve st-two-list to show spinner when scroll down in lists.
+* st-pagination: Emits new  event when user interacts with some of the elements in the selector of items displayed per page.
 
 ## 13.3.0 (October 30, 2018)
 

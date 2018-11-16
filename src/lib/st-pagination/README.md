@@ -18,6 +18,8 @@
 | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | change   | Paginate | Event emitted when user interacts with some of the elements in the pagination.This sends the new pagination status (current page and items per page) |
 
+| changePerPage   | number | Event emitted when user interacts with some of the elements in the selector of items displayed per page.This sends the current items per page.
+
 ## Example
 
 

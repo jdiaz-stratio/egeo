@@ -32,18 +32,20 @@ export interface StTwoListSelectionConfig {
    allElementsListTitle: string;
    allElementsListSubtitle?: string;
    allElementsSearchPlaceholder: string;
+   fetchingDataText?: string;
+   orderPlaceholder?: string;
    selectedElementsListTitle: string;
    selectedElementsListSubtitle?: string;
    selectedElementsSearchPlaceholder: string;
-   orderPlaceholder?: string;
 }
 
 export interface StTwoListSelectionConfigSchema {
    allElementsListTitle: TranslateableElement;
    allElementsListSubtitle?: TranslateableElement;
    allElementsSearchPlaceholder: TranslateableElement;
+   fetchingDataText?: TranslateableElement;
+   orderPlaceholder?: TranslateableElement;
    selectedElementsListTitle: TranslateableElement;
    selectedElementsListSubtitle?: TranslateableElement;
    selectedElementsSearchPlaceholder: TranslateableElement;
-   orderPlaceholder?: TranslateableElement;
 }

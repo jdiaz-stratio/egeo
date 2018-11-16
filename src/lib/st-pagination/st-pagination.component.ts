@@ -78,6 +78,11 @@ export class StPaginationComponent implements OnInit, OnChanges {
     */
    @Output() change: EventEmitter<Paginate> = new EventEmitter<Paginate>();
 
+   /** @Output {PaginateOptions} [changePerPage='']  Event emitted when user interacts with some of the elements in the selector of items displayed per page.
+    * This sends the current items per page.
+    */
+   @Output() changePerPage: EventEmitter<number> = new EventEmitter<number>();
+
    /** @Input {number} [currentPage=1] Number of the current page */
    @Input()
    get currentPage(): number {
@@ -167,6 +172,7 @@ export class StPaginationComponent implements OnInit, OnChanges {
       this.perPage = perPage;
       this.updatePages();
       this.selectedItem = this.items.find(item => item.value === this.perPage);
+      this.changePerPage.emit(this.perPage);
    }
 
    private addPageOption(option: PaginateOptions): void {

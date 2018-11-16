@@ -25,8 +25,10 @@ import { StSearchModule } from '../st-search/st-search.module';
 import { StSelectModule } from '../st-select/st-select.module';
 import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
 
+import { StSpinnerModule } from '../st-spinner/st-spinner.module';
+
 @NgModule({
-   imports: [CommonModule, StSearchModule, PipesModule, VirtualScrollerModule, StSelectModule, StCheckboxModule],
+   imports: [CommonModule, StSearchModule, PipesModule, VirtualScrollerModule, StSelectModule, StCheckboxModule, StSpinnerModule],
    declarations: [StTwoListSelectionViewComponent, StTwoListSelectionComponent, ListSelectionComponent, ListItemComponent, ListScrollComponent],
    exports: [StTwoListSelectionComponent, StTwoListSelectionViewComponent]
 })

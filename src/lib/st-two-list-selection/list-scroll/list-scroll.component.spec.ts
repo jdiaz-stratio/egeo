@@ -67,6 +67,10 @@ describe('StTwoListSelectionComponent', () => {
 
    describe('ListScrollComponent', () => {
       it('Should init correctly', () => {
+         const container = fixture.debugElement.query(By.css('#virtualScroll'));
+         container.nativeElement.scrollDown = 5000;
+         container.triggerEventHandler('scroll', null);
+
          fixture.detectChanges();
          expect(comp.listQaTag).toEqual(qaTag + '-scroll-list');
          expect(comp.listCheckAllQaTag).toEqual(qaTag + '-check-all-scroll-list');

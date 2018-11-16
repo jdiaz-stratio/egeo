@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import * as _ from 'lodash';
 import {
    StTwoListSelectionElement,
@@ -29,6 +29,7 @@ export class StTwoListSelectionDemoComponent {
    completeUserList: Array<StTwoListSelectionElement> = [];
    selectedUserList: Array<StTwoListSelectionElement> = [];
    itemAll: StTwoListSelectionElement;
+   isLoading: Boolean = true;
 
    config: StTwoListSelectionConfig = {
       allElementsListTitle: 'All element',
@@ -41,10 +42,11 @@ export class StTwoListSelectionDemoComponent {
       allElementsListTitle: 'All element',
       allElementsListSubtitle: '0 users',
       allElementsSearchPlaceholder: 'Search...',
+      fetchingDataText: 'Fetching more users',
+      orderPlaceholder: 'Order by alphabet',
       selectedElementsListTitle: 'Selected elements',
       selectedElementsListSubtitle: '0 users',
-      selectedElementsSearchPlaceholder: 'Search...',
-      orderPlaceholder: 'Order by alphabet'
+      selectedElementsSearchPlaceholder: 'Search...'
    };
 
    public orderOptions: Array<StDropDownMenuItem> = [
@@ -58,7 +60,7 @@ export class StTwoListSelectionDemoComponent {
       }
    ];
 
-   constructor() {
+   constructor(private _cd: ChangeDetectorRef) {
       this.fillLists();
    }
 
@@ -82,6 +84,18 @@ export class StTwoListSelectionDemoComponent {
 
    onNumItemsSelected(event: Event): void {
       this.configWithCheckAll.selectedElementsListSubtitle = `${event}/${this.selectedUserList.length} users selected`;
+   }
+
+   onScrollBottomAll(event: Event): void {
+      this.isLoading = true;
+      setTimeout(() => {
+         let cloneList = _.cloneDeep(this.completeUserList);
+         for (let i = 1; i <= 10; i++) {
+            cloneList.push({ id: cloneList.length + i, name: `User-${cloneList.length + i}` });
+         }
+         this.completeUserList = cloneList;
+         this._cd.markForCheck();
+       }, 1000);
    }
 
    showSelectedElements(): void {
