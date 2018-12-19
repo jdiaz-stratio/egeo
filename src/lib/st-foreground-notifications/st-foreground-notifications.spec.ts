@@ -180,7 +180,6 @@ describe('StForegroundNotificationsComponent', () => {
          expect(nativeElement.querySelector('st-foreground-notifications').classList).toContain('visible');
 
          closeButton.click();
-         comp.notifications = [];
          fixture.detectChanges();
          expect(nativeElement.querySelector('st-foreground-notifications').classList).not.toContain('visible');
       }));
@@ -193,7 +192,6 @@ describe('StForegroundNotificationsComponent', () => {
             fixture.detectChanges();
             expect(nativeElement.querySelector('st-foreground-notifications').classList).toContain('visible');
             tick(2000);
-            comp.notifications = [];
             fixture.detectChanges();
 
             expect(nativeElement.querySelector('st-foreground-notifications').classList).not.toContain('visible');

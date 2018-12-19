@@ -8,7 +8,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { AfterViewInit, ChangeDetectorRef, Component, Input, EventEmitter, Output, ElementRef, OnInit, Renderer2, OnChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, EventEmitter, Output, ElementRef, OnInit, Renderer2,
+   OnChanges, ChangeDetectionStrategy } from '@angular/core';
 
 import { StatusNotification, StNotificationElement } from './st-foreground-notifications.model';
 
@@ -18,7 +19,8 @@ import { StatusNotification, StNotificationElement } from './st-foreground-notif
    styleUrls: ['st-foreground-notifications.scss'],
    host: {
       '[class.visible]': '_visible'
-   }
+   },
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 /**
  * @description {Component} [Foreground notifications]
@@ -45,6 +47,7 @@ export class StForegroundNotificationsComponent implements AfterViewInit, OnChan
          this._visible = value;
          this.visibleChange.emit(this._visible);
       }
+      this.cd.markForCheck();
    }
    get visible(): boolean {
       return this._visible;
@@ -96,11 +99,7 @@ export class StForegroundNotificationsComponent implements AfterViewInit, OnChan
 
    ngOnChanges(): void {
 
-      if (this.notifications && this.notifications.length > 0 && this.visible !== undefined && !this.visible ) {
-         this._visible = true;
-         this.cd.detectChanges();
-      }
-     this.listStatusNotifications = [];
+      this.listStatusNotifications = [];
       this.fillStatusNotifications();
    }
 

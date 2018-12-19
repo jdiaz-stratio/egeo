@@ -89,6 +89,9 @@ export class StForegroundNotificationsDemoComponent implements AfterViewInit {
          text: 'Stratio audit failed to connect to Postgres database / fourth page'
       }
    ];
+
+   visibleTimeout: boolean = true;
+
    public toggleNotifications(index: number): void {
       this.items[index].visible = !this.items[index].visible;
    }
@@ -127,8 +130,8 @@ export class StForegroundNotificationsDemoComponent implements AfterViewInit {
       }
    }
    onVisibleChange(event: any): void {
-
       setTimeout(() => {
+         this.visibleTimeout = true;
          this.itemsEmpty = [];
          this.cd.markForCheck();
          this.itemsEmpty = [{

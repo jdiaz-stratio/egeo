@@ -86,7 +86,7 @@
             </svg>
          </div>
       </st-header>
-      <st-foreground-notifications [notifications]="itemsEmpty" [visible]="true" (visibleChange)="onVisibleChange($event)"></st-foreground-notifications>
+      <st-foreground-notifications [notifications]="itemsEmpty" [(visible)]="visibleTimeout" (visibleChange)="onVisibleChange($event)"></st-foreground-notifications>
    </div>
    <br>
 
