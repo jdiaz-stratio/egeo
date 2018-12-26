@@ -22,7 +22,7 @@ export class StDocsComponent implements OnInit {
    public statusShowCode: boolean = true;
 
    public options: StHorizontalTab[] = [
-      {id: 'demo', text: 'Demo'},
+      {id: 'demo', text: 'Overview'},
       {id: 'html', text: 'Html'},
       {id: 'implementation', text: 'Implementation'},
       {id: 'component', text: 'Component'}
