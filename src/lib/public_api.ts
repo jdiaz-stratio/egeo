@@ -60,6 +60,11 @@ export { StBubbleModule } from './st-bubble/st-bubble.module';
 // Checkbox
 export { StCheckboxModule } from './st-checkbox/st-checkbox.module';
 
+// Docs
+export {
+   StDocsModule
+} from './st-docs/st-docs.module';
+
 // Draggable car
 export {
    StDraggableCardModule

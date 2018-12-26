@@ -25,6 +25,7 @@
    "exclude": [
       "test.ts",
       "**/*.spec.ts",
-      "main.aot.ts"
+      "main.aot.ts",
+      "assets/source-code"
    ]
 }

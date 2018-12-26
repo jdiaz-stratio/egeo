@@ -17,6 +17,12 @@ import { STALERT_SEVERITY, StAlertsService } from '@stratio/egeo';
 })
 export class StAlertsDemoComponent {
 
+    public configDoc: any = {
+       html: 'demo/st-alert-demo/st-alerts-demo.html',
+       ts: 'demo/st-alert-demo/st-alerts-demo.ts',
+       component: 'lib/st-alerts/st-alerts.component.ts'
+    };
+
    constructor(private _alertService: StAlertsService) { }
 
    showWarning(): void {

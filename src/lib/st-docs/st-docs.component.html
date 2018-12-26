@@ -1,0 +1,27 @@
+<div>
+   <st-horizontal-tabs [options]="options" [(activeOption)]="active" qaTag="horizontal-tabs-demo" (changedOption)="onChangeOption($event)">
+
+   </st-horizontal-tabs>
+   <div class="st-docs">
+      <div *ngIf="active.id === 'demo'">
+         <ng-content></ng-content>
+      </div>
+      <div *ngIf="active.id === 'html'">
+         <!--<ngx-prism [language]="'html'" [code]="htmlCode" id="codeinput">
+         </ngx-prism>-->
+         <prism-highlight [language]="'html'" id="codeinput">{{htmlCode}}</prism-highlight>
+      </div>
+      <div *ngIf="active.id === 'implementation'">
+         <!-- <ngx-prism [language]="'javascript'" [code]="demoTsCode" id="codeinput">
+         </ngx-prism> -->
+         <prism-highlight [language]="'javascript'" id="codeinput">{{demoTsCode}}</prism-highlight>
+      </div>
+
+      <div *ngIf="active.id === 'component'">
+         <!-- <ngx-prism [language]="'javascript'" [code]="componentTsCode" id="codeinput">
+         </ngx-prism> -->
+         <prism-highlight [language]="'javascript'" id="codeinput">{{componentTsCode}}</prism-highlight>
+      </div>
+   </div>
+
+</div>

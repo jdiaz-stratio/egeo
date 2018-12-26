@@ -1,0 +1,45 @@
+@import '../../theme/constants/index';
+
+.st-docs {
+   //display: flex;
+   //flex-direction: column;
+   width: 100%;
+   //border: 1px solid rgba(0, 0, 0, 0.03);
+   //box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24), 0 0 2px rgba(0, 0, 0, 0.12);
+
+   margin-top:22px;
+
+   &__header {
+      display: flex;
+      flex-direction: row;
+      background-color: rgba(0, 0, 0, 0.03);
+      min-height: 50px;
+      align-items: center;
+
+      &__icon-code{
+         display: flex;
+         flex-direction: row;
+         margin-left: auto;
+         align-items: center;
+         margin-right: 15px;
+      }
+
+      &__copy-code{
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         margin-right: 15px;
+      }
+   }
+
+   &__content {
+      &__component {
+         min-height: 100px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+   }
+
+}

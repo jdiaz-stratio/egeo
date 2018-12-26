@@ -85,7 +85,7 @@ module.exports = function(config) {
          "src/lib/**/*.ts": ["karma-typescript"],
          "test/**/*.ts": ["karma-typescript"]
       },
-      reporters: ['mocha', 'karma-typescript', 'junit'],
+      reporters: ['mocha', 'karma-typescript', 'junit', 'progress'],
       mochaReporter: {
          ignoreSkipped: args && args.length > 0
       },

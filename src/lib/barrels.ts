@@ -13,6 +13,7 @@ import { StAlertsModule } from './st-alerts/st-alerts.module';
 import { StBubbleModule } from './st-bubble/st-bubble.module';
 import { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
 import { StCheckboxModule } from './st-checkbox/st-checkbox.module';
+import { StDocsModule } from './st-docs/st-docs.module';
 import { StDraggableCardModule } from './st-draggable-card/st-draggable-card.module';
 import { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
 import { StFileButtonModule } from './st-file-button/st-file-button.module';
@@ -63,6 +64,7 @@ export const DECLARATIONS: any[] = [
    StBreadcrumbsModule,
    StBubbleModule,
    StCheckboxModule,
+   StDocsModule,
    StDraggableCardModule,
    StDropdownMenuModule,
    StFileButtonModule,
