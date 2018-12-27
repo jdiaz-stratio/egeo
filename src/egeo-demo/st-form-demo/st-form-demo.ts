@@ -18,6 +18,11 @@ import { StHorizontalTab } from '@stratio/egeo';
 })
 export class StFormDemoComponent {
    public activeOption: StHorizontalTab;
+   public configDoc: any = {
+      html: 'demo/st-form-demo/st-form-demo.html',
+      ts: 'demo/st-form-demo/st-form-demo.ts',
+      component: 'lib/st-form/st-form.component.ts'
+   };
 
    public options: StHorizontalTab[] = [
       {id: 'formEditor', text: 'Demo'},

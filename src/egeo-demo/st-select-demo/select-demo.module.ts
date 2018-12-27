@@ -11,7 +11,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StDemoGeneratorModule, StSelectModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StSelectModule } from '@stratio/egeo';
 
 import { SelectDemoComponent } from './select-demo';
 
@@ -22,7 +22,8 @@ import { SelectDemoComponent } from './select-demo';
       StSelectModule,
       FormsModule,
       ReactiveFormsModule,
-      StDemoGeneratorModule.withComponents({ components: [SelectDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [SelectDemoComponent] }),
+      StDocsModule
    ],
    declarations: [SelectDemoComponent]
 })

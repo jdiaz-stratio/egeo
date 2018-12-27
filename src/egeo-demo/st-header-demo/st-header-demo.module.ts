@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
    StDemoGeneratorModule,
+   StDocsModule,
    StHeaderModule,
    StPopOverModule,
    StLauncherModule
@@ -27,6 +28,7 @@ import { routing } from './st-header-demo.routing';
    imports: [
       CommonModule,
       RouterModule,
+      StDocsModule,
       StHeaderModule,
       StPopOverModule,
       StLauncherModule,

@@ -17,4 +17,10 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class StWidgetDemoComponent {}
+export class StWidgetDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-widget-demo/st-widget-demo.component.html',
+      ts: 'demo/st-widget-demo/st-widget-demo.component.ts',
+      component: 'lib/st-widget/st-widget.component.ts'
+   };
+}

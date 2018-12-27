@@ -10,16 +10,18 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-liquid">
-   <div class="bubble-demo-container">
-      <div class="bubble-demo-items">
-         <st-bubble class="bubble-demo-component" qaTag="bubble-demo" [text]="text" [hidden]="hidden" [offset]="{x: 38, y: 17}">
+<st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
+   <section class="container-liquid">
+      <div class="bubble-demo-container">
+         <div class="bubble-demo-items">
+            <st-bubble class="bubble-demo-component" qaTag="bubble-demo" [text]="text" [hidden]="hidden" [offset]="{x: 38, y: 17}">
 
-            <button bubble-button class="bubble-demo-button button button-primary" (click)="onClick()">
-               <span>Bubble</span>
-            </button>
+               <button bubble-button class="bubble-demo-button button button-primary" (click)="onClick()">
+                  <span>Bubble</span>
+               </button>
 
-         </st-bubble>
+            </st-bubble>
+         </div>
       </div>
-   </div>
-</section>
+   </section>
+</st-docs>

@@ -16,6 +16,7 @@ compiled/
 #################
 temp
 dist
+src/demo-app/assets/source-code
 
 #################
 ## IDEs

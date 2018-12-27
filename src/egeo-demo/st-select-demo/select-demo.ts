@@ -21,6 +21,12 @@ import { StDropDownMenuItem } from '@stratio/egeo';
 export class SelectDemoComponent {
    @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
 
+   public configDoc: any = {
+      html: 'demo/st-select-demo/select-demo.html',
+      ts: 'demo/st-select-demo/select-demo.ts',
+      component: 'lib/st-select/st-select.ts'
+   };
+
    options: StDropDownMenuItem[] = [];
    model: any = {
       option1: null

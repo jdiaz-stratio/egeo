@@ -20,7 +20,11 @@ import { FormArray, NgForm, FormGroup, FormControl } from '@angular/forms';
 export class StFormListDemoComponent {
    @ViewChild('formModel') public formModel: NgForm;
    @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
-
+   public configDoc: any = {
+      html: 'demo/st-draggable-card-demo/st-draggable-card-demo.component.html',
+      ts: 'demo/st-draggable-card-demo/st-draggable-card-demo.component.ts',
+      component: 'lib/st-draggable-card/st-draggable-card.component.ts'
+   };
    public reactiveForm: FormGroup;
 
    public jsonSchema: any = {

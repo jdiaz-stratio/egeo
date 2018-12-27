@@ -10,7 +10,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { StDemoGeneratorModule, StItemListModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StItemListModule } from '@stratio/egeo';
 
 import { StItemListDemoComponent } from './st-item-list-demo';
 
@@ -18,7 +18,8 @@ import { StItemListDemoComponent } from './st-item-list-demo';
    imports: [
       CommonModule,
       StItemListModule,
-      StDemoGeneratorModule.withComponents({ components: [StItemListDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StItemListDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StItemListDemoComponent]
 })

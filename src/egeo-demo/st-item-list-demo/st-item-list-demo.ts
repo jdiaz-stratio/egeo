@@ -28,6 +28,11 @@ import { StItemListElement, StItemListConfig } from '@stratio/egeo';
    `]
 })
 export class StItemListDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-item-list-demo/st-item-list-demo.html',
+      ts: 'demo/st-item-list-demo/st-item-list-demo.ts',
+      component: 'lib/st-item-list/st-item-list.component.ts'
+   };
    public qaTag: string = 'st-item-list-demo';
 
    public listShort: StItemListElement[] = this.generateData(5);

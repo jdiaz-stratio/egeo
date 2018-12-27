@@ -11,7 +11,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { StDemoGeneratorModule, StSpinnerModule, StInputModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StSpinnerModule, StInputModule } from '@stratio/egeo';
 
 import { StSpinnerDemoComponent } from './st-spinner-demo';
 
@@ -23,7 +23,8 @@ import { StSpinnerDemoComponent } from './st-spinner-demo';
       FormsModule,
       StDemoGeneratorModule.withComponents({
          components: [StSpinnerDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [StSpinnerDemoComponent],
    providers: []

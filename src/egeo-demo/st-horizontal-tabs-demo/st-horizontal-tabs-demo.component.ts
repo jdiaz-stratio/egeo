@@ -18,7 +18,11 @@ import { StHorizontalTab } from '@stratio/egeo';
 })
 
 export class StHorizontalTabsDemoComponent {
-
+   public configDoc: any = {
+      html: 'demo/st-horizontal-tabs-demo/st-horizontal-tabs-demo.component.html',
+      ts: 'demo/st-horizontal-tabs-demo/st-horizontal-tabs-demo.component.ts',
+      component: 'lib/st-horizontal-tabs/st-horizontal-tabs.component.ts'
+   };
    public options: StHorizontalTab[] = [
       {id: 'overview', text: 'Overview'},
       {id: 'activity', text: 'Activity'},

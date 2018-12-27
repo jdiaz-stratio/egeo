@@ -18,6 +18,11 @@ import { StLauncherGroup, StLauncherItem } from '@stratio/egeo';
 })
 
 export class StLauncherDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-launcher-demo/st-launcher-demo.component.html',
+      ts: 'demo/st-launcher-demo/st-launcher-demo.component.ts',
+      component: 'lib/st-launcher/st-launcher.component.ts'
+   };
    public items: StLauncherGroup[] = [
       {
          label: 'Egeo',

@@ -10,14 +10,15 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StLauncherModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StLauncherModule } from '@stratio/egeo';
 import { StLauncherDemoComponent } from './st-launcher-demo.component';
 
 @NgModule({
    imports: [
       CommonModule,
       StLauncherModule,
-      StDemoGeneratorModule.withComponents({ components: [StLauncherDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StLauncherDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StLauncherDemoComponent],
    providers: []

@@ -19,6 +19,11 @@ import { StDropDownMenuItem, StDropDownMenuGroup } from '@stratio/egeo';
    styleUrls: ['./st-tag-input-demo.component.scss']
 })
 export class StTagInputDemoComponent implements OnInit {
+   public configDoc: any = {
+      html: 'demo/st-tag-input-demo/st-tag-input-demo.component.html',
+      ts: 'demo/st-tag-input-demo/st-tag-input-demo.component.ts',
+      component: 'lib/st-tag-input/st-tag-input.component.ts'
+   };
    @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
 
    public tags: any = {

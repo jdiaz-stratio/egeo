@@ -61,6 +61,11 @@ export { StBubbleModule } from './st-bubble/st-bubble.module';
 // Checkbox
 export { StCheckboxModule } from './st-checkbox/st-checkbox.module';
 
+// Docs
+export {
+   StDocsModule
+} from './st-docs/st-docs.module';
+
 // Draggable car
 export {
    StDraggableCardModule
@@ -178,6 +183,11 @@ export { StPaginationModule } from './st-pagination/st-pagination.module';
 
 // Pop Over
 export { StPopOverModule } from './st-pop-over/st-pop-over.module';
+
+// Prism
+export {
+   StPrismModule
+} from './st-docs/st-prism/st-prism.module';
 
 // Progress bar
 

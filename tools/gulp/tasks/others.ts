@@ -13,10 +13,12 @@ import { mkdirpSync } from 'fs-extra';
 import { readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
+const strip = require('gulp-strip-comments');
+const gulp = require('gulp');
 
-import { buildConfig } from 'build-tools';
+import { buildConfig, sequenceTask } from 'build-tools';
 
-const { outputDir } = buildConfig;
+const { outputDir, packagesDir } = buildConfig;
 
 task('demo-app:create-dist', (done) => {
    mkdirpSync(outputDir);
@@ -33,3 +35,23 @@ task('demo-app:replace:assets', (done) => {
    });
    done();
 });
+
+task('demo-app:copy:sourcecode:demo', () => {
+   const destinyDemoPath: string = join(packagesDir, 'demo-app/assets');
+   const originPath: string = join(packagesDir, 'egeo-demo');
+
+   return gulp.src([`${originPath}/**/*.html`, `${originPath}/**/*.ts`], {
+       base: originPath
+       }).pipe(gulp.dest(`${destinyDemoPath}/source-code/demo`));
+});
+
+task('demo-app:copy:sourcecode:lib', () => {
+   const destinyDemoPath: string = join(packagesDir, 'demo-app/assets');
+   const originPath: string = join(packagesDir, 'lib');
+
+   return gulp.src([`${originPath}/**/*.ts`, `${originPath}/**/*.module.ts`], {
+       base: originPath
+       }).pipe(gulp.dest(`${destinyDemoPath}/source-code/lib`));
+});
+
+task('demo-app:copy:sourcecode', sequenceTask('demo-app:copy:sourcecode:demo', 'demo-app:copy:sourcecode:lib'));

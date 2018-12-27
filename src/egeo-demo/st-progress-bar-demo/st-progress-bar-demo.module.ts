@@ -10,14 +10,15 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StProgressBarModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StProgressBarModule } from '@stratio/egeo';
 import { StProgresBarDemoComponent } from './st-progress-bar-demo.component';
 
 @NgModule({
    imports: [
       CommonModule,
       StProgressBarModule,
-      StDemoGeneratorModule.withComponents({ components: [StProgresBarDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StProgresBarDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StProgresBarDemoComponent],
    providers: []

@@ -17,6 +17,11 @@ import { Component } from '@angular/core';
 })
 
 export class StVerticalTabsDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-vertical-tabs-demo/st-vertical-tabs-demo.html',
+      ts: 'demo/st-vertical-tabs-demo/st-vertical-tabs-demo.ts',
+      component: 'lib/st-vertical-tabs/st-vertical-tabs.component.ts'
+   };
    public options: Array<string> = ['Service', 'Nodes', 'Cassandra'];
    public active: string = this.options[0];
    public qaTag: string = 'vertical-tabs-example';

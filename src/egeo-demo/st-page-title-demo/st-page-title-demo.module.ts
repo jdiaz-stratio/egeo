@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StPageTitleModule, StSearchModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StPageTitleModule, StSearchModule } from '@stratio/egeo';
 
 import { StPageTitleDemoComponent } from './st-page-title-demo.component';
 
@@ -21,7 +21,8 @@ import { StPageTitleDemoComponent } from './st-page-title-demo.component';
       StSearchModule,
       StDemoGeneratorModule.withComponents({
          components: [StPageTitleDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [StPageTitleDemoComponent],
    providers: []

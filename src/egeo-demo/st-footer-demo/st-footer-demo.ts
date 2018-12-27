@@ -17,6 +17,12 @@ import { StFooterLink } from '@stratio/egeo';
    styleUrls: ['./st-footer-demo.scss']
 })
 export class StFooterDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-footer-demo/st-footer-demo.html',
+      ts: 'demo/st-footer-demo/st-footer-demo.ts',
+      component: 'lib/st-footer/st-footer.component.ts'
+   };
+
    public rightsText: string;
    public links: Array<StFooterLink> = new Array<StFooterLink>();
 

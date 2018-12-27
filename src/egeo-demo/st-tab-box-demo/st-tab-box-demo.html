@@ -10,11 +10,13 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-fluid">
-   <div style="margin: 20px 0; width: 288px; height: 400px">
-      <st-tab-box [tabs]="tabs" (select)="onSelectTab($event)" qaTag="tab-box">
-         <div *ngIf="selectedTab.label === 'Tab1'">Tab 1 content</div>
-         <div *ngIf="selectedTab.label === 'Tab2'">Tab 2 content</div>
-      </st-tab-box>
-   </div>
-</section>
+<st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
+   <section class="container-fluid">
+      <div style="margin: 20px 0; width: 288px; height: 400px">
+         <st-tab-box [tabs]="tabs" (select)="onSelectTab($event)" qaTag="tab-box">
+            <div *ngIf="selectedTab.label === 'Tab1'">Tab 1 content</div>
+            <div *ngIf="selectedTab.label === 'Tab2'">Tab 2 content</div>
+         </st-tab-box>
+      </div>
+   </section>
+</st-docs>

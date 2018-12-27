@@ -13,6 +13,7 @@ import { StAlertsModule } from './st-alerts/st-alerts.module';
 import { StBubbleModule } from './st-bubble/st-bubble.module';
 import { StBreadcrumbsModule } from './st-breadcrumbs/st-breadcrumbs.module';
 import { StCheckboxModule } from './st-checkbox/st-checkbox.module';
+import { StDocsModule } from './st-docs/st-docs.module';
 import { StDraggableCardModule } from './st-draggable-card/st-draggable-card.module';
 import { StDropdownMenuModule } from './st-dropdown-menu/st-dropdown-menu.module';
 import { StFileButtonModule } from './st-file-button/st-file-button.module';
@@ -35,6 +36,7 @@ import { StPageTitleModule } from './st-page-title/st-page-title.module';
 import { StPaginationModule } from './st-pagination/st-pagination.module';
 import { StPopModule } from './st-pop/st-pop.module';
 import { StPopOverModule } from './st-pop-over/st-pop-over.module';
+import { StPrismModule } from './st-docs/st-prism/st-prism.module';
 import { StProgressBarModule } from './st-progress-bar/st-progress-bar.module';
 import { StRadioMenuModule } from './st-radio-menu/st-radio-menu.module';
 import { StRadioModule } from './st-radio/st-radio.module';
@@ -63,6 +65,7 @@ export const DECLARATIONS: any[] = [
    StBreadcrumbsModule,
    StBubbleModule,
    StCheckboxModule,
+   StDocsModule,
    StDraggableCardModule,
    StDropdownMenuModule,
    StFileButtonModule,
@@ -86,6 +89,7 @@ export const DECLARATIONS: any[] = [
    StPageTitleModule,
    StPaginationModule,
    StPopModule,
+   StPrismModule,
    StProgressBarModule,
    StPopOverModule,
    StRadioMenuModule,

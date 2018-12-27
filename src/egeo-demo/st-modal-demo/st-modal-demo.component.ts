@@ -30,6 +30,11 @@ import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.ser
 
 export class StModalDemoComponent implements AfterViewInit {
    @ViewChild('loadModal', { read: ViewContainerRef }) target: ViewContainerRef;
+   public configDoc: any = {
+      html: 'demo/st-modal-demo/st-modal-demo.component.html',
+      ts: 'demo/st-modal-demo/st-modal-demo.component.ts',
+      component: 'lib/st-modal/st-modal.component.ts'
+   };
 
    private buttons: StModalButton[] = [
       { label: 'Cancel', classes: 'button-secondary-line', responseValue: StModalResponse.NO, closeOnClick: true },

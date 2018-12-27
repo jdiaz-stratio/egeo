@@ -11,7 +11,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { StDemoGeneratorModule, StSearchModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StSearchModule } from '@stratio/egeo';
 
 import { StSearchDemoComponent } from './st-search-demo';
 
@@ -21,7 +21,8 @@ import { StSearchDemoComponent } from './st-search-demo';
       CommonModule,
       StSearchModule,
       FormsModule,
-      StDemoGeneratorModule.withComponents({ components: [StSearchDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StSearchDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StSearchDemoComponent]
 })

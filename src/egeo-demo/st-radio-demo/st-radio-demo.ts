@@ -18,7 +18,11 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 })
 
 export class StRadioDemoComponent {
-
+   public configDoc: any = {
+      html: 'demo/st-radio-demo/st-radio-demo.html',
+      ts: 'demo/st-radio-demo/st-radio-demo.ts',
+      component: 'lib/st-radio/st-radio.component.ts'
+   };
    public loading: boolean;
    public model: boolean = false;
    public form: FormGroup;

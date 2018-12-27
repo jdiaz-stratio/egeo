@@ -14,4 +14,10 @@ import { Component, Input } from '@angular/core';
    selector: 'st-tooltip-demo',
    templateUrl: './st-tooltip-demo.html'
 })
-export class StTooltipDemoComponent { }
+export class StTooltipDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-tooltip-demo/st-tooltip-demo.html',
+      ts: 'demo/st-tooltip-demo/st-tooltip-demo.ts',
+      component: 'lib/st-tooltip/st-tooltip.component.ts'
+   };
+ }

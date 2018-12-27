@@ -11,7 +11,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { StDemoGeneratorModule, StRadioMenuModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StRadioMenuModule } from '@stratio/egeo';
 
 import { StRadioMenuDemoComponent } from './st-radio-menu-demo';
 
@@ -21,7 +21,8 @@ import { StRadioMenuDemoComponent } from './st-radio-menu-demo';
       CommonModule,
       StRadioMenuModule,
       FormsModule,
-      StDemoGeneratorModule.withComponents({ components: [StRadioMenuDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StRadioMenuDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StRadioMenuDemoComponent]
 })

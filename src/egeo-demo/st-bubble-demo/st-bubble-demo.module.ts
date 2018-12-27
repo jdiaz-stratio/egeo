@@ -12,13 +12,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StDemoGeneratorModule } from '@stratio/egeo';
 import { StBubbleDemoComponent } from './st-bubble-demo.component';
-import { StBubbleModule } from '@stratio/egeo';
+import { StBubbleModule, StDocsModule } from '@stratio/egeo';
 
 @NgModule({
    imports: [
       CommonModule,
       StBubbleModule,
-      StDemoGeneratorModule.withComponents({ components: [StBubbleDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StBubbleDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StBubbleDemoComponent],
    providers: []

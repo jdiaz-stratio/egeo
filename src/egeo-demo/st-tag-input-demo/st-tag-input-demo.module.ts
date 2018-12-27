@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StTagInputModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StTagInputModule } from '@stratio/egeo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StTagInputDemoComponent } from './st-tag-input-demo.component';
@@ -23,7 +23,8 @@ import { StTagInputDemoComponent } from './st-tag-input-demo.component';
          components: [StTagInputDemoComponent]
       }),
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      StDocsModule
    ],
    declarations: [StTagInputDemoComponent]
 })

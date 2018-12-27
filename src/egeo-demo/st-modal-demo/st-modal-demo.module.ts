@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
    StDemoGeneratorModule,
+   StDocsModule,
    StModalModule,
    StModalService,
    StFullscreenLayoutModule
@@ -35,7 +36,8 @@ import { StDemoLoggerModule } from '../shared/st-demo-logger/st-demo-logger.modu
       ]),
       StDemoGeneratorModule.withComponents({
          components: [StModalDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [
       StModalDemoComponent,

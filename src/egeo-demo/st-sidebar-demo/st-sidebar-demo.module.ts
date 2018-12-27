@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StSidebarModule, StSwitchModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StSidebarModule, StSwitchModule } from '@stratio/egeo';
 import { StSidebarDemoComponent } from './st-sidebar-demo.component';
 
 @NgModule({
@@ -20,7 +20,8 @@ import { StSidebarDemoComponent } from './st-sidebar-demo.component';
       StSwitchModule,
       StDemoGeneratorModule.withComponents({
          components: [StSidebarDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [StSidebarDemoComponent],
    providers: []

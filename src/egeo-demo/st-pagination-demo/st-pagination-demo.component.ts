@@ -17,7 +17,11 @@ import { Paginate } from '@stratio/egeo';
    styleUrls: ['./st-pagination-demo.component.scss']
 })
 export class StPaginationDemoComponent implements OnInit {
-
+   public configDoc: any = {
+      html: 'demo/st-pagination-demo/st-pagination-demo.component.html',
+      ts: 'demo/st-pagination-demo/st-pagination-demo.component.ts',
+      component: 'lib/st-pagination/st-pagination.component.ts'
+   };
    public page: number = 1;
    public perPage: number = 50;
    public title: string = 'pagination';

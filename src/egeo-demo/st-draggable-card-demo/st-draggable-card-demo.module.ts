@@ -10,7 +10,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { StDemoGeneratorModule, StDraggableCardModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDraggableCardModule, StDocsModule } from '@stratio/egeo';
 
 import { StDraggableCardDemoComponent } from './st-draggable-card-demo.component';
 
@@ -18,7 +18,8 @@ import { StDraggableCardDemoComponent } from './st-draggable-card-demo.component
    imports: [
       CommonModule,
       StDraggableCardModule,
-      StDemoGeneratorModule.withComponents({ components: [StDraggableCardDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StDraggableCardDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StDraggableCardDemoComponent]
 })

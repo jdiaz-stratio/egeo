@@ -16,7 +16,11 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-bubble-demo.component.scss']
 })
 export class StBubbleDemoComponent {
-
+   public configDoc: any = {
+      html: 'demo/st-bubble-demo/st-bubble-demo.component.html',
+      ts: 'demo/st-bubble-demo/st-bubble-demo.component.ts',
+      component: 'lib/st-bubble/st-bubble.component.ts'
+   };
    public text: string = 'What needed to deploy Crossdata?';
    public hidden: boolean = true;
 

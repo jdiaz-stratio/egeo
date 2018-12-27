@@ -17,7 +17,13 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef } fro
 })
 export class StDraggableCardDemoComponent {
 
-    constructor(private _el: ElementRef) { }
+   public configDoc: any = {
+      html: 'demo/st-draggable-card-demo/st-draggable-card-demo.component.html',
+      ts: 'demo/st-draggable-card-demo/st-draggable-card-demo.component.ts',
+      component: 'lib/st-draggable-card/st-draggable-card.component.ts'
+   };
+
+   constructor(private _el: ElementRef) { }
 
    allowDrop(event: DragEvent): void {
       event.preventDefault();

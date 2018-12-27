@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StForegroundNotificationsModule, StHeaderModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StForegroundNotificationsModule, StHeaderModule } from '@stratio/egeo';
 import { StForegroundNotificationsDemoComponent } from './st-foreground-notifications-demo.component';
 
 @NgModule({
@@ -18,6 +18,7 @@ import { StForegroundNotificationsDemoComponent } from './st-foreground-notifica
       CommonModule,
       StForegroundNotificationsModule,
       StHeaderModule,
+      StDocsModule,
       StDemoGeneratorModule.withComponents({ components: [StForegroundNotificationsDemoComponent] })
    ],
    declarations: [StForegroundNotificationsDemoComponent]

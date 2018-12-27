@@ -10,15 +10,17 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-liquid">
-   <div class="row">
-      <div class="col-md-24 st-demo-tip-backgroundA">
-         <st-tip qaTag="tip-demo-themeA" theme="themeA" [text]="'ThemeA: ' + text"></st-tip>
+<st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
+   <section class="container-liquid">
+      <div class="row">
+         <div class="col-md-24 st-demo-tip-backgroundA">
+            <st-tip qaTag="tip-demo-themeA" theme="themeA" [text]="'ThemeA: ' + text"></st-tip>
+         </div>
       </div>
-   </div>
-   <div class="row">
-      <div class="col-md-24 st-demo-tip-backgroundB">
-         <st-tip qaTag="tip-demo-themeB" theme="themeB" [text]="'ThemeB: ' + text"></st-tip>
+      <div class="row">
+         <div class="col-md-24 st-demo-tip-backgroundB">
+            <st-tip qaTag="tip-demo-themeB" theme="themeB" [text]="'ThemeB: ' + text"></st-tip>
+         </div>
       </div>
-   </div>
-</section>
+   </section>
+</st-docs>

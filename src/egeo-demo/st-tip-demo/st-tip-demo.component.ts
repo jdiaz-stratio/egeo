@@ -15,6 +15,11 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-tip-demo.component.scss']
 })
 export class StTipDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-tip-demo/st-tip-demo.component.html',
+      ts: 'demo/st-tip-demo/st-tip-demo.component.ts',
+      component: 'lib/st-tip/st-tip.component.ts'
+   };
    text: string = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
    Aenean commodo ligula eget dolor. Aenean massa.
    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.

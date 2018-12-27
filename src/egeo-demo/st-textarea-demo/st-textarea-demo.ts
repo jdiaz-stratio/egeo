@@ -17,6 +17,11 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
    styleUrls: ['./st-textarea-demo.scss']
 })
 export class StTextareaDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-textarea-demo/st-textarea-demo.html',
+      ts: 'demo/st-textarea-demo/st-textarea-demo.ts',
+      component: 'lib/st-textarea/st-textarea.component.ts'
+   };
    public myForm: FormGroup;
 
    constructor(private fb: FormBuilder) {

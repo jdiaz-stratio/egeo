@@ -18,6 +18,11 @@ import { StDropDownMenuItem } from '@stratio/egeo';
    styleUrls: ['./st-search-demo.scss']
 })
 export class StSearchDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-search-demo/st-search-demo.html',
+      ts: 'demo/st-search-demo/st-search-demo.ts',
+      component: 'lib/st-search/st-search.component.ts'
+   };
    public placeholder: string = 'Text for search';
    public qaTag: string = 'search';
    public debounceTime: number = 0;

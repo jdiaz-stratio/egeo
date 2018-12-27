@@ -11,7 +11,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StDemoGeneratorModule, StTreeModule, StInputModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StTreeModule, StInputModule } from '@stratio/egeo';
 
 import { StTreeDemoComponent } from './st-tree-demo';
 
@@ -22,7 +22,8 @@ import { StTreeDemoComponent } from './st-tree-demo';
       FormsModule,
       ReactiveFormsModule,
       StInputModule,
-      StDemoGeneratorModule.withComponents({ components: [StTreeDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StTreeDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StTreeDemoComponent]
 })

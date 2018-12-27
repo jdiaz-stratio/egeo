@@ -10,18 +10,20 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-liquid">
-   <div class="row">
-      <div class="col-md-24 st-demo-help-background">
-         <st-help qaTag="help-demo-horizontal" textPosition="horizontal" [text]="'Horizontal: ' + text"></st-help>
+<st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
+   <section class="container-liquid">
+      <div class="row">
+         <div class="col-md-24 st-demo-help-background">
+            <st-help qaTag="help-demo-horizontal" textPosition="horizontal" [text]="'Horizontal: ' + text"></st-help>
+         </div>
       </div>
-   </div>
-   <div class="row">
-      <div class="col-md-12 st-demo-help-background">
-         <st-help qaTag="help-demo-vertical-left" textPosition="vertical" [text]="'Vertical: ' + text"></st-help>
+      <div class="row">
+         <div class="col-md-12 st-demo-help-background">
+            <st-help qaTag="help-demo-vertical-left" textPosition="vertical" [text]="'Vertical: ' + text"></st-help>
+         </div>
+         <div class="col-md-12 st-demo-help-background">
+            <st-help qaTag="help-demo-vertical-right" textPosition="vertical" [text]="'Vertical: ' + text"></st-help>
+         </div>
       </div>
-      <div class="col-md-12 st-demo-help-background">
-         <st-help qaTag="help-demo-vertical-right" textPosition="vertical" [text]="'Vertical: ' + text"></st-help>
-      </div>
-   </div>
-</section>
+   </section>
+</st-docs>

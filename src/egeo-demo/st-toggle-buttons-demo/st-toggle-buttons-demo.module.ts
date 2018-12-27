@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StToggleButtonsModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StToggleButtonsModule } from '@stratio/egeo';
 
 import { StToggleButtonsDemoComponent } from './st-toggle-buttons-demo';
 
@@ -18,7 +18,8 @@ import { StToggleButtonsDemoComponent } from './st-toggle-buttons-demo';
    imports: [
       CommonModule,
       StToggleButtonsModule,
-      StDemoGeneratorModule.withComponents({ components: [StToggleButtonsDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StToggleButtonsDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StToggleButtonsDemoComponent],
    providers: []

@@ -15,4 +15,10 @@ import { Component } from '@angular/core';
    templateUrl: './st-progress-bar-demo.component.html',
    styleUrls: ['./st-progress-bar-demo.component.scss']
 })
-export class StProgresBarDemoComponent { }
+export class StProgresBarDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-progress-bar-demo/st-progress-bar-demo.component.html',
+      ts: 'demo/st-progress-bar-demo/st-progress-bar-demo.component.ts',
+      component: 'lib/st-progress-bar/st-progress-bar.ts'
+   };
+ }

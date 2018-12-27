@@ -18,6 +18,11 @@ import { StToggleButton } from '@stratio/egeo';
 })
 
 export class StToggleButtonsDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-toggle-buttons-demo/st-toggle-buttons-demo.html',
+      ts: 'demo/st-toggle-buttons-demo/st-toggle-buttons-demo.ts',
+      component: 'lib/st-toggle-buttons/st-toggle-buttons.component.ts'
+   };
    public tabs: StToggleButton[];
    public description: string = 'My tabs: ';
 

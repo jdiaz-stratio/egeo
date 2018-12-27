@@ -20,7 +20,11 @@ import { HEADER_MENU, LAUNCHER_ITEMS } from './st-header-demo.model';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StHeaderDemoComponent {
-
+   public configDoc: any = {
+      html: 'demo/st-header-demo/st-header-demo.component.html',
+      ts: 'demo/st-header-demo/st-header-demo.component.ts',
+      component: 'lib/st-header/st-header.component.ts'
+   };
    public height: string;
    public launcherTitle: string = 'Services';
    public headerMenuSchema: StHeaderMenuOption[] = HEADER_MENU;

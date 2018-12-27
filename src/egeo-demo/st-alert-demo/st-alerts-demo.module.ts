@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
 import {
    StDemoGeneratorModule,
    StAlertsModule,
-   StAlertsService
+   StAlertsService,
+   StDocsModule
 } from '@stratio/egeo';
 
 import { StAlertsDemoComponent } from './st-alerts-demo';
@@ -22,7 +23,8 @@ import { StAlertsDemoComponent } from './st-alerts-demo';
    imports: [
       CommonModule,
       StAlertsModule,
-      StDemoGeneratorModule.withComponents({ components: [StAlertsDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StAlertsDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StAlertsDemoComponent],
    providers: [StAlertsService]

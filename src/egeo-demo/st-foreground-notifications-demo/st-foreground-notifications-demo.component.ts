@@ -92,6 +92,12 @@ export class StForegroundNotificationsDemoComponent implements AfterViewInit {
 
    visibleTimeout: boolean = true;
 
+   public configDoc: any = {
+      html: 'demo/st-foreground-notifications-demo/st-foreground-notifications-demo.component.html',
+      ts: 'demo/st-foreground-notifications-demo/st-foreground-notifications-demo.component.ts',
+      component: 'lib/st-foreground-notifications/st-foreground-notifications.ts'
+   };
+
    public toggleNotifications(index: number): void {
       this.items[index].visible = !this.items[index].visible;
    }

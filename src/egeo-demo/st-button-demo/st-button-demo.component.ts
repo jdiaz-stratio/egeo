@@ -16,6 +16,10 @@ import { Component } from '@angular/core';
 })
 
 export class StButtonDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-button-demo/st-button-demo.component.html',
+      ts: 'demo/st-button-demo/st-button-demo.component.ts'
+   };
 
    public test1(): void {
       console.log('You clicked the button 1!');

@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StFormListModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StFormListModule } from '@stratio/egeo';
 import { StFormListDemoComponent } from './st-form-list-demo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       CommonModule,
       FormsModule,
       ReactiveFormsModule,
+      StDocsModule,
       StFormListModule,
       StDemoGeneratorModule.withComponents({ components: [StFormListDemoComponent] })
    ],

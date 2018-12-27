@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
    StDemoGeneratorModule,
+   StDocsModule,
    StFullscreenLayoutModule
 } from '@stratio/egeo';
 
@@ -21,7 +22,8 @@ import { StFullscreenLayoutComponent } from './st-fullscreen-layout-demo';
    imports: [
       CommonModule,
       StFullscreenLayoutModule,
-      StDemoGeneratorModule.withComponents({ components: [StFullscreenLayoutComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StFullscreenLayoutComponent] }),
+      StDocsModule
    ],
    declarations: [StFullscreenLayoutComponent]
 })

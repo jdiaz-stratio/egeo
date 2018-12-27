@@ -17,6 +17,11 @@ import { Component } from '@angular/core';
 })
 
 export class StPageTitleDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-page-title-demo/st-page-title-demo.component.html',
+      ts: 'demo/st-page-title-demo/st-page-title-demo.component.ts',
+      component: 'lib/st-page-title/st-page-title.component.ts'
+   };
    public title: string = 'st page title demo';
    public error: boolean = false;
    public errorMsg: string = '';

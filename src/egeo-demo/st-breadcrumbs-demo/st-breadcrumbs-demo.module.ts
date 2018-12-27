@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StBreadcrumbsModule, StDemoGeneratorModule } from '@stratio/egeo';
+import { StBreadcrumbsModule, StDemoGeneratorModule, StDocsModule } from '@stratio/egeo';
 
 import { StBreadcrumbsDemoComponent } from './st-breadcrumbs-demo';
 import { StDemoLoggerModule } from '../shared/st-demo-logger/st-demo-logger.module';
@@ -20,6 +20,7 @@ import { StDemoLoggerModule } from '../shared/st-demo-logger/st-demo-logger.modu
       CommonModule,
       StDemoLoggerModule.withService(),
       StBreadcrumbsModule,
+      StDocsModule,
       StDemoGeneratorModule.withComponents({
          components: [StBreadcrumbsDemoComponent]
       })

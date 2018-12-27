@@ -16,7 +16,11 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-fullscreen-layout-demo.scss']
 })
 export class StFullscreenLayoutComponent {
-
+   public configDoc: any = {
+      html: 'demo/st-fullscreen-layout-demo/st-fullscreen-layout-demo.html',
+      ts: 'demo/st-fullscreen-layout-demo/st-fullscreen-layout-demo.ts',
+      component: 'lib/st-fullscreen-layout/st-fullscreen-layout.ts'
+   };
    showFullscreenLayout: boolean = false;
 
    onClickShowButton(): void {

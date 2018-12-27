@@ -20,6 +20,12 @@ import { StBreadCrumbItem } from '@stratio/egeo';
    templateUrl: 'st-breadcrumbs-demo.html'
 })
 export class StBreadcrumbsDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-breadcrumbs-demo/st-breadcrumbs-demo.html',
+      ts: 'demo/st-breadcrumbs-demo/st-breadcrumbs-demo.ts',
+      component: 'lib/st-breadcrumbs/st-breadcrumbs.component.ts'
+   };
+
    public output: string;
    public options: StBreadCrumbItem[] = [];
 

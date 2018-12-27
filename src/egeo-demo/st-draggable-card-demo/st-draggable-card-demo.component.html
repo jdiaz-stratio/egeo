@@ -10,31 +10,33 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-liquid">
-   <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
-      <st-draggable-card class="card" id="card-1" (onDragStart)="drag($event)">
-         <p>Draggable card 1</p>
-      </st-draggable-card>
-   </div>
+<st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
+   <section class="container-liquid">
+      <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
+         <st-draggable-card class="card" id="card-1" (onDragStart)="drag($event)">
+            <p>Draggable card 1</p>
+         </st-draggable-card>
+      </div>
 
-   <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
-      <st-draggable-card class="card" id="card-2" (onDragStart)="drag($event)">
-         <p>Draggable card 2</p>
-      </st-draggable-card>
-   </div>
+      <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
+         <st-draggable-card class="card" id="card-2" (onDragStart)="drag($event)">
+            <p>Draggable card 2</p>
+         </st-draggable-card>
+      </div>
 
-   <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
-      <st-draggable-card class="card" id="card-3" (onDragStart)="drag($event)">
-         <p>Draggable card 3</p>
-      </st-draggable-card>
-   </div>
+      <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
+         <st-draggable-card class="card" id="card-3" (onDragStart)="drag($event)">
+            <p>Draggable card 3</p>
+         </st-draggable-card>
+      </div>
 
-   <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
-   </div>
+      <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
+      </div>
 
-   <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
-   </div>
+      <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
+      </div>
 
-   <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
-   </div>
-</section>
+      <div class="card-container" (drop)="drop($event)" (dragover)="allowDrop($event)">
+      </div>
+   </section>
+</st-docs>

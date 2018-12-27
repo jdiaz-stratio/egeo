@@ -25,6 +25,11 @@ import { Observable, Subject } from 'rxjs';
 })
 
 export class StTreeDemoComponent implements OnInit {
+   public configDoc: any = {
+      html: 'demo/st-tree-demo/st-tree-demo.html',
+      ts: 'demo/st-tree-demo/st-tree-demo.ts',
+      component: 'lib/st-tree/st-tree.component.ts'
+   };
    public treeForm: FormGroup;
    public treeModel: TreeModel = { levels: 10, nodes: 50, name: 'Node' };
    public errors: StInputError = { generic: 'Error' };

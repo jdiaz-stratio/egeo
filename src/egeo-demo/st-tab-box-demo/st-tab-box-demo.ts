@@ -18,6 +18,11 @@ import { StTab } from '@stratio/egeo';
 })
 
 export class StTabBoxDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-tab-box-demo/st-tab-box-demo.html',
+      ts: 'demo/st-tab-box-demo/st-tab-box-demo.ts',
+      component: 'lib/st-tab-box/st-tab-box.component.ts'
+   };
    tabs: StTab[];
    selectedTab: StTab;
 

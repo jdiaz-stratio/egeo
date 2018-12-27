@@ -16,5 +16,10 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-spinner-demo.component.scss']
 })
 export class StSpinnerDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-spinner-demo/st-spinner-demo.html',
+      ts: 'demo/st-spinner-demo/st-spinner-demo.ts',
+      component: 'lib/st-spinner/st-spinner.component.ts'
+   };
    public size = 50;
 }

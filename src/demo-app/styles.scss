@@ -15,6 +15,7 @@ $egeo-fontface-src: '/assets/fonts';
 @import '../theme/vendors/sanitize';
 @import '../theme/grid/grid';
 @import '../theme/theme';
+@import '~prismjs/themes/prism.css';
 
 body {
    color: $neutral-08;
@@ -88,6 +89,13 @@ main {
    .container-fnotification {
       .sth-header {
          position: static;
+      }
+   }
+
+   st-prism-highlight {
+      pre {
+         margin: 0px;
+         background-color: $neutral-00;
       }
    }
 }

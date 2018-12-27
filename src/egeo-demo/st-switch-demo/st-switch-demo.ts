@@ -19,7 +19,11 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 })
 
 export class StSwitchDemoComponent {
-
+   public configDoc: any = {
+      html: 'demo/st-switch-demo/st-switch-demo.html',
+      ts: 'demo/st-switch-demo/st-switch-demo.ts',
+      component: 'lib/st-switch/st-switch.component.ts'
+   };
    public loading: boolean;
    public model: boolean = false;
    public form: FormGroup;

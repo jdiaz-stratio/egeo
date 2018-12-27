@@ -16,4 +16,10 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-info-card-demo.scss']
 })
 
-export class StInfoCardDemoComponent {}
+export class StInfoCardDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-info-card-demo/st-info-card-demo.html',
+      ts: 'demo/st-info-card-demo/st-info-card-demo.ts',
+      component: 'lib/st-info-card/st-info-card.component.ts'
+   };
+}

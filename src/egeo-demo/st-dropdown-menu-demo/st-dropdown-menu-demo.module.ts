@@ -20,7 +20,7 @@
 */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StPopModule, StDropdownMenuModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StPopModule, StDropdownMenuModule } from '@stratio/egeo';
 
 import { StDemoLoggerModule } from '../shared/st-demo-logger/st-demo-logger.module';
 import { StDropdownMenuDemoComponent } from './st-dropdown-menu-demo';
@@ -29,6 +29,7 @@ import { StDropdownMenuDemoComponent } from './st-dropdown-menu-demo';
 @NgModule({
    imports: [
       CommonModule,
+      StDocsModule,
       StDropdownMenuModule,
       StPopModule,
       StDemoLoggerModule.withService(),

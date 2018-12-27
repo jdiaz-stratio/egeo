@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StPaginationModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StPaginationModule } from '@stratio/egeo';
 
 import { StPaginationDemoComponent } from './st-pagination-demo.component';
 
@@ -20,7 +20,8 @@ import { StPaginationDemoComponent } from './st-pagination-demo.component';
       StPaginationModule,
       StDemoGeneratorModule.withComponents({
          components: [StPaginationDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [StPaginationDemoComponent],
    providers: []

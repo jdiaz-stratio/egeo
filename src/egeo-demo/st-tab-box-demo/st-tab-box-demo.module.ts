@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StTabBoxModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StTabBoxModule } from '@stratio/egeo';
 
 import { StTabBoxDemoComponent } from './st-tab-box-demo';
 
@@ -18,7 +18,8 @@ import { StTabBoxDemoComponent } from './st-tab-box-demo';
    imports: [
       CommonModule,
       StTabBoxModule,
-      StDemoGeneratorModule.withComponents({ components: [StTabBoxDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StTabBoxDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StTabBoxDemoComponent],
    providers: []

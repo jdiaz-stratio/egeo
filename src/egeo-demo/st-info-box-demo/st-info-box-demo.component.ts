@@ -14,4 +14,10 @@ import { Component } from '@angular/core';
    templateUrl: './st-info-box-demo.component.html',
    styleUrls: ['./st-info-box-demo.component.scss']
 })
-export class StInfoBoxDemoComponent { }
+export class StInfoBoxDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-info-box-demo/st-info-box-demo.component.html',
+      ts: 'demo/st-info-box-demo/st-info-box-demo.component.ts',
+      component: 'lib/st-info-box/st-info-box.component.ts'
+   };
+}

@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StCheckboxModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StCheckboxModule, StDocsModule } from '@stratio/egeo';
 
 import { StCheckboxDemoComponent } from './st-checkbox-demo.component';
 
@@ -20,7 +20,8 @@ import { StCheckboxDemoComponent } from './st-checkbox-demo.component';
       StCheckboxModule,
       StDemoGeneratorModule.withComponents({
          components: [StCheckboxDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [StCheckboxDemoComponent],
    providers: []

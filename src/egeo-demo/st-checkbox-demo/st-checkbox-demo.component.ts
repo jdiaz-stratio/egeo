@@ -16,4 +16,10 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-checkbox-demo.component.scss']
 })
 
-export class StCheckboxDemoComponent {}
+export class StCheckboxDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-checkbox-demo/st-checkbox-demo.component.html',
+      ts: 'demo/st-checkbox-demo/st-checkbox-demo.component.ts',
+      component: 'lib/st-checkbox/st-checkbox.component.ts'
+   };
+}

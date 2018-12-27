@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StTextareaModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StTextareaModule } from '@stratio/egeo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StTextareaDemoComponent } from './st-textarea-demo';
@@ -23,7 +23,8 @@ import { StTextareaDemoComponent } from './st-textarea-demo';
          components: [StTextareaDemoComponent]
       }),
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      StDocsModule
    ],
    declarations: [StTextareaDemoComponent],
    providers: []

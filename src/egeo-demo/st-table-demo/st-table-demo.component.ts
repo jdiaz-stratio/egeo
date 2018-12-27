@@ -16,6 +16,11 @@ import { StTableHeader } from '@stratio/egeo';
    styleUrls: ['./st-table-demo.component.scss']
 })
 export class StTableDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-table-demo/st-table-demo.component.html',
+      ts: 'demo/st-table-demo/st-table-demo.component.ts',
+      component: 'lib/st-table/st-table.component.ts'
+   };
    public fields: StTableHeader[] = [
       { id: 'id', label: 'Id',  sortable: true}, { id: 'name', label: 'Name' }, { id: 'lastName', label: 'Last Name' },
       { id: 'phone', label: 'Phone' }, { id: 'company', label: 'Company' },

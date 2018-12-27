@@ -10,15 +10,11 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-liquid">
-   <div style="margin: 20px 0">
-      <st-footer (link)="onLinkChange($event)" [rightsText]="rightsText" [links]="links" qaTag="footer" image="assets/images/stratio-white.png">
-      </st-footer>
-   </div>
-
-   <!--<div style="margin: 20px 0">-->
-      <!--<st-footer rightsText="© Carrefour. All Rights Reserved " [links]="links" qaTag="footer" image="https://www.google.es/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">-->
-      <!--</st-footer>-->
-   <!--</div>-->
-
-</section>
+<st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
+   <section class="container-liquid">
+      <div style="margin: 20px 0">
+         <st-footer (link)="onLinkChange($event)" [rightsText]="rightsText" [links]="links" qaTag="footer" image="assets/images/stratio-white.png">
+         </st-footer>
+      </div>
+   </section>
+</st-docs>

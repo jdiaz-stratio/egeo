@@ -18,6 +18,11 @@ import { StSidebarItem, StSidebarVisualMode } from '@stratio/egeo';
 })
 
 export class StSidebarDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-sidebar-demo/st-sidebar-demo.component.html',
+      ts: 'demo/st-sidebar-demo/st-sidebar-demo.component.ts',
+      component: 'lib/st-sidebar/st-sidebar.component.ts'
+   };
    public items: StSidebarItem[] = [
       { id: 'vault-roles', label: 'Vault Roles' },
       { id: 'identities', label: 'Identities', class: 'warning', disabled: true },

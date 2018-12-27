@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StFileButtonModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StFileButtonModule, StDocsModule } from '@stratio/egeo';
 
 import { StFileButtonDemoComponent } from './st-file-button-demo.component';
 
@@ -20,7 +20,8 @@ import { StFileButtonDemoComponent } from './st-file-button-demo.component';
       StFileButtonModule,
       StDemoGeneratorModule.withComponents({
          components: [StFileButtonDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [StFileButtonDemoComponent],
    providers: []

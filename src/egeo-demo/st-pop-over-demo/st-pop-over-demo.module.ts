@@ -10,14 +10,15 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StPopOverModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StPopOverModule } from '@stratio/egeo';
 import { StPopOverDemoComponent } from './st-pop-over-demo.component';
 
 @NgModule({
    imports: [
       CommonModule,
       StPopOverModule,
-      StDemoGeneratorModule.withComponents({ components: [StPopOverDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StPopOverDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StPopOverDemoComponent],
    providers: []

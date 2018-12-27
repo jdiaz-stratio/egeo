@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StHorizontalTabsModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StHorizontalTabsModule } from '@stratio/egeo';
 
 import { StHorizontalTabsDemoComponent } from './st-horizontal-tabs-demo.component';
 
@@ -20,7 +20,8 @@ import { StHorizontalTabsDemoComponent } from './st-horizontal-tabs-demo.compone
       StHorizontalTabsModule,
       StDemoGeneratorModule.withComponents({
          components: [StHorizontalTabsDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [StHorizontalTabsDemoComponent],
    providers: []

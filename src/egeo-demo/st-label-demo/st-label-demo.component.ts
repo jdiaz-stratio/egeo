@@ -15,6 +15,10 @@ import { Component } from '@angular/core';
    templateUrl: 'st-label-demo.component.html'
 })
 export class StLabelDemoComponent {
-
+   public configDoc: any = {
+      html: 'demo/st-label-demo/st-label-demo.component.html',
+      ts: 'demo/st-label-demo/st-label-demo.component.ts',
+      component: 'lib/st-label/st-label.component.ts'
+   };
    constructor() { }
 }

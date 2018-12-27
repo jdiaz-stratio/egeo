@@ -25,6 +25,11 @@ import {
 })
 
 export class StTwoListSelectionDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-two-list-selection-demo/st-two-list-selection-demo.html',
+      ts: 'demo/st-two-list-selection-demo/st-two-list-selection-demo.ts',
+      component: 'lib/st-two-list-selection/st-two-list-selection.component.ts'
+   };
 
    completeUserList: Array<StTwoListSelectionElement> = [];
    selectedUserList: Array<StTwoListSelectionElement> = [];

@@ -17,6 +17,12 @@ import { Component } from '@angular/core';
 })
 
 export class StFileButtonDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-file-button-demo/st-file-button-demo.component.html',
+      ts: 'demo/st-file-button-demo/st-file-button-demo.component.ts',
+      component: 'lib/st-file-button/st-file-button.component.ts'
+   };
+
    onUploadValidFile( files: any ): void {
       console.log('uploaded a valid file:', files);
    }

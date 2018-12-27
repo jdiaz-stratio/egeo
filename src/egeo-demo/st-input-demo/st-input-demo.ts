@@ -18,6 +18,11 @@ import { StInputError } from '@stratio/egeo';
    styleUrls: ['./st-input-demo.component.scss']
 })
 export class StInputDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-input-demo/st-input-demo.html',
+      ts: 'demo/st-input-demo/st-input-demo.ts',
+      component: 'lib/st-input/st-input.component.ts'
+   };
    public myForm: FormGroup;
    public requiredError: StInputError = { required: 'This field is required' };
    public disabled: boolean = false;

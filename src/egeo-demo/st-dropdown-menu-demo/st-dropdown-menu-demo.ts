@@ -20,6 +20,11 @@ import { StDemoLoggerService } from '../shared/st-demo-logger/st-demo-logger.ser
 })
 export class StDropdownMenuDemoComponent {
 
+   public configDoc: any = {
+      html: 'demo/st-dropdown-menu-demo/st-dropdown-menu-demo.html',
+      ts: 'demo/st-dropdown-menu-demo/st-dropdown-menu-demo.ts',
+      component: 'lib/st-dropdown-menu/st-dropdown-menu.component.ts'
+   };
    public titles: string[] = [];
    public menus: ((StDropDownMenuItem | StDropDownMenuGroup)[])[] = [];
    public active: boolean[] = [];

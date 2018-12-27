@@ -16,7 +16,11 @@ import { Component } from '@angular/core';
    styleUrls: ['./st-pop-over-demo.component.scss']
 })
 export class StPopOverDemoComponent {
-
+   public configDoc: any = {
+      html: 'demo/st-pop-over-demo/st-pop-over-demo.component.html',
+      ts: 'demo/st-pop-over-demo/st-pop-over-demo.component.ts',
+      component: 'lib/st-pop-over/st-pop-over.component.ts'
+   };
    // Pop Over
    public title: string = 'Notifications';
    public hidden: boolean = false;

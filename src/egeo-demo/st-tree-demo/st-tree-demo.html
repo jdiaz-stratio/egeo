@@ -10,72 +10,48 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<section class="container-liquid">
-   <div class="row">
-      <div class="col-md-12 tree-background-A">
-         <h2>Root Tree</h2>
-         <div class="tree-container">
-            <st-tree
-               id="tree"
-               [tree]="treeA"
-               (toggleNode)="onToggleNode($event)"
-               (selectNode)="onSelectNode($event)">
-            </st-tree>
+<st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
+   <section class="container-liquid">
+      <div class="row">
+         <div class="col-md-12 tree-background-A">
+            <h2>Root Tree</h2>
+            <div class="tree-container">
+               <st-tree id="tree" [tree]="treeA" (toggleNode)="onToggleNode($event)" (selectNode)="onSelectNode($event)">
+               </st-tree>
+            </div>
          </div>
       </div>
-   </div>
-   <div class="row">
-      <div class="col-md-12 tree-background-B">
+      <div class="row">
+         <div class="col-md-12 tree-background-B">
             <form [formGroup]="treeForm" novalidate autocomplete="off" (ngSubmit)="onGenerateTrees()">
                <h2>Generate Trees</h2>
                <div class="row">
                   <div class="col-md-12" style="margin-bottom: 10px;">
-                     <st-input
-                        label="Levels"
-                        placeholder="Number of tree levels"
-                        [forceValidations]="forceTreeValidations"
-                        [errors]="errors"
-                        fieldType="number"
-                        name="levels"
-                        qaTag="levels-input"
-                        contextualHelp="Number of levels of the tree to generate"
-                        formControlName="levels">
+                     <st-input label="Levels" placeholder="Number of tree levels" [forceValidations]="forceTreeValidations" [errors]="errors"
+                         fieldType="number" name="levels" qaTag="levels-input" contextualHelp="Number of levels of the tree to generate"
+                         formControlName="levels">
                      </st-input>
                   </div>
                   <div class="col-md-12" style="margin-bottom: 10px;">
-                     <st-input
-                        label="Nodes"
-                        placeholder="Number of nodes"
-                        [forceValidations]="forceTreeValidations"
-                        [errors]="errors"
-                        fieldType="number"
-                        name="nodes"
-                        qaTag="nodes-input"
-                        contextualHelp="Number of nodes of the tree to generate"
-                        formControlName="nodes">
+                     <st-input label="Nodes" placeholder="Number of nodes" [forceValidations]="forceTreeValidations" [errors]="errors" fieldType="number"
+                         name="nodes" qaTag="nodes-input" contextualHelp="Number of nodes of the tree to generate" formControlName="nodes">
                      </st-input>
                   </div>
                </div>
                <div class="row">
                   <div class="col-md-12" style="margin-bottom: 10px;">
-                     <st-input
-                        label="Node name"
-                        placeholder="Name of nodes"
-                        [forceValidations]="forceTreeValidations"
-                        [errors]="errors"
-                        fieldType="string"
-                        name="name"
-                        qaTag="name-input"
-                        contextualHelp="Name of nodes of the tree to generate"
-                        formControlName="name">
+                     <st-input label="Node name" placeholder="Name of nodes" [forceValidations]="forceTreeValidations" [errors]="errors" fieldType="string"
+                         name="name" qaTag="name-input" contextualHelp="Name of nodes of the tree to generate" formControlName="name">
                      </st-input>
                   </div>
                </div>
                <button class="button button-primary">
                   <span>Generate</span>
                </button>
-         </form>
+            </form>
+         </div>
       </div>
-   </div>
 
-</section>
+   </section>
+
+</st-docs>

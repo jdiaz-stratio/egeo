@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
    StDemoGeneratorModule,
+   StDocsModule,
    StRadioModule
 } from '@stratio/egeo';
 
@@ -24,7 +25,8 @@ import { StRadioDemoComponent } from './st-radio-demo';
       StRadioModule,
       ReactiveFormsModule,
       FormsModule,
-      StDemoGeneratorModule.withComponents({ components: [StRadioDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StRadioDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StRadioDemoComponent]
 })

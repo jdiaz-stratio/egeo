@@ -11,7 +11,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { StDemoGeneratorModule, StTooltipModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StTooltipModule } from '@stratio/egeo';
 
 import { StTooltipDemoComponent } from './st-tooltip-demo';
 
@@ -21,7 +21,8 @@ import { StTooltipDemoComponent } from './st-tooltip-demo';
       CommonModule,
       RouterModule,
       StTooltipModule,
-      StDemoGeneratorModule.withComponents({ components: [StTooltipDemoComponent] })
+      StDemoGeneratorModule.withComponents({ components: [StTooltipDemoComponent] }),
+      StDocsModule
    ],
    declarations: [StTooltipDemoComponent]
 })
