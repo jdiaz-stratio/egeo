@@ -10,7 +10,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StDemoGeneratorModule, StFilterSelectorModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StFilterSelectorModule } from '@stratio/egeo';
 
 import { StFilterSelectorDemoComponent } from './st-filter-selector-demo.component';
 
@@ -20,7 +20,8 @@ import { StFilterSelectorDemoComponent } from './st-filter-selector-demo.compone
       StFilterSelectorModule,
       StDemoGeneratorModule.withComponents({
          components: [StFilterSelectorDemoComponent]
-      })
+      }),
+      StDocsModule
    ],
    declarations: [StFilterSelectorDemoComponent],
    providers: []

@@ -18,6 +18,11 @@ import { StDropDownMenuItem, StHorizontalTab } from '@stratio/egeo';
 })
 
 export class StFilterSelectorDemoComponent {
+   public configDoc: any = {
+      html: 'demo/st-filter-selector-demo/st-filter-selector-demo.component.html',
+      ts: 'demo/st-filter-selector-demo/st-filter-selector-demo.component.ts',
+      component: 'lib/st-filter-selector/st-filter-selector.component.ts'
+   };
 
    public filterList: StDropDownMenuItem[] = [
       { label: 'Any', icon: 'icon-activity', value: 'any' },
