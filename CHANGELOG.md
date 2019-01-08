@@ -2,9 +2,14 @@
 
 ## 15.0.0 (upcoming)
 
+**New features:**
+
+* st-filter-selector: Create component
+
 **Documentation:**
 
 * egeo:  Show the examples source code in Egeo Web
+
 
 
 ## 14.0.0 (December 19, 2018)
