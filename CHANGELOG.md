@@ -16,6 +16,10 @@
 * st-table: Align cell content to the top when texts are so long
 * Remove st-info-box from demo.
 
+**Refactor:**
+
+* Fix method calls from templates
+
 
 ## 16.2.0 (April 12, 2019)
 
@@ -102,10 +106,6 @@
 **New features:**
 
 * st-breadcrumbs: Allow to configure visualization mode as "default" or "title"
-
-**Refactor:**
-
-* Fix method calls from templates
 
 **Breaking changes:**
 
