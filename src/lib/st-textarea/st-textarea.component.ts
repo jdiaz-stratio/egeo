@@ -104,6 +104,7 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
    public focus: boolean = false;
    public internalControl: FormControl;
    public errorMessage: string = undefined;
+   public showErrorValue: boolean = false;
 
    private sub: Subscription;
    private valueChangeSub: Subscription;
@@ -132,6 +133,8 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
    ngOnInit(): void {
       this.internalControl = new FormControl(this.internalTextareaModel);
       this.valueChangeSub = this.internalControl.valueChanges.subscribe((value) => this.onChange(value));
+      this.showErrorValue = this.showError();
+
    }
 
    ngAfterViewInit(): void {
@@ -183,6 +186,8 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
    /** Style functions */
    onFocus(event: Event): void {
       this.focus = true;
+
+      this.showErrorValue = this.showError();
    }
 
    onFocusOut(event: Event, emitEvent: boolean): void {
@@ -191,6 +196,8 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
       if (emitEvent) {
          this.blur.emit();
       }
+
+      this.showErrorValue = this.showError();
    }
 
    displayResetButton(): boolean {
@@ -199,6 +206,7 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
 
    resetToDefault(): void {
       this.writeValue(this.default);
+
       this._cd.markForCheck();
    }
 
@@ -206,6 +214,7 @@ export class StTextareaComponent implements ControlValueAccessor, OnChanges, OnI
    private checkErrors(control: FormControl): void {
       let errors: { [key: string]: any } = control.errors;
       this.errorMessage = this.getErrorMessage(errors);
+      this.showErrorValue = this.showError();
       this._cd.markForCheck();
    }
 

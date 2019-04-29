@@ -27,9 +27,13 @@ export class StAlertBoxComponent implements OnInit {
 
    @Input() alert: StAlert;
    @Input() showInConsole: boolean = false;
-   public opacity: number = 0;
 
-   constructor(private _cd: ChangeDetectorRef) { }
+   public iconValue: string;
+   public opacity: number = 0;
+   public severityColorValue: string;
+
+   constructor(private _cd: ChangeDetectorRef) {
+   }
 
    ngOnInit(): void {
       this.alert.opacity.subscribe(opacity => this.changeOpacity(opacity));
@@ -37,6 +41,8 @@ export class StAlertBoxComponent implements OnInit {
       if (this.showInConsole) {
          this.notifyConsole();
       }
+      this.severityColorValue = this.getSeverityColor();
+      this.iconValue = this.getIcon();
    }
 
    enter(): void {

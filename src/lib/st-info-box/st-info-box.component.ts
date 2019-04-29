@@ -24,12 +24,15 @@ export class StInfoBoxComponent implements OnInit {
    @Input() width: number;
    @Input() height: number;
 
+   public styleValue: Object;
+
    constructor() { }
 
    ngOnInit(): void {
       if (this.title === undefined) {
          throw new Error('st-info-box: title is a required field');
       }
+      this.styleValue = this.getStyles();
    }
 
    getStyles(): Object {

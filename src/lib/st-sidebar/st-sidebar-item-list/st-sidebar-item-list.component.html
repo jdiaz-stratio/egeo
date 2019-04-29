@@ -11,7 +11,7 @@
 
 -->
 
-<ul class="item-list" [ngClass]="{'item-list--inner': deep > 0, 'complex-mode': displayAsComplexMode()}">
+<ul class="item-list" [ngClass]="{'item-list--inner': deep > 0, 'complex-mode': displayAsComplexModeValue}">
    <li [id]="item.id" class="item" [ngClass]="getItemClasses(item, index)" *ngFor="let item of items; let index = index">
       <span class="item__label" [ngClass]="{'item__label--with-results': item.result}" (click)="onSelectItem(item, index)">{{item.label}}</span>
       <span *ngIf="item.result" class="result__box"><span class="result__text">{{item.result}}</span></span>

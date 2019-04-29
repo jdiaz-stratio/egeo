@@ -68,6 +68,9 @@ export class StForegroundNotificationsComponent implements AfterViewInit, OnChan
    @Output() visibleChange: EventEmitter<boolean> = new EventEmitter();
 
    public currentNotification: number = 1;
+   public statusIconValue: string;
+   public statusNotificationsValue: string;
+   public statusValue: string;
    public showLinkMore: boolean = false;
    public status: string = 'default';
 
@@ -137,6 +140,9 @@ export class StForegroundNotificationsComponent implements AfterViewInit, OnChan
             }
          }
       }
+      this.statusValue = this.getStatus();
+      this.statusIconValue = this.getStatusIcon();
+      this.statusNotificationsValue = this.getStatusNotifications();
    }
 
    decrementPage(): void {

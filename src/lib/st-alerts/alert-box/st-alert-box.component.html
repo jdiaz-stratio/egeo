@@ -10,12 +10,12 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div class="sth-alert-box" [ngClass]="getSeverityColor()" (mouseenter)="enter()" (mouseleave)="leave()" [ngStyle]="{opacity: opacity}">
+<div class="sth-alert-box" [ngClass]="severityColorValue" (mouseenter)="enter()" (mouseleave)="leave()" [ngStyle]="{opacity: opacity}">
    <span class="sth-alert-box-close-button" (click)="closeAlert()">
       <i class="icon-circle-cross"></i>
    </span>
    <div class="sth-alert-box-ico-type">
-      <i [ngClass]="getIcon()"></i>
+      <i [ngClass]="iconValue"></i>
    </div>
    <div class="sth-alert-box-message">
       <header class="sth-alert-box-message-header">
