@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit,  Output } from '@angular/core';
 import { StTab } from './st-tab-box.interface';
 
 @Component({
@@ -22,7 +22,13 @@ export class StTabBoxComponent {
    @Input() qaTag: string;
    @Output() select: EventEmitter<StTab> = new EventEmitter<StTab>();
 
+   public tabWidthValue: string;
+
    constructor(private _cd: ChangeDetectorRef) { }
+
+   ngOnInit(): void {
+     this.tabWidthValue = this.getTabWidth();
+   }
 
    onClick(selectedTab: StTab): void {
       this.tabs = Object.assign([], this.tabs.map((tab) => {

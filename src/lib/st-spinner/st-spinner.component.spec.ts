@@ -34,11 +34,11 @@ describe('StSpinnerComponent', () => {
    beforeEach(() => {
       fixture = TestBed.createComponent(StSpinnerComponent);
       comp = fixture.componentInstance;
-      fixture.detectChanges();
    });
 
    describe('Its theme can be configured', () => {
       it('by default, theme is "primary"', () => {
+         fixture.detectChanges();
          expect(comp.theme).toEqual('primary');
          expect(fixture.nativeElement.querySelector('.path.path--primary')).not.toBeNull();
       });

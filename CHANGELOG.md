@@ -103,6 +103,10 @@
 
 * st-breadcrumbs: Allow to configure visualization mode as "default" or "title"
 
+**Refactor:**
+
+* Fix method calls from templates
+
 **Breaking changes:**
 
 * st-foreground-notifications: allow to control multiple notifications

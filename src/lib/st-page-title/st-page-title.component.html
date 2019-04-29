@@ -17,7 +17,7 @@
       </button>
    </div>
    <div class="main-title sth-page-title-main-title">
-      <span *ngIf="hasPreTitle()" class="sth-page-title-pre-title">{{preTitle}}: </span>
+      <span *ngIf="hasPreTitleValue" class="sth-page-title-pre-title">{{preTitle}}: </span>
       <span *ngIf="!editable" class="sth-page-title-title">{{title}}</span>
 
       <div class="editable-box sth-editable" *ngIf="editable">

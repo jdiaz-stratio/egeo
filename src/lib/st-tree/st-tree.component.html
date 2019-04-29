@@ -12,7 +12,7 @@
 -->
 <div class="node sth-tree-node" [ngClass]="{root: tree}">
    <i
-         *ngIf="hasChildren()"
+         *ngIf="hasChildrenValue"
          class="button sth-tree-node-button"
          [ngClass]="node && node.expanded ? 'icon-arrow2_down' : 'icon-arrow2_right'"
          [attr.id]="idSuffix('-toggle')"
@@ -28,7 +28,7 @@
       <span class="text sth-tree-node-text">{{node.name}}</span>
    </div>
 </div>
-<div *ngIf="hasChildren() && node.expanded" class="sth-tree-children">
+<div *ngIf="hasChildrenValue && node.expanded" class="sth-tree-children">
    <st-tree
          *ngFor="let child of node.children; index as i"
          [attr.id]="idSuffix('-' + i)"

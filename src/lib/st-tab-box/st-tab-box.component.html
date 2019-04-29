@@ -15,7 +15,7 @@
     *ngFor="let tab of tabs; let i = index;"
     (click)="onClick(tab)"
     class="sth-tab-box__tab st-tab-box__tab"
-    [style.width]="getTabWidth()"
+    [style.width]="tabWidthValue"
     [attr.id]="qaTag + '-' + tab.label"
     [ngClass]="getTabClass(tab, i)">
     {{tab.label}}

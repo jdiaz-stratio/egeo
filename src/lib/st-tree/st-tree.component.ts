@@ -16,7 +16,8 @@ import {
    EventEmitter,
    HostBinding,
    Input,
-   Output
+   Output,
+   OnInit
 } from '@angular/core';
 import {
    cloneDeep as _cloneDeep,
@@ -57,7 +58,7 @@ import { StTreeEvent, StTreeNode } from './st-tree.model';
    styleUrls: ['./st-tree.component.scss'],
    templateUrl: './st-tree.component.html'
 })
-export class StTreeComponent {
+export class StTreeComponent implements OnInit {
 
    /** @Input {boolean} [collapseChildrenBranch=false] TRUE: Collapse all child nodes. FALSE: Only collapse the selected node */
    @Input() collapseChildrenBranch: boolean = false;
@@ -84,6 +85,8 @@ export class StTreeComponent {
 
    @HostBinding('class.sth-tree') classTtree: boolean = true;
 
+   public hasChildrenValue: boolean = false;
+
    private _tree: StTreeNode;
 
    private _delay: number = 150;
@@ -92,6 +95,9 @@ export class StTreeComponent {
 
    constructor(private _cd: ChangeDetectorRef, private _elementRef: ElementRef) {}
 
+   ngOnInit(): void {
+      this.hasChildrenValue = this.hasChildren();
+   }
    hasChildren(): boolean {
       return this.node && this.node.children && this.node.children.length > 0;
    }

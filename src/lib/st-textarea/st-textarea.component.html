@@ -11,7 +11,7 @@
 
 -->
 <label st-label [attr.title]="contextualHelp" class="st-textarea-title"
-       [ngClass]="{error: showError(), active: focus, disabled: isDisabled}" [attr.for]="name">
+       [ngClass]="{error: showErrorValue, active: focus, disabled: isDisabled}" [attr.for]="name">
    {{label}}
 </label>
 <textarea class="st-textarea" #textarea
@@ -19,7 +19,7 @@
           (focusout)="onFocusOut($event, false)"
           (blur)="onFocusOut($event, true)"
           [formControl]="internalControl"
-          [ngClass]="{error: showError(), disabled: isDisabled}"
+          [ngClass]="{error: showErrorValue, disabled: isDisabled}"
           [placeholder]="placeholder" [name]="name" [cols]="cols" [rows]="rows || null" [wrap]="wrap"
           [attr.maxlength]="maxLength" [attr.id]="qaTag">
 </textarea>
@@ -29,7 +29,7 @@
 </span>
 
 <div class="st-textarea-error-layout">
-   <div *ngIf="showError()">
+   <div *ngIf="showErrorValue">
       <span class="st-textarea-error-message">{{errorMessage}}</span>
    </div>
 </div>
