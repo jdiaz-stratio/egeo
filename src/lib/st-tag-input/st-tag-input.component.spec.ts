@@ -475,15 +475,18 @@ describe('StTagInputComponent', () => {
       expect(comp.tagSelected).toBeNull();
    });
 
-   it('Should be printed as invalid if it has an error message and it is not pristine', () => {
+   it('Should be printed as valid if it has an error message and it is pristine', () => {
       comp.isPristine = true;
       comp.errorMessage = 'This is a fake error message';
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('.st-input-error-message')).toBeNull();
       expect(fixture.nativeElement.querySelector('.st-tag-input__input').classList).not.toContain('error');
+   });
 
+   it('Should be printed as invalid if it has an error message and it is not pristine', () => {
       comp.isPristine = false;
+      comp.errorMessage = 'This is a fake error message';
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('.st-input-error-message')).not.toBeNull();

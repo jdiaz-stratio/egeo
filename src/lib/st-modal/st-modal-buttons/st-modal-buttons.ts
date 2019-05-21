@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { StModalButton, StModalButtonResponse } from '../st-modal.model';
 
@@ -18,11 +18,17 @@ import { StModalButton, StModalButtonResponse } from '../st-modal.model';
    styleUrls: ['./st-modal-buttons.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StModalButtonsComponent {
+export class StModalButtonsComponent implements OnInit {
 
    @Input() buttonConfig: StModalButton[] = [];
    @Input() fullscreen: boolean = false;
    @Output() click: EventEmitter<StModalButtonResponse> = new EventEmitter<StModalButtonResponse>();
+
+   public hasButtonsValue: boolean = false;
+
+   ngOnInit(): void {
+      this.hasButtonsValue = this.hasButtons();
+   }
 
    hasButtons(): boolean {
       return this.buttonConfig && this.buttonConfig.length > 0;

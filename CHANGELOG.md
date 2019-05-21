@@ -22,6 +22,10 @@
 * Remove st-info-box from demo.
 * Removed st-tree, st-tip, st-tab-box, st-info-card, st-help components
 
+**Refactor:**
+
+* Fix method calls from templates
+
 
 ## 16.2.0 (April 12, 2019)
 

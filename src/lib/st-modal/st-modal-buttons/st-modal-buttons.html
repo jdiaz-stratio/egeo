@@ -10,7 +10,7 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<div *ngIf="hasButtons()" class="st-modal-buttons">
+<div *ngIf="hasButtonsValue" class="st-modal-buttons">
    <button *ngFor="let button of buttonConfig" [attr.id]="getButtonId(button)" class="button" [ngClass]="getButtonClass(button)" (click)="clickButton(button, $event)"
        type="button">
       <i *ngIf="button.leftIcon" [ngClass]="button.leftIcon"></i>

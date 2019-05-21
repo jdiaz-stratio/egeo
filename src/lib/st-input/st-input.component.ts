@@ -69,9 +69,11 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    @ViewChildren('input') vc: any;
 
    public disabled: boolean = false; // To check disable
+   public displayResetButtonValue: boolean = false;
    public focus: boolean = false;
    public internalControl: FormControl;
    public errorMessage: string = undefined;
+   public showErrorValue: boolean = false;
 
    private sub: Subscription;
    private _value: any;
@@ -99,13 +101,14 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
       if (this.forceValidations && this.internalControl) {
          this.writeValue(this.internalControl.value);
       }
-      this._cd.markForCheck();
    }
 
    ngOnInit(): void {
       this.internalControl = new FormControl(this.internalInputModel);
       this.valueChangeSub = this.internalControl.valueChanges.subscribe((value) => {
          this.onChange(this.getTypedValue(value));
+         this.showErrorValue = this.showError();
+         this.displayResetButtonValue = this.displayResetButton();
       });
    }
 
@@ -172,6 +175,7 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
    /** Style functions */
    onFocus(event: Event): void {
       this.focus = true;
+      this.showErrorValue = this.showError();
    }
 
    onFocusOut(event: Event, emitEvent: boolean): void {
@@ -180,6 +184,7 @@ export class StInputComponent implements ControlValueAccessor, OnChanges, OnInit
       if (emitEvent) {
          this.blur.emit();
       }
+      this.showErrorValue = this.showError();
    }
 
    // When status change call this function to check if have errors

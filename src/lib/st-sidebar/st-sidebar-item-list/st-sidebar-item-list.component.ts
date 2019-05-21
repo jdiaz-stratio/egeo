@@ -50,6 +50,7 @@ export class StSidebarItemListComponent implements OnInit {
    /** @Output {StSidebarItem} [change=''] Event emitted when the active item is changed. This emit the active item */
    @Output() change: EventEmitter<StSidebarItem> = new EventEmitter<StSidebarItem>();
 
+   public displayAsComplexModeValue: boolean = false;
    public expanded: boolean[] = [];
 
    private _active: StSidebarItem;
@@ -65,6 +66,7 @@ export class StSidebarItemListComponent implements OnInit {
       }
 
       this._updateStatus();
+      this.displayAsComplexModeValue = this.displayAsComplexMode();
    }
 
    set active(active: StSidebarItem) {

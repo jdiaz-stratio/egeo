@@ -118,6 +118,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    public items: any[] = [];
    public innerInputContent: string = '';
    public isPristine: boolean = true;
+   public showErrorValue: boolean = false;
 
    private _focus: boolean = false;
    private _isDisabled: boolean = false;
@@ -215,6 +216,8 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       }
 
       this._regularExp = new RegExp(this.regularExpression);
+      this.showErrorValue = this.showError();
+      this._cd.markForCheck();
    }
 
 
@@ -392,6 +395,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
          this.onChange(this.items);
          this.isPristine = false;
       }
+      this.showErrorValue = this.showError();
    }
 
    private addCurrentTag(): void {

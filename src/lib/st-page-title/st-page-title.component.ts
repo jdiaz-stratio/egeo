@@ -18,6 +18,7 @@ import {
    Component,
    EventEmitter,
    Input,
+   OnInit,
    Output,
    ViewChild,
    forwardRef
@@ -39,7 +40,7 @@ export const PAGETITLE_CONTROL_ACCESSOR: any = {
    changeDetection: ChangeDetectionStrategy.OnPush,
    providers: [PAGETITLE_CONTROL_ACCESSOR]
 })
-export class StPageTitleComponent implements ControlValueAccessor {
+export class StPageTitleComponent implements ControlValueAccessor, OnInit {
    @Input()
    get title(): string {
       return this._title;
@@ -70,7 +71,12 @@ export class StPageTitleComponent implements ControlValueAccessor {
    @ViewChild('input') input: any;
 
    public focus: boolean = false;
+   public hasPreTitleValue: boolean = false;
    private _title: string;
+
+   ngOnInit(): void {
+      this.hasPreTitleValue = this.hasPreTitle();
+   }
 
    onClickedButton(): void {
       this.clickButton.emit();
