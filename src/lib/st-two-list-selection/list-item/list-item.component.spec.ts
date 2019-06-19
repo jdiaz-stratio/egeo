@@ -21,6 +21,8 @@ import { StTwoListSelectionElement } from '../st-two-list-selection.model';
 
 // Other
 import { StCheckboxModule } from '../../st-checkbox/st-checkbox.module';
+import { StDropdownMenuModule } from '../../st-dropdown-menu/st-dropdown-menu.module';
+import { StDropDownMenuItem } from 'st-dropdown-menu/st-dropdown-menu.interface';
 
 let comp: ListItemComponent;
 let fixture: ComponentFixture<ListItemComponent>;
@@ -30,11 +32,12 @@ let element: StTwoListSelectionElement = {
    id: 1,
    name: 'test'
 };
+let menuOptionList: StDropDownMenuItem[] = [{ label: 'Example test', icon: 'icon-datetime', value: 'test' }];
 
 describe('StTwoListSelectionComponent', () => {
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [StCheckboxModule],
+         imports: [StCheckboxModule, StDropdownMenuModule],
          declarations: [ListItemComponent]
       })
          .compileComponents();  // compile template and css
@@ -45,6 +48,7 @@ describe('StTwoListSelectionComponent', () => {
       comp = fixture.componentInstance;
       comp.qaTag = qaTag;
       comp.item = element;
+      comp.menuOptionList = menuOptionList;
    });
 
    describe('ListItemComponent', () => {
@@ -95,6 +99,70 @@ describe('StTwoListSelectionComponent', () => {
          (extraLabel.nativeElement as HTMLSpanElement).click();
          fixture.detectChanges();
          expect(outputSelect).toHaveBeenCalled();
+      });
+
+      it('Should emit when select an item non editable', () => {
+         comp.editable = false;
+         fixture.detectChanges();
+         spyOn(fixture.componentInstance.selectItemNonEditable, 'emit');
+         let itemRow: DebugElement = fixture.debugElement.query(By.css('.item__row > span'));
+         expect(itemRow).toBeDefined();
+
+         (itemRow.nativeElement as HTMLInputElement).click();
+         itemRow.nativeElement.dispatchEvent(new Event('click'));
+         fixture.detectChanges();
+
+         expect(fixture.componentInstance.selectItemNonEditable.emit).toHaveBeenCalled();
+         expect(fixture.componentInstance.selectItemNonEditable.emit).toHaveBeenCalledWith(element);
+      });
+
+      describe('if row item has a hover event', () => {
+
+         describe('should be able to show menu option', () => {
+            beforeEach(() => {
+
+               comp.editable = false;
+               fixture.detectChanges();
+               let itemRow: DebugElement = fixture.debugElement.query(By.css('.item__row'));
+               itemRow.nativeElement.dispatchEvent(new Event('mouseenter'));
+               fixture.detectChanges();
+            });
+
+            it('menu is displayed', () => {
+               let label: DebugElement = fixture.debugElement.query(By.css('.item__row > .label'));
+               let menu: DebugElement = fixture.debugElement.query(By.css('.item__row > st-dropdown-menu'));
+               expect(label.nativeElement.classList).toContain('primary-link');
+               expect(menu.nativeElement).toBeDefined();
+            });
+
+           it('should emit event with item and option selected', () => {
+               let menu: DebugElement = fixture.debugElement.query(By.css('.item__row > st-dropdown-menu'));
+               menu.nativeElement.dispatchEvent(new Event('click'));
+               fixture.detectChanges();
+
+               spyOn(fixture.componentInstance.selectItemNonEditable, 'emit');
+
+               let optionMenu: DebugElement = fixture.debugElement.query(By.css('.item__row > st-dropdown-menu'));
+               optionMenu.nativeElement.dispatchEvent(new Event('change'));
+               fixture.detectChanges();
+
+               expect(fixture.componentInstance.selectItemNonEditable.emit).toHaveBeenCalled();
+               expect(fixture.componentInstance.selectItemNonEditable.emit).toHaveBeenCalledWith(element);
+
+               menu.nativeElement.dispatchEvent(new Event('clickOutside'));
+               fixture.detectChanges();
+               expect(optionMenu.nativeElement.innerHTML).toContain('visibility: hidden;');
+            });
+
+            it('should not show menu options if not hover row', () => {
+               let itemRow: DebugElement = fixture.debugElement.query(By.css('.item__row'));
+               itemRow.nativeElement.dispatchEvent(new Event('mouseleave'));
+               fixture.detectChanges();
+
+               let optionMenu: DebugElement = fixture.debugElement.query(By.css('.item__row > st-dropdown-menu'));
+               expect(optionMenu).toBe(null);
+            });
+         });
       });
    });
 });

@@ -39,6 +39,12 @@
       </div>
 
       <br><br><br>
+      <h2>Only view component in no edition mode with menu options</h2>
+      <div style="width: 50%; height: 500px">
+         <st-two-list-selection-view [selectedElements]="selectedUserList" [config]="configWithMenuOption" [editable]="false" qaTag="example-two-list-disable" mode="compact" (selectItemNonEditable)="onSelectItemNonEditable($event)"></st-two-list-selection-view>
+      </div>
+
+      <br><br><br>
       <h2>Checkbox all, and condition show search</h2>
       <div style="width: 855px; height: 570px">
          <st-two-list-selection [allElements]="completeUserList" [(selectedElements)]="selectedUserList" [config]="configWithCheckAll" [editable]="true"

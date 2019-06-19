@@ -18,6 +18,18 @@
    white-space: nowrap;
    text-overflow: ellipsis;
    padding-right: 10px;
+
+   &__row {
+      display: flex;
+      flex-direction: row-reverse;
+      .filter-selector {
+         position: absolute;
+
+         .icon-ellipsis {
+            font-size: 20px;
+         }
+      }
+   }
 }
 
 .label {
@@ -27,6 +39,11 @@
    color: $action-secondary-07;
    font-size: $egeo-font-size-xsmall;
    font-weight: 400;
+}
+
+.label.primary-link {
+   color: $action-primary-default;
+   cursor: pointer;
 }
 
 :host {

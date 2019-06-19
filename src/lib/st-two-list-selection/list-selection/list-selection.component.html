@@ -19,8 +19,8 @@
    <list-item [disabled]="list.length === 0" class="list-selection__list-item-all" *ngIf="hasAllList && scrollItems" [item]="itemAll"
       (selectItem)="selectItem.emit(itemAll);" [editable]="editable" [qaTag]="listCheckAllQaTag"></list-item>
 
-   <list-scroll [list]="list" [itemAll]="itemAll" [mode]="mode" (selectItem)="selectItem.emit($event)" [hasAllList]="hasAllList" [qaTag]="listQaTag" [editable]="editable" [qaTag]="listQaTag" [editable]="editable"
-             (selectExtraLabel)="selectExtraLabel.emit($event)" (scrollBottom)="scrollBottom.emit($event)" [isLoading]="isLoading" [fetchingDataText]="fetchingDataText"></list-scroll>
+   <list-scroll [list]="list" [itemAll]="itemAll" [mode]="mode" (selectItem)="selectItem.emit($event)" (selectItemNonEditable)="selectItemNonEditable.emit($event)"  [hasAllList]="hasAllList" [qaTag]="listQaTag" [editable]="editable" [qaTag]="listQaTag" [editable]="editable"
+             (selectExtraLabel)="selectExtraLabel.emit($event)" (scrollBottom)="scrollBottom.emit($event)" [isLoading]="isLoading" [fetchingDataText]="fetchingDataText" [menuOptionList]="menuOptionList"></list-scroll>
    <div class="list-selection__rectangle bottom" *ngIf="hasOrder" >
          <st-select [disabled]="list.length === 0" class="order-select" button="Order" [options]="orderOptions" (select)="changeOrder.emit($event)" [placeholder]="orderPlaceholder"></st-select>
    </div>

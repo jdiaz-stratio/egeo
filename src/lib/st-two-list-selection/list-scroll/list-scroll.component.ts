@@ -29,11 +29,13 @@ export class ListScrollComponent implements OnInit {
    @Input() hasAllList?: boolean = false;
    @Input() isLoading?: boolean = false;
    @Input() itemAll?: StTwoListSelectionElement;
+   @Input() menuOptionList?: StDropDownMenuItem[];
    @Input() @StRequired() qaTag: string;
    @Input() mode: 'compact' | 'normal' = 'normal';
 
    @Output() scrollBottom: EventEmitter<any> = new EventEmitter<any>();
    @Output() selectItem: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
+   @Output() selectItemNonEditable: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
    @Output() selectExtraLabel: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() search: EventEmitter<string> = new EventEmitter<string>();
 

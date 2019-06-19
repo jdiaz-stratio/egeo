@@ -10,10 +10,22 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
+
 <div class="item" [ngClass]="itemMode" [attr.id]="itemQaTag" [title]="itemName">
-   <span *ngIf="!editable" class="label">{{itemName}}</span>
-   <st-checkbox [disabled]="disabled" *ngIf="editable" [qaTag]="checkQaTag" [checked]="selected" (click)="emitOnSelect($event)" >
+   <span *ngIf="!editable && !menuOptionList" class="label">{{itemName}}</span>
+   <div class="item__row" *ngIf="!editable && menuOptionList" (mouseenter)="mouseHoverRow()" (mouseleave)="mouseLeftRow()">
+      <span class="label" [ngClass]="{'primary-link': hoverRow}" (click)="emitOnClickNonEditable($event)">{{itemName}}</span>
+      <st-dropdown-menu *ngIf="hoverRow" class="filter-selector" [items]="menuOptionList" attr.id="actionListId" [placement]="placement"
+          [offset]="{ x: -170, y: 0 }" [visualMode]="menuVisualMode" [active]="showActionList" (click)="onEllipsisClick()"
+          (change)="onChangeOption($event)" (clickOutside)="onCloseActionMenu()">
+         <button class="button" id="actions-service">
+            <i class="icon-ellipsis"></i>
+         </button>
+      </st-dropdown-menu>
+   </div>
+   <st-checkbox [disabled]="disabled" *ngIf="editable" [qaTag]="checkQaTag" [checked]="selected" (click)="emitOnSelect($event)">
       <span class="label">{{itemName}}</span>
    </st-checkbox>
-   <span class="extraLabel" *ngIf="item.extraLabel" [innerHTML]="item.extraLabel" (click)="selectExtraLabel.emit({element: item, event: $event})"></span>
+   <span class="extraLabel" *ngIf="item.extraLabel" [innerHTML]="item.extraLabel"
+       (click)="selectExtraLabel.emit({element: item, event: $event})"></span>
 </div>

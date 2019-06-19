@@ -9,6 +9,7 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 import { TranslateableElement } from '../utils/egeo-resolver/egeo-resolve-model';
+import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 
 export interface StTwoListSelectionElement {
    id: string | number;
@@ -33,6 +34,7 @@ export interface StTwoListSelectionConfig {
    allElementsListSubtitle?: string;
    allElementsSearchPlaceholder: string;
    fetchingDataText?: string;
+   menuOptionList?: StDropDownMenuItem[];
    orderPlaceholder?: string;
    selectedElementsListTitle: string;
    selectedElementsListSubtitle?: string;

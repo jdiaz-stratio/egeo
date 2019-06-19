@@ -54,6 +54,15 @@ export class StTwoListSelectionDemoComponent {
       selectedElementsSearchPlaceholder: 'Search...'
    };
 
+   configWithMenuOption: StTwoListSelectionConfig = {
+      allElementsListTitle: 'All element',
+      allElementsSearchPlaceholder: 'Search...',
+      menuOptionList: [
+      { label: 'Example action', icon: 'icon-datetime', value: 'example' }],
+      selectedElementsListTitle: 'Selected elements',
+      selectedElementsSearchPlaceholder: 'Search...'
+   };
+
    public orderOptions: Array<StDropDownMenuItem> = [
       {
          label: 'A-Z',
@@ -101,6 +110,10 @@ export class StTwoListSelectionDemoComponent {
          this.completeUserList = cloneList;
          this._cd.markForCheck();
        }, 1000);
+   }
+
+   onSelectItemNonEditable(event: Event): void {
+      console.log(`Selected item ${JSON.stringify(event)}`);
    }
 
    showSelectedElements(): void {

@@ -33,6 +33,7 @@ export class ListSelectionComponent {
    @Input() hasSearch: boolean = true;
    @Input() isLoading?: boolean = false;
    @Input() itemAll?: StTwoListSelectionElement;
+   @Input() menuOptionList?: StDropDownMenuItem[];
    @Input() orderOptions: StDropDownMenuItem[] = [];
    @Input() orderPlaceholder?: string;
    @Input() mode: 'compact' | 'normal' = 'normal';
@@ -41,6 +42,7 @@ export class ListSelectionComponent {
 
    @Output() scrollBottom: EventEmitter<any> = new EventEmitter<any>();
    @Output() selectItem: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
+   @Output() selectItemNonEditable: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
    @Output() selectExtraLabel: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() search: EventEmitter<string> = new EventEmitter<string>();
    @Output() changeOrder: EventEmitter<any> = new EventEmitter<any>();

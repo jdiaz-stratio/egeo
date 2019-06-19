@@ -55,6 +55,7 @@ export class StTwoListSelectionViewComponent {
    @Output() selectAllElement: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
    @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
+   @Output() selectItemNonEditable: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
    @Output() selectSelectedElement: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
 
    get allTitle(): string {
@@ -71,6 +72,10 @@ export class StTwoListSelectionViewComponent {
 
    get fetchingDataText(): string {
       return this.config && this.config.fetchingDataText || '';
+   }
+
+   get menuOptionList(): StDropDownMenuItem[]{
+      return this.config && this.config.menuOptionList;
    }
 
    get orderPlaceholder(): string {

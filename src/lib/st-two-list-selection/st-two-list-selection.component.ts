@@ -61,6 +61,7 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
          (numItemsSelectedSelected)="numItemsSelectedSelected.emit($event)"
          (selectExtraLabelAll)="selectExtraLabelAll.emit($event)"
          (selectExtraLabelSelected)="selectExtraLabelAll.emit($event)"
+         (selectItemNonEditable)="selectItemNonEditable.emit($event)"
          (changeOrderAll)="changeOrderAll.emit($event)"
          (changeOrderSelected)="changeOrderSelected.emit($event)"
          (scrollBottomAll)="scrollBottomAll.emit($event)"
@@ -102,6 +103,7 @@ export class StTwoListSelectionComponent extends StTwoListSelection implements O
    @Output() selectedElementsChange: EventEmitter<StTwoListSelectionElement[]> = new EventEmitter<StTwoListSelectionElement[]>();
    @Output() selectExtraLabelAll: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
+   @Output() selectItemNonEditable: EventEmitter<StTwoListSelectionElement[]> = new EventEmitter<StTwoListSelectionElement[]>();
 
    constructor(private cd: ChangeDetectorRef) {
       super(cd);

@@ -27,7 +27,7 @@
 
    <!--SELECTED ELEMENTS-->
    <list-selection class="list sth-two-list__list sth-two-list__selected-list" [ngClass]="{'not-editable': !editable}" [list]="selectedElements" [itemAll]="itemAll" [title]="selectedTitle" [subtitle]="selectedSubtitle"
-       [searchPlaceholder]="selectedPlaceholder" [orderPlaceholder]="orderPlaceholder" [showSearchNumber]="showSearchNumber" [qaTag]="selectedQaTag" [editable]="editable" (search)="searchOverSelected.emit($event)" (selectItem)="selectSelectedElement.emit($event)"
-       [important]="true" [hasSearch]="hasSearch" [hasAllList]="hasAllListSelected" (selectExtraLabel)="selectExtraLabelSelected.emit($event)" [orderOptions]="orderSelectedOptions" (changeOrder)="changeOrderSelected.emit($event)" [mode]="mode">
+       [searchPlaceholder]="selectedPlaceholder" [orderPlaceholder]="orderPlaceholder" [showSearchNumber]="showSearchNumber" [qaTag]="selectedQaTag" [editable]="editable" [menuOptionList]="menuOptionList" (search)="searchOverSelected.emit($event)" (selectItem)="selectSelectedElement.emit($event)"
+       [important]="true" [hasSearch]="hasSearch" [hasAllList]="hasAllListSelected" (selectExtraLabel)="selectExtraLabelSelected.emit($event)" (selectItemNonEditable)="selectItemNonEditable.emit($event)" [orderOptions]="orderSelectedOptions" (changeOrder)="changeOrderSelected.emit($event)" [mode]="mode">
    </list-selection>
 </div>
