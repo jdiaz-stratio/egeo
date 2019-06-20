@@ -14,6 +14,7 @@ import { StEgeo, StRequired } from '../../decorators/require-decorators';
 import { StTwoListSelectionElement, StTwoListSelectExtraLabelAction } from '../st-two-list-selection.model';
 
 import { StDropDownMenuItem, StDropDownVisualMode } from '../../st-dropdown-menu/st-dropdown-menu.interface';
+import { StPopPlacement } from '../../st-pop/st-pop.model';
 
 @Component({
    selector: 'list-item',
@@ -38,6 +39,7 @@ export class ListItemComponent {
 
    public hoverRow: boolean = false;
    public menuVisualMode: StDropDownVisualMode = StDropDownVisualMode.MENU_LIST;
+   public placement: StPopPlacement = StPopPlacement.BOTTOM_END;
    public showActionList: boolean;
 
    constructor() { }

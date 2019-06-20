@@ -16,8 +16,8 @@
    <div class="item__row" *ngIf="!editable && menuOptionList" (mouseenter)="mouseHoverRow()" (mouseleave)="mouseLeftRow()">
       <span class="label" [ngClass]="{'primary-link': hoverRow}" (click)="emitOnClickNonEditable($event)">{{itemName}}</span>
       <st-dropdown-menu *ngIf="hoverRow" class="filter-selector" [items]="menuOptionList" attr.id="actionListId" [placement]="placement"
-          [offset]="{ x: -170, y: 0 }" [visualMode]="menuVisualMode" [active]="showActionList" (click)="onEllipsisClick()"
-          (change)="onChangeOption($event)" (clickOutside)="onCloseActionMenu()">
+           [visualMode]="menuVisualMode" [active]="showActionList" (click)="onEllipsisClick()"
+          (change)="onChangeOption($event)" (clickOutside)="onCloseActionMenu()" [openToLeft]="true">
          <button class="button" id="actions-service">
             <i class="icon-ellipsis"></i>
          </button>
