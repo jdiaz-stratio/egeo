@@ -98,11 +98,7 @@ export class ListItemComponent {
    }
 
    onChangeOption(option: StDropDownMenuItem): void {
-      switch (option.value) {
-         default:
-            this.emitOnClickNonEditable(new CustomEvent('selectItem', { bubbles: true, cancelable: true, detail: Object.assign(this.item, option)}));
-            break;
-      }
+      this.emitOnClickNonEditable(new CustomEvent('selectItem', { bubbles: true, cancelable: true, detail: Object.assign(this.item, option)}));
    }
 
    onEllipsisClick(): void {
