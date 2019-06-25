@@ -7,6 +7,10 @@
 * st-color-picker: Create component
 * st-two-list-selection: allow to show dropdown menu options  if it is a non-editable list.
 
+**Fixed bugs:**
+
+* st-table: Fixed error with selectableAll and sortable columns
+
 ## 16.4.0 (June 10, 2019)
 
 **New features:**

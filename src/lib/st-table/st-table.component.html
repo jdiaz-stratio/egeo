@@ -18,11 +18,10 @@
           class='st-table__header-item'
           [ngClass]="{'st-table__header-item--selected': isSortedByField(field), sortable: isSortable(field)}"
           (click)="onChangeOrder(field)">
-
+          <st-checkbox *ngIf="i == 0 && selectableAll" qaTag="select-all-checkbox" class="st-table__checkbox"
+               name="selectAll" [checked]="selectedAll" (change)="onSelectAll($event)">
+         </st-checkbox>
          <label class='st-table__header-text'>
-            <st-checkbox *ngIf="i == 0 && selectableAll" qaTag="select-all-checkbox" class="st-table__checkbox"
-                         name="selectAll" [checked]="selectedAll" (change)="onSelectAll($event)">
-            </st-checkbox>
             {{field.label}}
             <i *ngIf="isSortable(field)" class='st-table__order-arrow'
                [ngClass]="getHeaderItemClass(field)">

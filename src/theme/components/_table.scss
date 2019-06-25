@@ -11,41 +11,50 @@
 @import '../constants/fonts';
 @import '../constants/colors';
 
-.st-table__header {
-   font-family: $egeo-nunito-sans;
-   background-color: $neutral-03;
-   height: 50px;
-}
+.st-table{
+   &__header {
+      font-family: $egeo-nunito-sans;
+      background-color: $neutral-03;
+      height: 50px;
+   }
 
-.st-table__checkbox {
-   position: absolute;
-   left: 10px;
-   height: 20px;
-}
+   &__checkbox {
+      position: absolute;
+      left: 10px;
+      height: 20px;
+      z-index: 1;
+   }
 
-.st-table__header-text {
-   font-weight: bold;
-   font-size: $egeo-font-size-xxsmall;
-   line-height: $egeo-line-height-xxsmall;
-   text-align: left;
-   color: $neutral-10;
-   padding: 0 35px;
-}
+   &__header-text {
+      font-weight: bold;
+      font-size: $egeo-font-size-xxsmall;
+      line-height: $egeo-line-height-xxsmall;
+      text-align: left;
+      color: $neutral-10;
+      padding: 0 35px;
+   }
 
-.st-table__header-item--selected {
-   & > .st-table__header-text {
-      color: $neutral-13;
-      & .st-table__order-arrow {
-         color: $neutral-13;
+   &__header-item {
+      .st-table__checkbox {
+         top: 12px;
+      }
+      &--selected {
+         & > .st-table__header-text {
+            color: $neutral-13;
+            & .st-table__order-arrow {
+               color: $neutral-13;
+            }
+         }
       }
    }
-}
 
-.st-table__order-arrow {
-   font-weight: bold;
-   font-size: $egeo-font-size-xxxsmall;
-   line-height: $egeo-line-height-xxxsmall;
-   color: $neutral-10;
+
+   &__order-arrow {
+      font-weight: bold;
+      font-size: $egeo-font-size-xxxsmall;
+      line-height: $egeo-line-height-xxxsmall;
+      color: $neutral-10;
+   }
 }
 
 // row theme
