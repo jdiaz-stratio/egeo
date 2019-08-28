@@ -22,6 +22,8 @@
 * st-foreground-notifications: Fix selected current notification
 * st-header: Fixed current active item
 * Construction tasks: Fixed package.json main config
+* theme: fix st-widget imports
+* fix prismjs dependency
 
 **Breaking changes:**
 
