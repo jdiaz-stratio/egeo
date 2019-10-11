@@ -125,7 +125,7 @@ export class StTagInputDemoComponent implements OnInit {
       this.filteredGroupList = _cloneDeep(this.groupList);
 
       // this.reactiveForm.controls['tag-input-reactive'].setValue( [{value: 'adsadad'}, {value: 'asdadada'}, {value: 'adsasdads'}, {value: 'adsadadsxaxa'}, {value: 'adsadadsxaxa'} ]);
-      this.reactiveForm.controls['tag-input-reactive-autocomplete'].setValue( ['adsadad', 'asdadada', 'adsasdads', 'adsadadsxaxa', 'adsadadsxaxa' ]);
+      this.reactiveForm.controls['tag-input-reactive-autocomplete'].setValue( ['ads', 'asd', 'asdaaaaaaaaaaaaaaaaaaaaaa', 'adsadadsxaxa', 'adsadadsxaxa' ]);
 
    }
 

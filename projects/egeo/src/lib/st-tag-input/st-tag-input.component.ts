@@ -253,6 +253,12 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
    }
 
    checkOneLine(): void {
+      // this.itemsWithOverflow = this.itemsWithOverflow.filter((item, index) => {
+      //    if (item.overflow) {
+      //       this.items.splice(index, 1);
+      //    }
+      //    return !item.overflow;
+      // });
       let element = this._selectElement.nativeElement.querySelectorAll('.st-tag-input__input');
 
       if (element && this.checkOverflow(element[0])) {
@@ -262,12 +268,15 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
                let idOverflow: number;
                for (let i = 0; i <  element[0].children.length; i++) {
                   debugger
-                  if ((element[0].children[i].offsetTop || element[0].children[i].offsetHeight) >= element[0].clientHeight) {
-                     idOverflow = (idOverflow === 0) ? idOverflow : i - 1;
+
+                  if ((element[0].children[i].offsetTop || element[0].children[i].offsetHeight) >= element[0].offsetHeight) {
+                     //idOverflow = (idOverflow === 0) ? idOverflow : i - 1;
+                     idOverflow = i;
                      break;
                   } else {
                      acumWidth = acumWidth + element[0].children[i].clientWidth; // if > parent clientWidth
                   }
+
                }
                this.insertOverflowElement(idOverflow, acumWidth, element[0].clientWidth);
             }
@@ -276,13 +285,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
    }
 
    deleteTag(index: number): void {
-      this.items.splice(index, 1);
-      this.onChange(this.items);
-
-      this._newElementInput.value = '';
-      this.innerInputContent = '';
-      this._newElementInput.dispatchEvent(new Event('input'));
-
       if (this.oneLineLimit) {
          //this.items = this.items.filter((item) => !item.overflow);
          this.itemsWithOverflow = this.itemsWithOverflow.filter((item, index) => {
@@ -290,8 +292,18 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
                this.items.splice(index, 1);
             }
             return !item.overflow;
-         });
+         })
+         this.itemsWithOverflow.splice(index, 1);
       }
+      debugger
+      this.items.splice(index, 1);
+      this.onChange(this.items);
+
+      this._newElementInput.value = '';
+      this.innerInputContent = '';
+      this._newElementInput.dispatchEvent(new Event('input'));
+
+
 
       this._cd.markForCheck();
       if (this.oneLineLimit) {
@@ -567,19 +579,34 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
    private insertOverflowElement(pos: number, accumWidth: number, totalWidth: number): void {
 
       const widthOverflowItem = 77;
+      // if (accumWidth + widthOverflowItem > totalWidth) {
+      //       if (pos === 0) {
+      //          this.removeStyleOneLine();
+      //       } else {
+      //          this.itemsWithOverflow.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true});
+      //          this.items.splice(pos, 0, `${this.items.length - pos} more`);
+      //       }
+      // } else {
+      //    this.itemsWithOverflow.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true});
+      //    this.items.splice(pos, 0, `${this.items.length - pos} more`);
+      // }
+      if (accumWidth > totalWidth) {
+         if (pos === 0) {
+            this.removeStyleOneLine();
+         } else {
+            this.itemsWithOverflow.splice(pos - 1, 0, { value: `${this.items.length - pos} more`, overflow: true});
+            this.items.splice(pos, 0, `${this.items.length - pos} more`);
+         }
+   } else {
       if (accumWidth + widthOverflowItem > totalWidth) {
-            if (pos === 0) {
-               this.removeStyleOneLine();
-            } else {
-               //this.items.splice(pos - 1, 0, { value: `${this.items.length - pos} more`, overflow: true});
-               this.itemsWithOverflow.splice(pos - 1, 0, { value: `${this.items.length - pos} more`, overflow: true});
-               this.items.splice(pos - 1, 0, `${this.items.length - pos} more`);
-            }
+         this.itemsWithOverflow.splice(pos - 1, 0, { value: `${this.items.length - (pos - 1)} more`, overflow: true});
+         this.items.splice(pos - 1, 0, `${this.items.length - (pos - 1)} more`);
       } else {
-         //this.items.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true });
-         this.itemsWithOverflow.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true });
+         this.itemsWithOverflow.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true});
          this.items.splice(pos, 0, `${this.items.length - pos} more`);
       }
+
+   }
       this._cd.markForCheck();
    }
 
