@@ -21,7 +21,7 @@
 
       <div #inputElement class="st-tag-input__input st-input"
            [attr.disabled]="disableValue" (clickOutside)="onClickOutside($event)"
-           [ngClass]="{ 'active': hasFocus, 'error': showErrorValue }" (click)="onInputFocusIn($event)">
+           [ngClass]="{ 'active': hasFocus, 'error': showErrorValue, 'one-line-limit': oneLineLimit }" (click)="onInputFocusIn($event)">
 
          <span *ngIf="hasPlaceholder" class="st-tag-input__placeholder" [attr.disabled]="disableValue">{{placeholder}}</span>
          <div class="st-tag-input__item tag-item" *ngFor="let item of items; let i = index;"
@@ -31,7 +31,8 @@
               (focusout)="onTagFocusOut($event, i)"
               (blur)="onTagFocusOut($event, i)"
               (click)="onTagClick($event, i)"
-              (keydown)="onTagKeyDown($event, i)">{{item}}<span *ngIf="!disabled" class="icon-cross remove-tag-button" (click)="deleteTag(i); $event.stopPropagation()"></span>
+              [ngClass]="{ 'tag-item-overflow': isOverflowedItem(i) }"
+              (keydown)="onTagKeyDown($event, i)">{{item}}<span *ngIf="!disabled &&  !isOverflowedItem(i)" class="icon-cross remove-tag-button" (click)="deleteTag(i); $event.stopPropagation()"></span>
          </div>
 
          <div #newElement type="type"

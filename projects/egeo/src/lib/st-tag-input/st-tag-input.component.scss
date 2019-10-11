@@ -32,9 +32,25 @@
    margin-right: 5px;
    overflow: hidden;
    max-width: 100%;
+   overflow-wrap: break-word;
 
    &:focus {
       outline: none;
+   }
+}
+
+.st-tag-input {
+   ::-webkit-scrollbar {
+      width: 0px;  /* Remove scrollbar space */
+      background: transparent;  /* Optional: just make scrollbar invisible */
+   }
+   &__input.one-line-limit{
+      max-height: 43px;
+      overflow: auto;
+   }
+
+   &__input .tag-item-overflow {
+      font-weight: bold;
    }
 }
 
@@ -43,6 +59,3 @@
    padding-top: 5px;
 }
 
-.info-message {
-
-}

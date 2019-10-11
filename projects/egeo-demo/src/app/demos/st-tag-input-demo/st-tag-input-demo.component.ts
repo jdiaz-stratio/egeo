@@ -123,6 +123,10 @@ export class StTagInputDemoComponent implements OnInit {
       this.reactiveForm.valueChanges.subscribe(res => console.log('Reactive Form', res));
       this.templateDrivenForm.valueChanges.subscribe(res => console.log('Template Driven Form', res));
       this.filteredGroupList = _cloneDeep(this.groupList);
+
+      // this.reactiveForm.controls['tag-input-reactive'].setValue( [{value: 'adsadad'}, {value: 'asdadada'}, {value: 'adsasdads'}, {value: 'adsadadsxaxa'}, {value: 'adsadadsxaxa'} ]);
+      this.reactiveForm.controls['tag-input-reactive-autocomplete'].setValue( ['adsadad', 'asdadada', 'adsasdads', 'adsadadsxaxa', 'adsadadsxaxa' ]);
+
    }
 
    onSubmitReactiveForm(): void {
@@ -155,7 +159,8 @@ export class StTagInputDemoComponent implements OnInit {
 
    onFilterList(event: any): void {
       let text: string = event.target.innerText;
-      this.filteredList = text ? _cloneDeep(this.list.filter(country => country.label.toLowerCase().indexOf(text.toLowerCase()) !== -1)) : [];
+      this.filteredList = text ? _cloneDeep(this.list.filter(country => country.label.toLowerCase().indexOf(text.toLowerCase()) !== -1)) : this.list;
+      debugger
    }
 
    onFilterGroupList(event: any): void {

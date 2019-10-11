@@ -20,12 +20,16 @@ import {
    OnChanges,
    OnInit,
    SimpleChanges,
-   ViewChild
+   ViewChild,
+   AfterViewInit,
+   Renderer2
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import * as _ from 'lodash';
 
 import { StDropDownMenuGroup, StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
 
+import { TagInputModel } from './st-tag-input.model';
 /**
  * @description {Component} Tag Input
  *
@@ -78,44 +82,46 @@ import { StDropDownMenuGroup, StDropDownMenuItem } from '../st-dropdown-menu/st-
       { provide: NG_VALIDATORS, useExisting: forwardRef(() => StTagInputComponent), multi: true }],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StTagInputComponent implements ControlValueAccessor, Validator, OnInit, OnChanges {
 
-   /** @input {string | null} [label=null] Label to show over the input. It is empty by default */
-   @Input() label: string | null = null;
-   /** @input {string | null} [tooltip=null] The tooltip to show  over the label. It is empty by default */
-   @Input() tooltip: string | null = null;
-   /** @input {string | null} [placeholder=null] The text that appears as placeholder of the input. It is empty by default */
-   @Input() placeholder: string | null = null;
-   /** @input {string | null} [errorMessage=null] Error message to show. It is empty by default */
-   @Input() errorMessage: string | null = null;
-   /** @input {string | null} [type=null] Type of the items */
-   @Input() type: string | null = 'text';
+export class StTagInputComponent implements ControlValueAccessor, Validator, AfterViewInit, OnInit, OnChanges {
 
-   /** @input {boolean} [withAutocomplete=false] Enable autocomplete feature. It is false by default */
-   @Input() withAutocomplete: boolean = false;
+   /** @input {boolean} [allowFreeText=true] Boolean to allow user to type a free text or not */
+   @Input() allowFreeText: boolean = true;
    /** @input {(StDropDownMenuItem | StDropDownMenuGroup)[]} [autocompleteList=Array()] List to be used for autocomplete feature. It is empty by default */
    @Input() autocompleteList: (StDropDownMenuItem | StDropDownMenuGroup)[] = [];
    /** @input {boolean} [charsToShowAutocompleteList=Array()] List to be used for autocomplete feature. It is empty by default */
    @Input() charsToShowAutocompleteList: number = 1;
-   /** @input {boolean} [allowFreeText=true] Boolean to allow user to type a free text or not */
-   @Input() allowFreeText: boolean = true;
-   /** @input {string} [infoMessage=] Message used to inform user about what values he has to introduce */
-   @Input() infoMessage: string;
-
+   /** @input {string | null} [errorMessage=null] Error message to show. It is empty by default */
+   @Input() errorMessage: string | null = null;
    /** @input {string[]} [forbiddenValues=Array()] A list of values that user can not type and if he types one of them,
     * tag input will be invalid. It is empty by default
     */
    @Input() forbiddenValues: string[] = [];
-   /** @input {string} [regularExpression=] Regular expression to validate values. It is null by default */
-   @Input() regularExpression: any | null = null;
    /** @Input {boolean} [forceValidations=false] If you specify it to 'true', the tag input checks the errors before being modified by user */
    @Input() forceValidations: boolean = false;
+   /** @input {string} [infoMessage=] Message used to inform user about what values he has to introduce */
+   @Input() infoMessage: string;
+   /** @input {string | null} [label=null] Label to show over the input. It is empty by default */
+   @Input() label: string | null = null;
+   /** @input {boolean} [oneLineLimit=false] Boolean to allow user to show component in one line, and fold/unfold if clicks in last element showed */
+   @Input() oneLineLimit?: boolean = false;
+   /** @input {string | null} [placeholder=null] The text that appears as placeholder of the input. It is empty by default */
+   @Input() placeholder: string | null = null;
+   /** @input {string} [regularExpression=] Regular expression to validate values. It is null by default */
+   @Input() regularExpression: any | null = null;
+   /** @input {string | null} [type=null] Type of the items */
+   @Input() type: string | null = 'text';
+   /** @input {string | null} [tooltip=null] The tooltip to show  over the label. It is empty by default */
+   @Input() tooltip: string | null = null;
+   /** @input {boolean} [withAutocomplete=false] Enable autocomplete feature. It is false by default */
+   @Input() withAutocomplete: boolean = false;
 
    @ViewChild('newElement') newElementInput: ElementRef;
    @ViewChild('inputElement') inputElement: ElementRef;
 
    public expandedMenu: boolean = false;
    public items: any[] = [];
+   public itemsWithOverflow: Array <TagInputModel> = [];
    public innerInputContent: string = '';
    public isPristine: boolean = true;
    public showErrorValue: boolean = false;
@@ -132,8 +138,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    onTouched = () => {
    }
 
-   constructor(private _selectElement: ElementRef,
-               private _cd: ChangeDetectorRef) {
+   constructor(private _selectElement: ElementRef, private _cd: ChangeDetectorRef, private renderer: Renderer2) {
    }
 
    /** @input {boolean} [disabled=false] Disable the component. It is false by default */
@@ -168,6 +173,15 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    }
 
    get isValidInput(): boolean {
+      // const isForbidden = this.forbiddenValues.length && this.forbiddenValues.indexOf(this.innerInputContent) > -1;
+      // const isDuplicated = this.items.filter((item: TagInputModel) => {
+      //    item.value = item.value.toString();
+      //    if (item.value && ((typeof item.value === 'string' && item.value.indexOf(this.innerInputContent) !== -1) || item.value === this.innerInputContent)) {
+      //       return item;
+      //    }
+      // }).length > 0;
+      // const matchedPattern = this.regularExpression ? this._regularExp.test(this.innerInputContent) : true;
+      // return this.innerInputContent.length ? !isForbidden && !isDuplicated && matchedPattern : true;
       const isForbidden = this.forbiddenValues.length && this.forbiddenValues.indexOf(this.innerInputContent) > -1;
       const isDuplicated = this.items.indexOf(this.innerInputContent) !== -1;
       const matchedPattern = this.regularExpression ? this._regularExp.test(this.innerInputContent) : true;
@@ -197,6 +211,15 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
 
    get listId(): string {
       return this.selectId !== null ? `${this.selectId}-autocomplete` : null;
+   }
+
+   ngAfterViewInit(): void {
+      this.itemsWithOverflow = _.clone(this.items);
+      if (this.oneLineLimit) {
+         this.checkOneLine();
+      }
+
+      this._cd.markForCheck();
    }
 
    ngOnInit(): void {
@@ -229,46 +252,71 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       this._cd.markForCheck();
    }
 
-   writeValue(data: any): void {
-      if (data && Array.isArray(data) && data.length) {
-         this.items = [];
-         for (const value of data) {
-            const parsedValue = this._getParsedTag(value);
-            if (parsedValue || !isNaN(parsedValue)) {
-               this.items.push(parsedValue);
+   checkOneLine(): void {
+      let element = this._selectElement.nativeElement.querySelectorAll('.st-tag-input__input');
+
+      if (element && this.checkOverflow(element[0])) {
+         this.checkOverflow(element[0]).then((data) => {
+            if (data) {
+               let acumWidth = 0;
+               let idOverflow: number;
+               for (let i = 0; i <  element[0].children.length; i++) {
+                  debugger
+                  if ((element[0].children[i].offsetTop || element[0].children[i].offsetHeight) >= element[0].clientHeight) {
+                     idOverflow = (idOverflow === 0) ? idOverflow : i - 1;
+                     break;
+                  } else {
+                     acumWidth = acumWidth + element[0].children[i].clientWidth; // if > parent clientWidth
+                  }
+               }
+               this.insertOverflowElement(idOverflow, acumWidth, element[0].clientWidth);
             }
-         }
-         this.onChange(this.items);
-         this.isPristine = false;
-         this._cd.markForCheck();
+         });
       }
    }
 
-   setDisabledState(disabled: boolean): void {
-      this.disabled = disabled;
+   deleteTag(index: number): void {
+      this.items.splice(index, 1);
+      this.onChange(this.items);
+
+      this._newElementInput.value = '';
+      this.innerInputContent = '';
+      this._newElementInput.dispatchEvent(new Event('input'));
+
+      if (this.oneLineLimit) {
+         //this.items = this.items.filter((item) => !item.overflow);
+         this.itemsWithOverflow = this.itemsWithOverflow.filter((item, index) => {
+            if (item.overflow) {
+               this.items.splice(index, 1);
+            }
+            return !item.overflow;
+         });
+      }
+
+      this._cd.markForCheck();
+      if (this.oneLineLimit) {
+         this.checkOneLine();
+      }
       this._cd.markForCheck();
    }
 
-   validate(control: FormControl): any {
+   isOverflowedItem(index: number): boolean {
+      return (this.itemsWithOverflow[index]) ? (this.itemsWithOverflow[index].overflow) ? true : false : false;
    }
 
-   // Registry the change function to propagate internal model changes
-   registerOnChange(fn: (_: any) => void): void {
-      this.onChange = fn;
-   }
-
-   registerOnTouched(fn: any): void {
-      this.onTouched = fn;
-   }
-
-   // Input actions
-   onInputText(text: string): void {
-      this.innerInputContent = text;
-      this.showAutocompleteMenu();
+   onClickOutside(event: Event): void {
+      if (this.expandedMenu) {
+         this._focus = false;
+         this.addCurrentTag();
+      }
    }
 
    onInputFocusIn(event: Event): void {
-      if (!this._isDisabled) {
+      //let existOverflowElement = this.items.filter(item  =>  item.overflow).length > 0;
+      let existOverflowElement = this.itemsWithOverflow.filter(item  =>  item.overflow).length > 0;
+
+      if (!this._isDisabled && !existOverflowElement) {
+         this.removeStyleOneLine();
          this._focus = true;
          this._newElementInput.focus();
          this._forceResetAutoCompleteList();
@@ -321,6 +369,64 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       }
    }
 
+    // Input actions
+    onInputText(text: string): void {
+      this.innerInputContent = text;
+      this.showAutocompleteMenu();
+   }
+
+   // Dropdown actions
+   onListSelect(data: StDropDownMenuItem): void {
+      // this._focus = false;
+
+      // const duplicated = this.items.filter((item) => {
+      //    return (item.value).toString() === data.value;
+      // }).length > 0;
+      // if (data.value.length && !duplicated) {
+      //    this.addTag(data.value);
+      // } else {
+      //    this.clearInput();
+      // }
+      this._focus = false;
+      if (data.value.length && this.items.indexOf(data.value) === -1) {
+         this.addTag(data.value);
+      } else {
+         this.clearInput();
+      }
+   }
+
+   onTagClick(event: Event, index: number): void {
+      let isOverflowElement = this.itemsWithOverflow[index].overflow;
+      if (isOverflowElement) {
+         this.removeStyleOneLine();
+         //this.items = this.items.filter((item) => !item.overflow);
+         this.itemsWithOverflow = this.itemsWithOverflow.filter((item, index) => {
+            if (item.overflow) {
+               this.items.splice(index, 1);
+            }
+            return !item.overflow;
+         });
+         this._cd.markForCheck();
+      } else {
+         event.stopPropagation();
+         event.preventDefault();
+      }
+   }
+
+   onTagFocusIn(event: Event, index: number): void {
+      if (!this._isDisabled) {
+         this._focus = true;
+         this.addCurrentTag();
+         this.expandedMenu = false;
+         this._selected = index;
+      }
+   }
+
+   onTagFocusOut(event: Event, index: number): void {
+      this._focus = false;
+      this._selected = null;
+   }
+
    // Tag actions
    onTagKeyDown(event: any, index: number): void {
       switch (event.keyCode) {
@@ -347,54 +453,48 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       }
    }
 
-   onTagFocusIn(event: Event, index: number): void {
-      if (!this._isDisabled) {
-         this._focus = true;
-         this.addCurrentTag();
-         this.expandedMenu = false;
-         this._selected = index;
-      }
+   // Registry the change function to propagate internal model changes
+   registerOnChange(fn: (_: any) => void): void {
+      this.onChange = fn;
    }
 
-   onTagFocusOut(event: Event, index: number): void {
-      this._focus = false;
-      this._selected = null;
+   registerOnTouched(fn: any): void {
+      this.onTouched = fn;
    }
 
-   onTagClick(event: Event, index: number): void {
-      event.stopPropagation();
-      event.preventDefault();
-   }
-
-   // Dropdown actions
-   onListSelect(data: StDropDownMenuItem): void {
-      this._focus = false;
-      if (data.value.length && this.items.indexOf(data.value) === -1) {
-         this.addTag(data.value);
-      } else {
-         this.clearInput();
-      }
-   }
-
-   onClickOutside(event: Event): void {
-      if (this.expandedMenu) {
-         this._focus = false;
-         this.addCurrentTag();
-      }
+   setDisabledState(disabled: boolean): void {
+      this.disabled = disabled;
+      this._cd.markForCheck();
    }
 
    showError(): boolean {
       return typeof this.errorMessage === 'string' && (!this.isPristine || this.forceValidations) && !this._focus && !this.disabled;
    }
 
+   validate(control: FormControl): any {
+   }
 
-   deleteTag(index: number): void {
-      this.items.splice(index, 1);
-      this.onChange(this.items);
+   writeValue(data: any): void {
+      if (data && Array.isArray(data) && data.length) {
+         this.items = [];
+         for (const value of data) {
+            const parsedValue = this._getParsedTag(value);
+            if (parsedValue || !isNaN(parsedValue)) {
+               this.items.push(parsedValue);
+            }
+         }
+         this.onChange(this.items);
+         this.isPristine = false;
+         this._cd.markForCheck();
+      }
+   }
 
-      this._newElementInput.value = '';
-      this.innerInputContent = '';
-      this._newElementInput.dispatchEvent(new Event('input'));
+   private addCurrentTag(): void {
+      if (this.innerInputContent.length && this.isValidInput) {
+         this.addTag(this.innerInputContent);
+      } else {
+         this.clearInput();
+      }
    }
 
    private addTag(tag: string): void {
@@ -408,12 +508,18 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       this.showErrorValue = this.showError();
    }
 
-   private addCurrentTag(): void {
-      if (this.innerInputContent.length && this.isValidInput) {
-         this.addTag(this.innerInputContent);
-      } else {
-         this.clearInput();
+   private checkAutocompleteMenuChange(changes: SimpleChanges): void {
+      if (changes && changes.autocompleteList) {
+         this._cd.markForCheck();
       }
+   }
+
+   private checkOverflow(element: any): Promise<boolean> {
+      return new Promise((resolve) => {
+         setTimeout(() => {
+           resolve(element.offsetHeight < element.scrollHeight);
+         });
+    });
    }
 
    private clearInput(): void {
@@ -424,23 +530,28 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       this._newElementInput.innerText = '';
    }
 
-   private showAutocompleteMenu(): void {
-      if (this.withAutocomplete && !this.expandedMenu && this.charsToShowAutocompleteList <= this.innerInputContent.length) {
-         this.expandedMenu = true;
-      }
-      if (this.innerInputContent === '' && this.charsToShowAutocompleteList) {
-         this.expandedMenu = false;
-      }
-      this._cd.markForCheck();
-   }
-
-   private checkAutocompleteMenuChange(changes: SimpleChanges): void {
-      if (changes && changes.autocompleteList) {
-         this._cd.markForCheck();
+   private _forceResetAutoCompleteList(): void {
+      if (!this.charsToShowAutocompleteList && this.withAutocomplete) {
+         this._newElementInput.innerText = '';
+         const event: any = new Event('input', {
+            'bubbles': true
+         });
+         event.data = '';
+         this._newElementInput.dispatchEvent(event);
       }
    }
 
    private _getParsedTag(tag: string): any {
+      // switch (this.type) {
+      //    case 'number': {
+      //       return (parseFloat(tag)) ? {value: parseFloat(tag)} : parseFloat(tag);
+      //    }
+      //    case 'integer': {
+      //       return (parseInt(tag, 0)) ? {value: parseInt(tag, 0)} : parseInt(tag, 0);
+      //    }
+      //    default:
+      //       return {value: tag };
+      // }
       switch (this.type) {
          case 'number': {
             return parseFloat(tag);
@@ -453,14 +564,36 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
       }
    }
 
-   private _forceResetAutoCompleteList(): void {
-      if (!this.charsToShowAutocompleteList && this.withAutocomplete) {
-         this._newElementInput.innerText = '';
-         const event: any = new Event('input', {
-            'bubbles': true
-         });
-         event.data = '';
-         this._newElementInput.dispatchEvent(event);
+   private insertOverflowElement(pos: number, accumWidth: number, totalWidth: number): void {
+
+      const widthOverflowItem = 77;
+      if (accumWidth + widthOverflowItem > totalWidth) {
+            if (pos === 0) {
+               this.removeStyleOneLine();
+            } else {
+               //this.items.splice(pos - 1, 0, { value: `${this.items.length - pos} more`, overflow: true});
+               this.itemsWithOverflow.splice(pos - 1, 0, { value: `${this.items.length - pos} more`, overflow: true});
+               this.items.splice(pos - 1, 0, `${this.items.length - pos} more`);
+            }
+      } else {
+         //this.items.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true });
+         this.itemsWithOverflow.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true });
+         this.items.splice(pos, 0, `${this.items.length - pos} more`);
       }
+      this._cd.markForCheck();
+   }
+
+   private removeStyleOneLine(): void {
+      let element = this._selectElement.nativeElement.querySelectorAll('.st-tag-input__input');
+      this.renderer.setStyle(element[0], 'max-height', 'inherit');
+   }
+   private showAutocompleteMenu(): void {
+      if (this.withAutocomplete && !this.expandedMenu && this.charsToShowAutocompleteList <= this.innerInputContent.length) {
+         this.expandedMenu = true;
+      }
+      if (this.innerInputContent === '' && this.charsToShowAutocompleteList) {
+         this.expandedMenu = false;
+      }
+      this._cd.markForCheck();
    }
 }
