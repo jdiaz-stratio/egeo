@@ -173,15 +173,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
    }
 
    get isValidInput(): boolean {
-      // const isForbidden = this.forbiddenValues.length && this.forbiddenValues.indexOf(this.innerInputContent) > -1;
-      // const isDuplicated = this.items.filter((item: TagInputModel) => {
-      //    item.value = item.value.toString();
-      //    if (item.value && ((typeof item.value === 'string' && item.value.indexOf(this.innerInputContent) !== -1) || item.value === this.innerInputContent)) {
-      //       return item;
-      //    }
-      // }).length > 0;
-      // const matchedPattern = this.regularExpression ? this._regularExp.test(this.innerInputContent) : true;
-      // return this.innerInputContent.length ? !isForbidden && !isDuplicated && matchedPattern : true;
       const isForbidden = this.forbiddenValues.length && this.forbiddenValues.indexOf(this.innerInputContent) > -1;
       const isDuplicated = this.items.indexOf(this.innerInputContent) !== -1;
       const matchedPattern = this.regularExpression ? this._regularExp.test(this.innerInputContent) : true;
@@ -253,12 +244,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
    }
 
    checkOneLine(): void {
-      // this.itemsWithOverflow = this.itemsWithOverflow.filter((item, index) => {
-      //    if (item.overflow) {
-      //       this.items.splice(index, 1);
-      //    }
-      //    return !item.overflow;
-      // });
       let element = this._selectElement.nativeElement.querySelectorAll('.st-tag-input__input');
 
       if (element && this.checkOverflow(element[0])) {
@@ -267,16 +252,12 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
                let acumWidth = 0;
                let idOverflow: number;
                for (let i = 0; i <  element[0].children.length; i++) {
-                  debugger
-
                   if ((element[0].children[i].offsetTop || element[0].children[i].offsetHeight) >= element[0].offsetHeight) {
-                     //idOverflow = (idOverflow === 0) ? idOverflow : i - 1;
                      idOverflow = i;
                      break;
                   } else {
-                     acumWidth = acumWidth + element[0].children[i].clientWidth; // if > parent clientWidth
+                     acumWidth = acumWidth + element[0].children[i].clientWidth;
                   }
-
                }
                this.insertOverflowElement(idOverflow, acumWidth, element[0].clientWidth);
             }
@@ -286,16 +267,14 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
 
    deleteTag(index: number): void {
       if (this.oneLineLimit) {
-         //this.items = this.items.filter((item) => !item.overflow);
          this.itemsWithOverflow = this.itemsWithOverflow.filter((item, index) => {
             if (item.overflow) {
                this.items.splice(index, 1);
             }
             return !item.overflow;
-         })
+         });
          this.itemsWithOverflow.splice(index, 1);
       }
-      debugger
       this.items.splice(index, 1);
       this.onChange(this.items);
 
@@ -324,7 +303,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
    }
 
    onInputFocusIn(event: Event): void {
-      //let existOverflowElement = this.items.filter(item  =>  item.overflow).length > 0;
       let existOverflowElement = this.itemsWithOverflow.filter(item  =>  item.overflow).length > 0;
 
       if (!this._isDisabled && !existOverflowElement) {
@@ -389,16 +367,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
 
    // Dropdown actions
    onListSelect(data: StDropDownMenuItem): void {
-      // this._focus = false;
-
-      // const duplicated = this.items.filter((item) => {
-      //    return (item.value).toString() === data.value;
-      // }).length > 0;
-      // if (data.value.length && !duplicated) {
-      //    this.addTag(data.value);
-      // } else {
-      //    this.clearInput();
-      // }
       this._focus = false;
       if (data.value.length && this.items.indexOf(data.value) === -1) {
          this.addTag(data.value);
@@ -411,7 +379,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
       let isOverflowElement = this.itemsWithOverflow[index].overflow;
       if (isOverflowElement) {
          this.removeStyleOneLine();
-         //this.items = this.items.filter((item) => !item.overflow);
          this.itemsWithOverflow = this.itemsWithOverflow.filter((item, index) => {
             if (item.overflow) {
                this.items.splice(index, 1);
@@ -554,16 +521,6 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
    }
 
    private _getParsedTag(tag: string): any {
-      // switch (this.type) {
-      //    case 'number': {
-      //       return (parseFloat(tag)) ? {value: parseFloat(tag)} : parseFloat(tag);
-      //    }
-      //    case 'integer': {
-      //       return (parseInt(tag, 0)) ? {value: parseInt(tag, 0)} : parseInt(tag, 0);
-      //    }
-      //    default:
-      //       return {value: tag };
-      // }
       switch (this.type) {
          case 'number': {
             return parseFloat(tag);
@@ -579,17 +536,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
    private insertOverflowElement(pos: number, accumWidth: number, totalWidth: number): void {
 
       const widthOverflowItem = 77;
-      // if (accumWidth + widthOverflowItem > totalWidth) {
-      //       if (pos === 0) {
-      //          this.removeStyleOneLine();
-      //       } else {
-      //          this.itemsWithOverflow.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true});
-      //          this.items.splice(pos, 0, `${this.items.length - pos} more`);
-      //       }
-      // } else {
-      //    this.itemsWithOverflow.splice(pos, 0, { value: `${this.items.length - pos} more`, overflow: true});
-      //    this.items.splice(pos, 0, `${this.items.length - pos} more`);
-      // }
+
       if (accumWidth > totalWidth) {
          if (pos === 0) {
             this.removeStyleOneLine();
