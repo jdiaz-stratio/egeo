@@ -26,9 +26,10 @@ const simpleTags: string[] = ['Example 1', 'Example 2', 'Example 3'];
 const ipFormat: any = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 const fakeInfoMessage = 'This is an informative message';
 
-describe('StTagInputComponent', () => {
+fdescribe('StTagInputComponent', () => {
    let comp: StTagInputComponent;
    let fixture: ComponentFixture<StTagInputComponent>;
+
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
@@ -44,6 +45,7 @@ describe('StTagInputComponent', () => {
 
    beforeEach(() => {
       fixture = TestBed.createComponent(StTagInputComponent);
+      //input = fixture.debugElement.query(By.css('.st-tag-input'));
       comp = fixture.componentInstance;
    });
 
@@ -75,6 +77,51 @@ describe('StTagInputComponent', () => {
       expect(comp.labelId).toBeNull();
       expect(comp.tagId).toBeNull();
       expect(comp.listId).toBeNull();
+   });
+
+   describe('Should be able to be configured to show component in one line limit', () => {
+      let input: DebugElement;
+      beforeEach(() => {
+         comp.oneLineLimit = true;
+         input = fixture.debugElement.query(By.css('.st-tag-input'));
+         comp.items = ['test', 'overflowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww'];
+         (fixture.elementRef.nativeElement as HTMLElement).setAttribute('style', 'width: 250px;');
+         fixture.detectChanges();
+
+      });
+
+      it('if item is an overflowed element and is not the first position it wont be showed', async(() => {
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+            expect(comp.items.length).toEqual(3);
+            expect(comp.items[1]).toEqual('1 more');
+            console.log(fixture.nativeElement.querySelectorAll('.tag-item')[2].offsetHeight);
+         });
+      }));
+
+      it('if adds an item, count overflow element is updated',  async(() => {
+         comp.items.push('nuevo');
+         fixture.detectChanges();
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+            expect(comp.items.length).toEqual(4);
+            expect(comp.items[1]).toEqual('2 more');
+         });
+      }));
+
+      it('Should remove overflow item when click over it, and show all items',  async(() => {
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+            let overflowItem: HTMLLabelElement = fixture.debugElement.query(By.css('.tag-item-overflow')).nativeElement;
+            expect(comp.items.length).toEqual(3);
+            expect(overflowItem).not.toBeNull();
+
+            overflowItem.click();
+            fixture.detectChanges();
+            expect(comp.items.length).toEqual(2);
+            expect(fixture.debugElement.query(By.css('.tag-item-overflow'))).toBeNull();
+         });
+      }));
    });
 
    it('Should propagate id to internal elements', () => {
@@ -829,6 +876,7 @@ describe('StTagInputComponent', () => {
    template: `
       <form [formGroup]="reactiveForm" novalidate autocomplete="off">
          <st-tag-input #tagInput
+            [oneLineLimit]="true"
             name="tags"
             formControlName="tags"
             placeholder="placeholder"
@@ -836,6 +884,7 @@ describe('StTagInputComponent', () => {
             tooltip="Test Help"
             id="test"
             [errorMessage]="errorMessage"
+
             class="st-form-field">
          </st-tag-input>
       </form>
@@ -845,8 +894,10 @@ class StTagInputTestReactiveComponent {
    errorMessage: string | undefined = null;
    reactiveForm: FormGroup;
    model: string[] = [];
+   public oneLineLimit: boolean;
 
    @ViewChild('tagInput') tagInput: StTagInputComponent;
+
 
    constructor(private _fb: FormBuilder) {
       this.reactiveForm = this._fb.group({
@@ -881,6 +932,12 @@ describe('StTagInputComponent', () => {
 
       afterEach(() => {
          fixture.destroy();
+      });
+
+      it('test onlyOneLine', () => {
+         comp.oneLineLimit = true;
+         fixture.detectChanges();
+         console.log('------------------------------------------------------------------------------------------------------------------')
       });
 
       it('Should change value from formControl', () => {

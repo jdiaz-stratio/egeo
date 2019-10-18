@@ -252,7 +252,7 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, Aft
                let acumWidth = 0;
                let idOverflow: number;
                for (let i = 0; i <  element[0].children.length; i++) {
-                  if ((element[0].children[i].offsetTop || element[0].children[i].offsetHeight) >= element[0].offsetHeight) {
+                  if (Math.max(element[0].children[i].offsetTop, element[0].children[i].offsetHeight) >= element[0].offsetHeight) {
                      idOverflow = i;
                      break;
                   } else {
