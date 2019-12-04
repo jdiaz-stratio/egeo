@@ -26,7 +26,7 @@ import { StModal2Component } from './st-modal2.component';
     `
 })
 export class Modal2TestComponent {
-   @ViewChild(StModal2Component) modalComponent: StModal2Component;
+   @ViewChild(StModal2Component, {static: false}) modalComponent: StModal2Component;
    public emptyModal: boolean = false;
    public closeOnEscape: boolean = false;
    public modalTitle: string = '';

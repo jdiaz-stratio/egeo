@@ -31,7 +31,7 @@ export class StHeaderDemoComponent {
    public launcherItems: StLauncherGroup[] = LAUNCHER_ITEMS;
    public showLauncherMenu: boolean = false;
 
-   @ViewChild('launcher') launcherElement: ElementRef;
+   @ViewChild('launcher', {static: false}) launcherElement: ElementRef;
 
    constructor(private _cd: ChangeDetectorRef) {}
 

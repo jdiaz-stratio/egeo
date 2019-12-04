@@ -37,7 +37,7 @@ export class StHeaderMenuOptionComponent implements OnDestroy {
 
    @Output() selectMenu: EventEmitter<StHeaderSelection> = new EventEmitter<StHeaderSelection>();
 
-   @ViewChild('menu') menu: ElementRef;
+   @ViewChild('menu', {static: false}) menu: ElementRef;
    public isActive: boolean = false;
 
    private subscription: Subscription;

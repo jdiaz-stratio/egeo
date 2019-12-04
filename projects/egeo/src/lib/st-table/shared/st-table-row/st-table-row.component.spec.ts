@@ -47,8 +47,8 @@ let component: TestStTableRowComponent;
 })
 
 class TestStTableRowComponent {
-   @ViewChild('row') row: StTableRowComponent;
-   @ViewChild('rowWithHoverMenu') rowWithHoverMenu: StTableRowComponent;
+   @ViewChild('row', {static: false}) row: StTableRowComponent;
+   @ViewChild('rowWithHoverMenu', {static: false}) rowWithHoverMenu: StTableRowComponent;
 
    userData: {} = {
       id: '4545-df56-s345',

@@ -82,7 +82,7 @@ export class StFormComponent implements AfterViewInit, AfterViewChecked, Control
    /** @Output {any} [valueChange=] Event emitted when value is changed. This emits the current form value */
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
-   @ViewChild('form') form: NgForm;
+   @ViewChild('form', {static: false}) form: NgForm;
 
    public showCollapsedSectionFields: boolean = false;
    public innerValue: any = {};

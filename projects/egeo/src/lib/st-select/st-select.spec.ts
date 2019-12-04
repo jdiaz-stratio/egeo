@@ -573,7 +573,7 @@ class StSelectTestReactiveComponent {
    search: boolean = false;
    reactiveForm: FormGroup;
    model: any = { option: undefined };
-   @ViewChild('select') select: StSelectComponent;
+   @ViewChild('select', {static: false}) select: StSelectComponent;
 
    constructor(private _fb: FormBuilder) {
       this.reactiveForm = this._fb.group({
@@ -759,8 +759,8 @@ class StSelectTestTemplateComponent {
    selected: StDropDownMenuItem = null;
    options: StDropDownMenuItem[];
    model: number;
-   @ViewChild('select') select: StSelectComponent;
-   @ViewChild('templateDrivenForm') templateDrivenForm: NgForm;
+   @ViewChild('select', /* TODO: add static flag */ {static: false}) select: StSelectComponent;
+   @ViewChild('templateDrivenForm', /* TODO: add static flag */ {static: false}) templateDrivenForm: NgForm;
 
    onSelect(element: StDropDownMenuItem): void {
       this.selected = element;
