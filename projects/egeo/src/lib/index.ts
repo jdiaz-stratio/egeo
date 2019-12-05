@@ -134,6 +134,7 @@ export { StInfoBoxModule } from './st-info-box/st-info-box.module';
 
 // Input
 export { StInputModule } from './st-input/st-input.module';
+export { StInputComponent } from './st-input/st-input.component';
 export {
    StInputError,
    StInputErrorSchema
