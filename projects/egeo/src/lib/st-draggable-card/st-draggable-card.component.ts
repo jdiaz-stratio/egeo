@@ -56,7 +56,7 @@ export class StDraggableCardComponent {
    @HostBinding('draggable')
    @Input() draggable: boolean = true;
 
-   @ViewChild('card') card: any;
+   @ViewChild('card', {static: false}) card: any;
    private _dragging: boolean = false;
 
    get dragging(): boolean {

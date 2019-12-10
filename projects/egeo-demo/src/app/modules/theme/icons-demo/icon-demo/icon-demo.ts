@@ -29,7 +29,7 @@ export class IconDemoComponent {
 
    @Input() icon: IconDemoModel;
    @Output() copyIconName: EventEmitter<string> = new EventEmitter<string>();
-   @ViewChild('nameEl') textElement: ElementRef;
+   @ViewChild('nameEl', {static: false}) textElement: ElementRef;
 
    getClass(): string {
       return `icon-${this.icon.name}`;

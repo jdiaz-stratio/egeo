@@ -846,7 +846,7 @@ class StTagInputTestReactiveComponent {
    reactiveForm: FormGroup;
    model: string[] = [];
 
-   @ViewChild('tagInput') tagInput: StTagInputComponent;
+   @ViewChild('tagInput', {static: true}) tagInput: StTagInputComponent;
 
    constructor(private _fb: FormBuilder) {
       this.reactiveForm = this._fb.group({
@@ -1116,8 +1116,8 @@ class StTagInputTestTemplateComponent {
    errorMessage: string | undefined = null;
    model: string[] = [];
 
-   @ViewChild('tagInput') tagInput: StTagInputComponent;
-   @ViewChild('templateDrivenForm') templateDrivenForm: NgForm;
+   @ViewChild('tagInput', {static: true}) tagInput: StTagInputComponent;
+   @ViewChild('templateDrivenForm', {static: true}) templateDrivenForm: NgForm;
 }
 
 describe('StTagInputComponent', () => {

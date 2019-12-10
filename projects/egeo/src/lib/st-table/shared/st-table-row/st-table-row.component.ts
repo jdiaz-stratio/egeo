@@ -43,7 +43,7 @@ export class StTableRowComponent implements OnInit {
    /** @Input {boolean} [standUpSelected=true] It indicates if when row is selected, it has to be displayed stood up */
    @Input() standUpSelected: boolean = true;
 
-   @ViewChild('hoverMenu') hoverMenu: any;
+   @ViewChild('hoverMenu', {static: true}) hoverMenu: any;
 
    @HostBinding('class.st-table-row') rootClass: boolean = true;
 

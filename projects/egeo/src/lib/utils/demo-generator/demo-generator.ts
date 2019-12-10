@@ -39,7 +39,7 @@ import { StDemoGeneratorModule } from './demo-generator.module';
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StDemoGenerator implements OnDestroy, AfterViewInit {
-   @ViewChild('stDemoBody', { read: ViewContainerRef }) target: ViewContainerRef;
+   @ViewChild('stDemoBody', { read: ViewContainerRef, static: false }) target: ViewContainerRef;
 
    inputs: Object;
    outputs: Object;

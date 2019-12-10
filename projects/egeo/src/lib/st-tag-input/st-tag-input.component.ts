@@ -111,8 +111,8 @@ export class StTagInputComponent implements ControlValueAccessor, Validator, OnI
    /** @Input {boolean} [forceValidations=false] If you specify it to 'true', the tag input checks the errors before being modified by user */
    @Input() forceValidations: boolean = false;
 
-   @ViewChild('newElement') newElementInput: ElementRef;
-   @ViewChild('inputElement') inputElement: ElementRef;
+   @ViewChild('newElement', {static: true}) newElementInput: ElementRef;
+   @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
 
    public expandedMenu: boolean = false;
    public items: any[] = [];
