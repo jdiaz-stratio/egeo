@@ -1,8 +1,5 @@
 const fs = require('fs');
-const {
-   execSync
-} = require('child_process');
-
+const { execSync } = require('child_process');
 const projects = ['egeo-library'];
 
 projects.forEach(project => {
@@ -19,6 +16,8 @@ function compileComponent(project, component) {
 
    if (blackListComponents.indexOf(component) === -1) {
       console.log(`\t- ${component}`);
+      let initTime = new Date().getTime();
+
       const buildJsFiles = `ng run egeo-elements:build:production --aot --main='projects/egeo-elements/src/${project}/${component}/compile.ts'`;
 
       //remove polyfill if not needed
@@ -29,5 +28,7 @@ function compileComponent(project, component) {
       const copyBundledComponentES2015 = `cp dist/tmp/${component}-es2015.js dist/components/`;
 
       execSync(`${buildJsFiles} && ${bundleIntoSingleFileES5} && ${copyBundledComponentES5} && ${bundleIntoSingleFileES2015} && ${copyBundledComponentES2015}`);
+      let finishTime = (new Date().getTime() - initTime) / 1000;
+      console.log(`\t\t ${finishTime} seconds`);
    }
 }
