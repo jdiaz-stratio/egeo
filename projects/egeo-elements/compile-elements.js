@@ -20,7 +20,6 @@ function compileComponent(project, component) {
 
       const buildJsFiles = `ng run egeo-elements:build:production --aot --main='projects/egeo-elements/src/${project}/${component}/compile.ts'`;
 
-      //remove polyfill if not needed
       const bundleIntoSingleFileES5 = `cat dist/tmp/runtime-es5.js dist/tmp/main-es5.js > dist/tmp/${component}-es5.js`;
       const copyBundledComponentES5 = `cp dist/tmp/${component}-es5.js dist/components/`;
 

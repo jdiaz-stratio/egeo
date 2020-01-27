@@ -2,6 +2,6 @@
 
 rm -r -f dist/ &&
 mkdir -p dist/components &&
-node compileElements.js &&
-node compileHelpers.js &&
+node compile-elements.js &&
+node compile-helpers.js &&
 rm -r -f dist/tmp
