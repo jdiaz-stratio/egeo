@@ -128,7 +128,7 @@ export class StSearchComponent extends EventWindowManager implements OnChanges, 
 
    constructor(private _render: Renderer2,
                private cd: ChangeDetectorRef,
-               @ViewChild('buttonId') public buttonElement: ElementRef) {
+               @ViewChild('buttonId', {static: false}) public buttonElement: ElementRef) {
       super(_render, cd, buttonElement);
    }
 

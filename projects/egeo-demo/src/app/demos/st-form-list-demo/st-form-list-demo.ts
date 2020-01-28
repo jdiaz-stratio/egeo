@@ -18,8 +18,8 @@ import { FormArray, NgForm, FormGroup, FormControl } from '@angular/forms';
 })
 
 export class StFormListDemoComponent {
-   @ViewChild('formModel') public formModel: NgForm;
-   @ViewChild('templateDrivenForm') public templateDrivenForm: NgForm;
+   @ViewChild('formModel', {static: false}) public formModel: NgForm;
+   @ViewChild('templateDrivenForm', {static: false}) public templateDrivenForm: NgForm;
    public configDoc: any = {
       html: 'demo/st-draggable-card-demo/st-draggable-card-demo.component.html',
       ts: 'demo/st-draggable-card-demo/st-draggable-card-demo.component.ts',

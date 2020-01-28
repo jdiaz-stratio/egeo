@@ -67,9 +67,9 @@ export class StHeaderComponent implements AfterViewInit {
    /** @Output {string} [selectMenu] Notify any menu option selection */
    @Output() selectMenu: EventEmitter<string> = new EventEmitter<string>();
 
-   @ViewChild('headerDivElement') headerDivElement: ElementRef;
-   @ViewChild('headerFixPart') headerFixPart: ElementRef;
-   @ViewChild('userMenuContainerElement') userMenuContainer: ElementRef;
+   @ViewChild('headerDivElement', {static: false}) headerDivElement: ElementRef;
+   @ViewChild('headerFixPart', {static: false}) headerFixPart: ElementRef;
+   @ViewChild('userMenuContainerElement', {static: true}) userMenuContainer: ElementRef;
 
    public showMenuNames: boolean = true;
 

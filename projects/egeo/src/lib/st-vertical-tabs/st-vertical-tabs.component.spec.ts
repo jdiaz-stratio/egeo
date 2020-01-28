@@ -10,7 +10,7 @@
  */
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Http } from '@angular/http';
+
 import { By } from '@angular/platform-browser';
 
 import { StVerticalTabsComponent } from './st-vertical-tabs.component';

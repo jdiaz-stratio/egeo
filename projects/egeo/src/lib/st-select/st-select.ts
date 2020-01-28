@@ -62,8 +62,8 @@ export class StSelectComponent implements AfterViewInit, ControlValueAccessor {
    @Output() scrollAtBottom: EventEmitter<any> = new EventEmitter<any>();
    @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
-   @ViewChild('input') inputElement: ElementRef;
-   @ViewChild('button') buttonElement: ElementRef;
+   @ViewChild('input', {static: false}) inputElement: ElementRef;
+   @ViewChild('button', {static: false}) buttonElement: ElementRef;
 
    @HostBinding('class.st-select-opened')
 

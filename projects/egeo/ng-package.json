@@ -3,11 +3,6 @@
    "dest": "../../dist/egeo",
    "lib": {
       "entryFile": "src/public_api.ts",
-      "externals": {
-         "lodash": "lodash",
-         "ngx-virtual-scroller": "ngx-virtual-scroller",
-         "prismjs": "prismjs"
-      },
       "umdModuleIds": {
          "lodash": "_",
          "ngx-virtual-scroller": "vscroller",

@@ -23,7 +23,7 @@ export class StFormEditorDemoComponent {
    public model: any = {  };
    public schemaError: string;
 
-   @ViewChild('formModel') public formModel: NgForm;
+   @ViewChild('formModel', {static: false}) public formModel: NgForm;
 
    constructor() {
       this.jsonSchema = JSON_SCHEMA;

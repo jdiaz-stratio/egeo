@@ -21,7 +21,7 @@
    </issueManagement>
 
    <properties>
-      <nodeVer>v8.15.0</nodeVer>
+      <nodeVer>v10.16.0</nodeVer>
       <npmVer>6.5.0</npmVer>
       <nodeURL>http://tools.stratio.com/buildtools</nodeURL>
    </properties>

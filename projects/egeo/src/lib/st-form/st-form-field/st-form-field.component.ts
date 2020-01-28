@@ -52,7 +52,7 @@ export class StFormFieldComponent implements ControlValueAccessor, OnInit, OnCha
    @Input() maxWidth: number;
    @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
-   @ViewChild('templateModel') templateModel: NgModel;
+   @ViewChild('templateModel', {static: false}) templateModel: NgModel;
 
    public disabled: boolean = false; // To check disable
    public focus: boolean = false;

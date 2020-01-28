@@ -35,8 +35,8 @@ export class StModalComponent implements OnDestroy, AfterViewInit {
    @Input() modalConfig: StModalConfig;
    @Input() component: any;
    @Output() click: EventEmitter<StModalButtonResponse> = new EventEmitter<StModalButtonResponse>();
-   @ViewChild('stModalBody', { read: ViewContainerRef }) targetContent: ViewContainerRef;
-   @ViewChild('stModalBodyEmpty', { read: ViewContainerRef }) targetEmpty: ViewContainerRef;
+   @ViewChild('stModalBody', { read: ViewContainerRef, static: false }) targetContent: ViewContainerRef;
+   @ViewChild('stModalBodyEmpty', { read: ViewContainerRef, static: false }) targetEmpty: ViewContainerRef;
 
    readonly defaultMaxWidth: number = 600;
    readonly defaultMinWidth: number = 400;
