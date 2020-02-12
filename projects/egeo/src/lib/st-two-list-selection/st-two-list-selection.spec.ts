@@ -114,6 +114,17 @@ describe('[StTwoListSelection]', () => {
          expect(el2.selected).toEqual(false);
       });
 
+      it('Shouldn\'t select an element if is disabled', () => {
+         let el: StTwoListSelectionElement = {
+            id: 1,
+            name: 'test1',
+            disabled: true
+         };
+
+         expect(el.selected).toBeUndefined();
+         twoListSelection.onSelectAllElement(el);
+         expect(el.selected).toBeUndefined();
+      });
 
       it('Should update search values', () => {
          expect(twoListSelection.allSearch).toEqual('');
@@ -144,6 +155,25 @@ describe('[StTwoListSelection]', () => {
          expect(changeEmitter.emit).toHaveBeenCalled();
          expect(changeEmitter.emit).toHaveBeenCalledTimes(1);
          expect(changeEmitter.emit).toHaveBeenCalledWith([allElements[2]]);
+      });
+
+      it('Shouldn\'t move to selected if element is disabled', () => {
+
+         let elemAll: StTwoListSelectionElement = {
+            id: 0,
+            name: 'All',
+            itemAll: true
+         };
+
+         allElements[0].disabled = true;
+
+         twoListSelection.init(allElements, selectedElements, changeEmitter, 'id', true, true, elemAll);
+         twoListSelection.onSelectAllElement(twoListSelection.copyAllElement[0]);
+
+         twoListSelection.onMoveToSelected(new Event(''));
+         expect(changeEmitter.emit).toHaveBeenCalled();
+         expect(changeEmitter.emit).toHaveBeenCalledTimes(1);
+         expect(changeEmitter.emit).toHaveBeenCalledWith([]);
       });
 
       it('Should move all to selected', () => {
@@ -230,38 +260,67 @@ describe('[StTwoListSelection]', () => {
          id: 2,
          name: 'test2'
       };
+      let el3: StTwoListSelectionElement = {
+         id: 3,
+         name: 'test3',
+         disabled: true
+      };
+      let el4: StTwoListSelectionElement = {
+         id: 4,
+         name: 'test4',
+         disabled: true
+      };
+
       let elemAll: StTwoListSelectionElement = {
          id: 0,
          name: 'All',
          itemAll: true
       };
 
-      twoListSelection.init([el1], [el2], changeEmitter, 'id', true, true, elemAll);
+      twoListSelection.init([el1, el3], [el2, el4], changeEmitter, 'id', true, true, elemAll);
 
       // All list
       elemAll.selected = false;
       twoListSelection.onSelectAllElement(elemAll);
       twoListSelection.copyAllElement.forEach((elem) => {
-         expect(elem.selected).toBe(true);
+
+         if (elem.disabled) {
+            expect(elem.selected).toBeUndefined();
+         } else {
+            expect(elem.selected).toBe(true);
+         }
       });
 
       elemAll.selected = true;
       twoListSelection.onSelectAllElement(elemAll);
       twoListSelection.copyAllElement.forEach((elem) => {
-         expect(elem.selected).toBe(false);
+
+         if (elem.disabled) {
+            expect(elem.selected).toBeUndefined();
+         } else {
+            expect(elem.selected).toBe(false);
+         }
       });
 
       // Selected list
       elemAll.selected = false;
       twoListSelection.onSelectSelectedElement(elemAll);
       twoListSelection.copySelectedElements.forEach((elem) => {
-         expect(elem.selected).toBe(true);
+         if (elem.disabled) {
+            expect(elem.selected).toBeUndefined();
+         } else {
+            expect(elem.selected).toBe(true);
+         }
       });
 
       elemAll.selected = true;
       twoListSelection.onSelectSelectedElement(elemAll);
       twoListSelection.copySelectedElements.forEach((elem) => {
-         expect(elem.selected).toBe(false);
+         if (elem.disabled) {
+            expect(elem.selected).toBeUndefined();
+         } else {
+            expect(elem.selected).toBe(false);
+         }
       });
 
 

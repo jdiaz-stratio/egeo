@@ -105,7 +105,7 @@ export class StTwoListSelection {
 
    // Move all to selected
    onMoveAllToSelected(event: Event): void {
-      this.emitter.emit(_.cloneDeep(this.originalAll));
+      this.emitter.emit(_.cloneDeep(this.originalAll.filter((elem) => !elem.disabled)));
    }
 
    // Remove All from selected
@@ -142,9 +142,11 @@ export class StTwoListSelection {
       let filteredBySearch = filterPipe.transform(twoList, 'name', elemSearched);
       if (elemSearched) {
          twoList.forEach((elem) => {
-            elem.selected = false;
-            if (filteredBySearch.find(filtered => filtered.name === elem.name) !== undefined) {
-               elem.selected = !allSelected;
+            if (!elem.disabled) {
+               elem.selected = false;
+               if (filteredBySearch.find(filtered => filtered.name === elem.name) !== undefined) {
+                  elem.selected = !allSelected;
+               }
             }
          });
          this._cd.markForCheck();
@@ -156,7 +158,7 @@ export class StTwoListSelection {
 
    private changeSelectedItemList(list: StTwoListSelectionElement[], selected: boolean): StTwoListSelectionElement[] {
       return _.cloneDeep(list).map((elem) => {
-         elem.selected = selected;
+         elem.selected = (!elem.disabled) ? selected : elem.selected;
          return elem;
       });
    }
@@ -231,6 +233,6 @@ export class StTwoListSelection {
    }
 
    private canSelect(selection: StTwoListSelectionElement, list: List): boolean {
-      return selection && list !== undefined && list.length > 0;
+      return selection && !selection.disabled && list !== undefined && list.length > 0;
    }
 }

@@ -20,8 +20,8 @@
    <!--SELECTORS-->
    <div class="pick-buttons" *ngIf="editable">
       <button *ngIf="moveAllToSelectedButton" class="button button-toolbar" type="button" title="Move all to selected" (click)="moveAllToSelected.emit($event)" [attr.id]="qaTag + '-left-all-button'"><i class="icon-fast-forward"></i></button>
-      <button class="button button-toolbar" type="button" title="Move to selected" (click)="moveToSelected.emit($event)" [attr.id]="qaTag + '-left-button'" [ngClass]="{'empty': allElements.length === 0 || !moveToAllButton}" [disabled]="!moveToAllButton"><i class="icon-arrow2_right" ></i></button>
-      <button class="button button-toolbar" type="button" title="Move to all" (click)="moveToAll.emit($event)" [attr.id]="qaTag + '-right-button'" [ngClass]="{'empty': selectedElements.length === 0 || !moveToSelectedButton}" [disabled]="!moveToSelectedButton"><i class="icon-arrow2_left"></i></button>
+      <button class="button button-toolbar" type="button" title="Move to selected" (click)="moveToSelected.emit($event)" [attr.id]="qaTag + '-left-button'" [ngClass]="{'empty': checkMoveToSelectedValue }" [disabled]="!moveToAllButton"><i class="icon-arrow2_right" ></i></button>
+      <button class="button button-toolbar" type="button" title="Move to all" (click)="moveToAll.emit($event)" [attr.id]="qaTag + '-right-button'" [ngClass]="{'empty': checkMoveToAllValue }" [disabled]="!moveToSelectedButton"><i class="icon-arrow2_left"></i></button>
       <button *ngIf="moveAllToAllButton" class="button button-toolbar" type="button" title="Move all to all" (click)="moveAllToAll.emit($event)" [attr.id]="qaTag + '-right-all-button'"><i class="icon-rewind"></i></button>
    </div>
 

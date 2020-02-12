@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import * as _ from 'lodash';
 
 import { StDropDownMenuItem } from '../st-dropdown-menu/st-dropdown-menu.interface';
@@ -22,7 +22,7 @@ import { StTwoListSelectionConfig, StTwoListSelectionElement, StTwoListSelectExt
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 @StEgeo()
-export class StTwoListSelectionViewComponent {
+export class StTwoListSelectionViewComponent implements OnInit, OnChanges {
 
    @Input() @StRequired() qaTag: string;
    @Input() @StRequired() selectedElements: StTwoListSelectionElement[];
@@ -57,6 +57,21 @@ export class StTwoListSelectionViewComponent {
    @Output() selectExtraLabelSelected: EventEmitter<StTwoListSelectExtraLabelAction> = new EventEmitter<StTwoListSelectExtraLabelAction>();
    @Output() selectItemNonEditable: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
    @Output() selectSelectedElement: EventEmitter<StTwoListSelectionElement> = new EventEmitter<StTwoListSelectionElement>();
+
+   public checkMoveToSelectedValue: boolean;
+   public checkMoveToAllValue: boolean;
+
+   constructor(private _cd: ChangeDetectorRef) {}
+
+   ngOnChanges(changes: SimpleChanges): void {
+      if (changes) {
+         this.refreshButtons();
+      }
+   }
+
+   ngOnInit(): void {
+      this.refreshButtons();
+   }
 
    get allTitle(): string {
       return this.config && this.config.allElementsListTitle || '';
@@ -100,5 +115,24 @@ export class StTwoListSelectionViewComponent {
 
    get selectedQaTag(): string {
       return this.qaTag + '-selected-elements';
+   }
+
+   checkMoveToSelected(): void {
+      let existDisabledElements = (this.allElements) ? this.allElements.filter((elem) => elem.disabled) : [];
+      // tslint:disable-next-line:max-line-length
+      this.checkMoveToSelectedValue = (this.allElements) ? (this.allElements.length === 0) || (existDisabledElements && existDisabledElements.length === this.allElements.length) : false;
+      this._cd.markForCheck();
+   }
+
+   checkMoveToAll(): void {
+      let existDisabledElements = (this.selectedElements) ? this.selectedElements.filter((elem) => elem.disabled) : [];
+      // tslint:disable-next-line:max-line-length
+      this.checkMoveToAllValue = (this.selectedElements) ? (this.selectedElements.length === 0) || (existDisabledElements && existDisabledElements.length === this.selectedElements.length) : false;
+      this._cd.markForCheck();
+   }
+
+   refreshButtons(): void {
+      this.checkMoveToSelected();
+      this.checkMoveToAll();
    }
 }

@@ -80,7 +80,9 @@ export class ListItemComponent {
    emitOnSelect(event: Event): void {
       event.preventDefault();
       event.stopImmediatePropagation();
-      this.selectItem.emit(this.item);
+      if (!this.item.disabled) {
+         this.selectItem.emit(this.item);
+      }
    }
 
    mouseHoverRow(): void {

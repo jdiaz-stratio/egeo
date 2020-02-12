@@ -1,6 +1,9 @@
 # Changelog
 
 ## 19.0.0 (upcoming)
+**New features:**
+* st-two-list-selection: allows to show and control movement of disabled items
+in origin list (optional parameter).
 
 **Fixed bugs:**
 

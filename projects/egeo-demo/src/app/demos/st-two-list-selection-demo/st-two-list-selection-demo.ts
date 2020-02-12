@@ -32,6 +32,7 @@ export class StTwoListSelectionDemoComponent {
    };
 
    completeUserList: Array<StTwoListSelectionElement> = [];
+   completeUserListDisabled: Array<StTwoListSelectionElement> = [];
    selectedUserList: Array<StTwoListSelectionElement> = [];
    itemAll: StTwoListSelectionElement;
    isLoading: Boolean = true;
@@ -132,7 +133,8 @@ export class StTwoListSelectionDemoComponent {
    private fillLists(): void {
       for (let i = 0; i < 300; i++) {
 
-            this.completeUserList.push({ id: i, name: `User-${i}` });
+            this.completeUserList.push({ id: i, name: `User-${i}`});
+            this.completeUserListDisabled.push({ id: i, name: `User-${i}`, disabled: i % 3 === 0});
             if (i % 4 === 0) {
                this.selectedUserList.push(_.clone(this.completeUserList[i]));
             }

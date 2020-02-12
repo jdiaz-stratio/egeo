@@ -115,6 +115,29 @@ describe('StTwoListSelectionComponent', () => {
          expect(fixture.componentInstance.selectItemNonEditable.emit).toHaveBeenCalledWith(element);
       });
 
+      describe('if element is disabled', () => {
+         beforeEach(() => {
+            comp.editable = true;
+            comp.disabled = true;
+         });
+
+         it('shouldn\'t be able to be clicked', () => {
+            let outputSelect = jasmine.createSpy('responseSelect');
+            comp.selectItem.subscribe(outputSelect);
+
+            fixture.detectChanges();
+            let checkbox: DebugElement = fixture.debugElement.query(By.css('.st-checkbox'));
+            expect(checkbox).toBeDefined();
+            expect(checkbox.nativeElement.classList).toContain('disabled');
+
+            let input: DebugElement = fixture.debugElement.query(By.css('input'));
+            (input.nativeElement as HTMLInputElement).click();
+            input.nativeElement.dispatchEvent(new Event('input'));
+            fixture.detectChanges();
+            expect(outputSelect).not.toHaveBeenCalled();
+         });
+      });
+
       describe('if row item has a hover event', () => {
 
          describe('should be able to show menu option', () => {
