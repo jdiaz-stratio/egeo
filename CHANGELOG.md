@@ -27,7 +27,7 @@ in origin list (optional parameter).
 * Update icon palette
 * Update font size variables
 * st-select: Apply new UX font size and color in forms
-
+* st-foreground-notificactions: apply new UX style
 
 ## 18.0.0 (January 16, 2020)
 
