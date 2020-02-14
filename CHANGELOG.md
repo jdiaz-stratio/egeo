@@ -28,6 +28,7 @@ in origin list (optional parameter).
 * Update font size variables
 * st-select: Apply new UX font size and color in forms
 * st-foreground-notificactions: apply new UX style
+* st-modal: apply new ux style, include new statusIcon in delete and warnings modals.
 
 ## 18.0.0 (January 16, 2020)
 
