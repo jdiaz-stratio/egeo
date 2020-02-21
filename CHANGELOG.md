@@ -6,7 +6,11 @@
 
 * st-header: Include new UX defined styles to header
 
-## 19.0.0 (upcoming)
+**Others:**
+
+* Update icon font to 1.27
+
+## 19.0.0 (February 20, 2020)
 
 **New features:**
 
