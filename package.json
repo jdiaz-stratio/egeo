@@ -21,7 +21,7 @@
     "replace": "json -I -f package.json -e",
     "commit": "git-cz",
     "serve:coverage": "http-server target/html",
-    "serve:build": "npm run build:demo-app && http-server dist/demo-app"
+    "serve:build": "npm run build:demo-app && http-server dist/egeo-demo"
   },
   "repository": {
     "type": "git",

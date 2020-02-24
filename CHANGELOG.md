@@ -21,6 +21,7 @@
 * st-dropdown-menu: Do not diplay dropdown items in several lines with menu list visualization
 * st-modal: Do not break words
 * st-dropdown-menu: Fix wrong visualization of select dropdown
+* egeo-demo: fix wrong path (fonts).
 
 **Breaking changes:**
 
