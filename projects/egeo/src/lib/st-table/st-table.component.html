@@ -10,27 +10,35 @@
     SPDX-License-Identifier: Apache-2.0.
 
 -->
-<table class='st-table' [ngClass]="tableClass" [attr.id]='qaTag'>
+<table (stParentsScroll)="onParentScroll($event)" class='st-table' [ngClass]="tableClass" [attr.id]='qaTag'>
    <thead>
-   <tr *ngIf="header" class='st-table__header'>
+      <tr *ngIf="header" class='st-table__header'>
 
-      <th *ngFor='let field of fields; let i = index'
-          class='st-table__header-item'
-          [ngClass]="{'st-table__header-item--selected': isSortedByField(field), 'st-table__header-item--sortable': isSortable(field)}"
-      >
-         <st-checkbox *ngIf="i == 0 && selectableAll" qaTag="select-all-checkbox" class="st-table__checkbox"
-                      name="selectAll" [checked]="selectedAll" (change)="onSelectAll($event)">
-         </st-checkbox>
-         <label class='st-table__header-text' (click)="onChangeOrder(field)">
-            <i *ngIf="isSortedByField(field)" class='st-table__order-arrow'
-               [ngClass]="getHeaderItemClass(field)">
-            </i>
-            {{field.label}}
-         </label>
-      </th>
+         <th *ngFor='let field of fields; let i = index' class='st-table__header-item' [ngClass]="{
+             'st-table__header-item--selected': isSortedByField(field),
+             'st-table__header-item--sortable': isSortable(field),
+             'st-table__header-item--filterable': isFilterable(field)}">
+            <st-checkbox *ngIf="i == 0 && selectableAll" qaTag="select-all-checkbox" class="st-table__checkbox" name="selectAll"
+                [checked]="selectedAll" (change)="onSelectAll($event)">
+            </st-checkbox>
+            <label class='st-table__header-text' (click)="onChangeOrder(field)">
+               <i *ngIf="isSortedByField(field)" class='st-table__order-arrow' [ngClass]="getHeaderItemClass(field)">
+               </i>
+               {{field.label}}
+            </label>
+            <st-pop-over class="st-table__popover" qaTag="pop-over-demo" [title]="getTitle(field)" [hidden]="hiddenFilter[i]"
+                [offset]="{x: 7, y: positionYPopover}" [showSettingBtn]="getShowSettingBtn(field)">
+               <i pop-over-button *ngIf="isFilterable(field)" class='st-table__filter-arrow icon-arrow4_down'
+                   (click)="onClickFilterColumn(i, $event)"></i>
+               <div pop-over-content class="st-table__popover-content">
+                  <span #filterContent><ng-content select="[filterContent]"></ng-content></span>
+                  <span *ngIf="!filterContent.innerHTML.trim()">Content</span>
+               </div>
+            </st-pop-over>
+         </th>
 
-      <th *ngIf="hasHoverMenu"></th> <!-- For hover cell -->
-   </tr>
+         <th *ngIf="hasHoverMenu"></th>
+      </tr>
    </thead>
    <ng-content></ng-content>
 </table>

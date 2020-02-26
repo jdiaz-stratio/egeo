@@ -35,6 +35,31 @@ export class StTableDemoComponent {
       { id: 'company', label: 'Company' },
       { id: 'completedProfile', label: 'Completed profile' }];
 
+   public filterFields: StTableHeader[] = [
+      { id: 'id', label: 'Id' },
+      { id: 'name', label: 'Name' },
+      {
+         id: 'lastName',
+         label: 'Last Name',
+         filters: {
+            filterable: true,
+            filterConfig: [
+               {
+                  id: '0',
+                  name: 'First one'
+               },
+               {
+                  id: '1',
+                  name: 'Second one'
+               }
+            ],
+            title: 'Filter by'
+         }
+      },
+      { id: 'phone', label: 'Phone', filters: { filterable: true, filterConfig: [], showSettingBtn: true, title: 'Filter by' }},
+      { id: 'company', label: 'Company' },
+      { id: 'completedProfile', label: 'Completed profile' }];
+
    public header: boolean = true;
 
    public data: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }> = [

@@ -9,21 +9,12 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-export interface StFilterHeaderElement {
-   id: String;
-   name: String;
-}
+import { NgModule } from '@angular/core';
+import { StParentsScrollDirective } from './st-parent-scroll.directive';
 
-export interface StFilterHeader {
-   filterable?: boolean;
-   filterConfig?: StFilterHeaderElement[];
-   showSettingBtn?: boolean;
-   title?: string;
-}
-
-export interface StTableHeader {
-   id: string;
-   label: string;
-   sortable?: boolean;
-   filters?: StFilterHeader;
-}
+@NgModule({
+   imports: [],
+   declarations: [StParentsScrollDirective],
+   exports: [StParentsScrollDirective]
+})
+export class StParentScrollModule { }

@@ -17,6 +17,7 @@ import { Order, ORDER_TYPE } from './shared/order';
 import { StTableComponent } from './st-table.component';
 import { StTableHeader } from './shared/table-header.interface';
 import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
+import { StPopOverModule } from '../st-pop-over/st-pop-over.module';
 
 let fixture: ComponentFixture<StTableComponent>;
 let component: StTableComponent;
@@ -35,7 +36,7 @@ describe('StTableComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [CommonModule, RouterTestingModule, StCheckboxModule],
+         imports: [CommonModule, RouterTestingModule, StCheckboxModule, StPopOverModule],
          declarations: [StTableComponent]
       })
       // remove this block when the issue #12313 of Angular is fixed

@@ -15,9 +15,11 @@ import { StTableCellComponent } from './shared/st-table-cell/st-table-cell.compo
 import { StTableRowComponent } from './shared/st-table-row/st-table-row.component';
 import { StTableComponent } from './st-table.component';
 import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
+import { StPopOverModule } from '../st-pop-over/st-pop-over.module';
+import { StParentScrollModule } from '../directives/st-parent-scroll/st-parent-scroll.module';
 
 @NgModule({
-   imports: [CommonModule, StCheckboxModule],
+   imports: [CommonModule, StCheckboxModule, StParentScrollModule, StPopOverModule],
    declarations: [StTableCellComponent, StTableComponent, StTableRowComponent],
    exports: [StTableCellComponent, StTableComponent, StTableRowComponent]
 })

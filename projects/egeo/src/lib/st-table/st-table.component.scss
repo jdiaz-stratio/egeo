@@ -18,6 +18,11 @@
       vertical-align: bottom;
    }
 
+   &__header-item--filterable {
+      text-transform: inherit;
+      position: initial;
+   }
+
    &__header-text {
       position: relative;
       height: 100%;
@@ -45,4 +50,18 @@
       }
    }
 
+   &__popover-content {
+      padding: 30px;
+      display: flex;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+   }
+
+   &__popover {
+      display: inline-flex;
+      span {
+         position: initial;
+         text-transform: inherit;
+      }
+   }
 }

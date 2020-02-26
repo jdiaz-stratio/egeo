@@ -11,12 +11,13 @@
 
 -->
 <st-docs [htmlFile]="configDoc.html" [tsFile]="configDoc.ts" [componentFile]="configDoc.component">
-   <section class="container-liquid demo-layout">
-      <p class="introduction">Tables are structured grids of information that help users understand large amounts of
+   <section class="container-liquid">
+      <div class="demo-layout">
+         <p class="introduction">Tables are structured grids of information that help users understand large amounts of
          data.</p>
-      <span class="separator"></span>
-      <h1 class="title">Design and behaviour</h1>
-      <p class="paragraph">When a user needs to understand, manipulate, or edit a group of information that is
+         <span class="separator"></span>
+         <h1 class="title">Design and behaviour</h1>
+          <p class="paragraph">When a user needs to understand, manipulate, or edit a group of information that is
          text-based
          and has the same content structure you use a Table component. Table’s main content can be of two main types:
          Normal content tables and file system content. Depending on the type of table’s content some options will be
@@ -28,7 +29,6 @@
          type allows folder / files navigation. In that case too a first folder with two dots allows the user go back to
          the parent folder.
       </p>
-
       <h1 class="title">Normal content table design and behaviour</h1>
       <p class="paragraph">They can have two rows of items before the table header.
          On the first you can have a title on the top left (optional) and dropdown filters on the right (optional)
@@ -40,6 +40,8 @@
          while
          scrolling so the user always know what kind of data is seeing on the current table. On scroll up the subheader
          will appear. To understand better this behaviour please interact with the following tables</p>
+
+      </div>
 
 
       <h2 class="subtitle">Selectable tables</h2>
@@ -111,6 +113,39 @@
       <p class="paragraph">Table can be configured as sortable or not. Moreover, it allows to configure only specific
          fields as sortable </p>
       <st-table [fields]="fields" (changeOrder)="onSortTable($event)">
+         <tbody>
+            <tr st-table-row *ngFor="let userData of sortedData; let index = index">
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.id}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.name}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.lastName}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.phone}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.company}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.completedProfile}}</label>
+               </td>
+
+               <td st-table-row-hover class="st-table-hover">
+                  <i class="icon icon-ellipsis"></i>
+               </td>
+            </tr>
+         </tbody>
+      </st-table>
+
+       <h2 class="subtitle">Filterable table</h2>
+      <p class="paragraph">Table can be configured as filterable or not. Moreover, it allows to configure only specific
+         fields as filterable </p>
+      <st-table [fields]="filterFields">
+         <div #filterContent>Some Content</div>
          <tbody>
             <tr st-table-row *ngFor="let userData of sortedData; let index = index">
                <td st-table-cell st-table-row-content>

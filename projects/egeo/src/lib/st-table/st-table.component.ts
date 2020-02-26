@@ -8,12 +8,13 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableHeader } from './shared/table-header.interface';
-
+import * as _ from 'lodash';
 /**
  * @description {Component} [Table]
  *
@@ -67,7 +68,6 @@ export class StTableComponent implements OnInit {
    @Input() qaTag: string;
    /** @Input {boolean} [header=true] Boolean to show or hide the header */
    @Input() header: boolean = true;
-
    /**
     * @Input {boolean} [sortable=true] Boolean to make sortable the table, To enable sorting of columns use
     * the new "sortable" field inside stTableHeader model
@@ -115,6 +115,16 @@ export class StTableComponent implements OnInit {
     */
    @Output() selectAll: EventEmitter<boolean> = new EventEmitter();
 
+   delay: any = (() => {
+      let timer: any = 0;
+      return (callback: any, ms: any): void => {
+         clearTimeout(timer);
+         timer = setTimeout(callback, ms);
+      };
+   })();
+
+   public hiddenFilter: boolean[];
+   public positionYPopover: number = 0;
    public tableClass: any;
    public orderTypes: any = ORDER_TYPE;
 
@@ -122,10 +132,14 @@ export class StTableComponent implements OnInit {
    private _hasHoverMenu: boolean = false;
 
 
+
+   constructor(private _cd: ChangeDetectorRef, private _er: ElementRef) { }
+
    ngOnInit(): void {
       this.tableClass = this.getClasses();
+      this.hiddenFilter = new Array(this.fields.length);
+      this.hiddenFilter.fill(true);
    }
-
    public onChangeOrder(field: StTableHeader): void {
       if (field && this.isSortable(field)) {
          if (this.currentOrder && this.currentOrder.orderBy === field.id) {
@@ -139,7 +153,7 @@ export class StTableComponent implements OnInit {
 
    public getClasses(): any {
       let classes: any = {};
-      if ( this.fixedHeader) {
+      if (this.fixedHeader) {
          classes['st-table--fixed-header'] = true;
       }
       classes[this.customClasses] = this.customClasses;
@@ -160,8 +174,34 @@ export class StTableComponent implements OnInit {
       return isOrderAsc ? 'icon-arrow-up' : 'icon-arrow-down';
    }
 
+
    public isSortedByField(field: StTableHeader): boolean {
       return this.currentOrder && this.currentOrder.orderBy === field.id;
+   }
+
+   public isFilterable(field: StTableHeader): boolean {
+      return _.get(field, 'filters.filterable');
+   }
+
+   public  getShowSettingBtn(field: StTableHeader): boolean {
+      return _.get(field, 'filters.showSettingBtn');
+   }
+
+   public  getTitle(field: StTableHeader): boolean {
+      return _.get(field, 'filters.title');
+   }
+
+   public onClickFilterColumn(index: number, event: Event): void {
+      this.hiddenFilter[index] = !this.hiddenFilter[index];
+   }
+
+   public onParentScroll(eventScroll$: Observable<Event>): void {
+      const debounce = _.debounce(() => {
+         this.positionYPopover = - (<any>eventScroll$).srcElement.scrollTop;
+         this._cd.markForCheck();
+      }, 100).bind(this);
+
+      this.delay(debounce, 100);
    }
 
    private isSortedByFieldAndDirection(field: StTableHeader, orderType: ORDER_TYPE): boolean {
