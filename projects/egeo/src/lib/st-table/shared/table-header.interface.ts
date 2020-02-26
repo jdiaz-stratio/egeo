@@ -11,7 +11,7 @@
 
 export interface StFilterElement {
    id: String | number;
-   name: String;
+   name: String | number;
    selected?: boolean;
 }
 
