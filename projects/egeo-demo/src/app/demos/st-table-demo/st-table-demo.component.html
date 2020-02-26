@@ -145,7 +145,72 @@
       <p class="paragraph">Table can be configured as filterable or not. Moreover, it allows to configure only specific
          fields as filterable </p>
       <st-table [fields]="filterFields">
-         <div #filterContent>Some Content</div>
+         <tbody>
+            <tr st-table-row *ngFor="let userData of sortedData; let index = index">
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.id}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.name}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.lastName}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.phone}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.company}}</label>
+               </td>
+               <td st-table-cell st-table-row-content>
+                  <label>{{userData.completedProfile}}</label>
+               </td>
+
+               <td st-table-row-hover class="st-table-hover">
+                  <i class="icon icon-ellipsis"></i>
+               </td>
+            </tr>
+         </tbody>
+      </st-table>
+
+      <h2 class="subtitle">Filterable table with custom template</h2>
+      <p class="paragraph">Table can be configured as filterable or not. Moreover, it allows to configure only specific
+         fields as filterable </p>
+      <ng-template #filterContent let-index="index">
+         <div *ngIf="index === 2">
+            <st-checkbox name="nameA" value="1">
+               <span>Option A</span>
+            </st-checkbox>
+            <st-checkbox name="nameB" value="2">
+               <span>Option B</span>
+            </st-checkbox>
+            <st-checkbox name="nameC" value="3">
+               <span>Option C</span>
+            </st-checkbox>
+
+            <st-toggle-buttons
+               class="toggle-buttons"
+               [tabs]="[
+                  {
+                     label: 'Tab1',
+                     number: 5,
+                     active: true
+                  }, {
+                     label: 'Tab2',
+                     number: 10,
+                     active: false
+                  }
+               ]"
+               [description]="description"
+               (select)="onSelectTab($event)"
+               qaTag="toggle-buttons">
+            </st-toggle-buttons>
+         </div>
+         <div *ngIf="index === 3">
+            <span>Hello {{index}}</span>
+         </div>
+      </ng-template>
+      <st-table [fields]="filterFields" [templateContentFilter]="filterContent">
          <tbody>
             <tr st-table-row *ngFor="let userData of sortedData; let index = index">
                <td st-table-cell st-table-row-content>

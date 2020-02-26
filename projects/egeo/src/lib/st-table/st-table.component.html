@@ -31,8 +31,10 @@
                <i pop-over-button *ngIf="isFilterable(field)" class='st-table__filter-arrow icon-arrow4_down'
                    (click)="onClickFilterColumn(i, $event)"></i>
                <div pop-over-content class="st-table__popover-content">
-                  <span #filterContent><ng-content select="[filterContent]"></ng-content></span>
-                  <span *ngIf="!filterContent.innerHTML.trim()">Content</span>
+                  <div *ngIf="isFilterable(field)" >
+                     <ng-container [ngTemplateOutlet]="templateContentFilter" [ngTemplateOutletContext]="{index:i}"></ng-container>
+                     <span *ngIf="!templateContentFilter">Content</span>
+                  </div>
                </div>
             </st-pop-over>
          </th>

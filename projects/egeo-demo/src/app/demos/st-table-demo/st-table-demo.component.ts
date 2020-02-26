@@ -56,7 +56,7 @@ export class StTableDemoComponent {
             title: 'Filter by'
          }
       },
-      { id: 'phone', label: 'Phone', filters: { filterable: true, filterConfig: [], showSettingBtn: true, title: 'Filter by' }},
+      { id: 'phone', label: 'Phone', filters: { filterable: true, filterConfig: [], showSettingBtn: true, title: 'Filter by' } },
       { id: 'company', label: 'Company' },
       { id: 'completedProfile', label: 'Completed profile' }];
 

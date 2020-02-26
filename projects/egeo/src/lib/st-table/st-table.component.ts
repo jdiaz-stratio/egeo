@@ -8,7 +8,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
@@ -86,6 +86,9 @@ export class StTableComponent implements OnInit {
 
    /** @Input {boolean} [fixedHeader=false] Boolean to fix the table header */
    @Input() fixedHeader: boolean = false;
+
+   /** @Input {TemplateRef} [templateContentFilter=undefined] Reference to paint a custom template inside popover content */
+   @Input() templateContentFilter?: TemplateRef<any>;
 
    /** @Input {boolean} [selectedAll=false] It specifies if all rows are selected */
    @Input()
