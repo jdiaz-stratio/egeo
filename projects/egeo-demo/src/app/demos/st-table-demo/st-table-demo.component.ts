@@ -11,6 +11,7 @@
 import { Component } from '@angular/core';
 import { cloneDeep as _cloneDeep } from 'lodash';
 import { Order, ORDER_TYPE, StTableHeader } from '@stratio/egeo';
+import * as _ from 'lodash';
 
 @Component({
    templateUrl: './st-table-demo.component.html',
@@ -46,17 +47,35 @@ export class StTableDemoComponent {
             filterConfig: [
                {
                   id: '0',
-                  name: 'First one'
+                  name: 'López'
                },
                {
                   id: '1',
-                  name: 'Second one'
+                  name: 'Lara'
                }
             ],
+            title: 'Filter By'
+         }
+      },
+      {
+         id: 'phone',
+         label: 'Phone',
+         filters: {
+            filterable: true,
+            filterConfig: [
+               {
+                  id: '0',
+                  name: 60052520145
+               },
+               {
+                  id: '1',
+                  name: 600456520145
+               }
+            ],
+            showSettingBtn: true,
             title: 'Filter by'
          }
       },
-      { id: 'phone', label: 'Phone', filters: { filterable: true, filterConfig: [], showSettingBtn: true, title: 'Filter by' } },
       { id: 'company', label: 'Company' },
       { id: 'completedProfile', label: 'Completed profile' }];
 
@@ -111,12 +130,14 @@ export class StTableDemoComponent {
          completedProfile: '70%'
       }
    ];
+   public filterData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
    public sortedData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
    public selectedCheckboxes: boolean[][] = [[], []];
 
 
    constructor() {
       this.sortedData = _cloneDeep(this.data);
+      this.filterData = _cloneDeep(this.data);
    }
 
    // Selectable tables
@@ -139,5 +160,22 @@ export class StTableDemoComponent {
       this.sortedData = [...this.data].sort((a, b) => {
          return a[order.orderBy].toString().localeCompare(b[order.orderBy].toString()) * reverseConst;
       });
+   }
+
+   public onSelectedFilters(event: Event): void {
+      console.log(event);
+      console.log(this.sortedData);
+
+      if ((<any>event).length > 0) {
+         (<any>event).map((filter) => {
+            this.filterData = [].concat.apply([], (filter.filters.filterConfig.map((config) => {
+               return _.filter(this.data, function (user) {
+                  return user[filter.id] === config.name;
+               });
+            })));
+         });
+      } else {
+         this.filterData = this.data;
+      }
    }
 }

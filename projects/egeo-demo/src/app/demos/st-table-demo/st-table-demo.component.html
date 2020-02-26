@@ -144,9 +144,9 @@
        <h2 class="subtitle">Filterable table</h2>
       <p class="paragraph">Table can be configured as filterable or not. Moreover, it allows to configure only specific
          fields as filterable </p>
-      <st-table [fields]="filterFields">
+      <st-table [fields]="filterFields" (selectedFilters)="onSelectedFilters($event)">
          <tbody>
-            <tr st-table-row *ngFor="let userData of sortedData; let index = index">
+            <tr st-table-row *ngFor="let userData of filterData; let index = index">
                <td st-table-cell st-table-row-content>
                   <label>{{userData.id}}</label>
                </td>
@@ -212,7 +212,7 @@
       </ng-template>
       <st-table [fields]="filterFields" [templateContentFilter]="filterContent">
          <tbody>
-            <tr st-table-row *ngFor="let userData of sortedData; let index = index">
+            <tr st-table-row *ngFor="let userData of filterData; let index = index">
                <td st-table-cell st-table-row-content>
                   <label>{{userData.id}}</label>
                </td>

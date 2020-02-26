@@ -118,6 +118,8 @@ export class StTableComponent implements OnInit {
     */
    @Output() selectAll: EventEmitter<boolean> = new EventEmitter();
 
+   @Output() selectedFilters: EventEmitter<StTableHeader[]> = new EventEmitter();
+
    delay: any = (() => {
       let timer: any = 0;
       return (callback: any, ms: any): void => {
@@ -133,8 +135,6 @@ export class StTableComponent implements OnInit {
 
    private _selectedAll: boolean;
    private _hasHoverMenu: boolean = false;
-
-
 
    constructor(private _cd: ChangeDetectorRef, private _er: ElementRef) { }
 
@@ -198,13 +198,28 @@ export class StTableComponent implements OnInit {
       this.hiddenFilter[index] = !this.hiddenFilter[index];
    }
 
+   public onChangeFilter(index: number, indexFilter: number, event: Event): void {
+      this.fields[index].filters.filterConfig[indexFilter].selected = (<any>event).checked;
+      let filteredFilters = _.cloneDeep(this.fields);
+      filteredFilters = filteredFilters.filter((field) => {
+         if (_.get(field, 'filters.filterConfig')) {
+            field.filters.filterConfig = field.filters.filterConfig.filter((conf) => conf.selected);
+            if (field.filters.filterConfig.length > 0) {
+                return field;
+            }
+         }
+      });
+
+      this.selectedFilters.emit(filteredFilters);
+   }
+
    public onParentScroll(eventScroll$: Observable<Event>): void {
       const debounce = _.debounce(() => {
          this.positionYPopover = - (<any>eventScroll$).srcElement.scrollTop;
          this._cd.markForCheck();
       }, 100).bind(this);
 
-      this.delay(debounce, 100);
+      this.delay(debounce, 10);
    }
 
    private isSortedByFieldAndDirection(field: StTableHeader, orderType: ORDER_TYPE): boolean {

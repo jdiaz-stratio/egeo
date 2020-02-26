@@ -33,12 +33,17 @@
                <div pop-over-content class="st-table__popover-content">
                   <div *ngIf="isFilterable(field)" >
                      <ng-container [ngTemplateOutlet]="templateContentFilter" [ngTemplateOutletContext]="{index:i}"></ng-container>
-                     <span *ngIf="!templateContentFilter">Content</span>
+                     <div *ngIf="!templateContentFilter">
+                        <div *ngFor="let filter of field.filters.filterConfig; let indexFilter = index">
+                           <st-checkbox name="filter.name" [checked]="filter.selected"  [value]="false"  (change)="onChangeFilter(i, indexFilter, $event)">
+                              <span>{{filter.name}}</span>
+                           </st-checkbox>
+                        </div>
+                     </div>
                   </div>
                </div>
             </st-pop-over>
          </th>
-
          <th *ngIf="hasHoverMenu"></th>
       </tr>
    </thead>

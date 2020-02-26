@@ -9,14 +9,15 @@
  * SPDX-License-Identifier: Apache-2.0.
  */
 
-export interface StFilterHeaderElement {
-   id: String;
+export interface StFilterElement {
+   id: String | number;
    name: String;
+   selected?: boolean;
 }
 
 export interface StFilterHeader {
    filterable?: boolean;
-   filterConfig?: StFilterHeaderElement[];
+   filterConfig?: StFilterElement[];
    showSettingBtn?: boolean;
    title?: string;
 }
