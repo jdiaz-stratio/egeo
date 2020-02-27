@@ -169,7 +169,7 @@ export class StTableDemoComponent {
       if ((<any>event).length > 0) {
          (<any>event).map((filter) => {
             this.filterData = [].concat.apply([], (filter.filters.filterConfig.map((config) => {
-               return _.filter(this.data, function (user) {
+               return _.filter(this.data, (user) => {
                   return user[filter.id] === config.name;
                });
             })));
