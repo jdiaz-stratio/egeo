@@ -200,7 +200,10 @@ export class StTableComponent implements OnInit {
 
    public onChangeFilter(index: number, indexFilter: number, event: Event): void {
       this.fields[index].filters.filterConfig[indexFilter].selected = (<any>event).checked;
+      this.fields[index].filters.filterConfig[indexFilter].indexColumn = index;
+
       let filteredFilters = _.cloneDeep(this.fields);
+
       filteredFilters = filteredFilters.filter((field) => {
          if (_.get(field, 'filters.filterConfig')) {
             field.filters.filterConfig = field.filters.filterConfig.filter((conf) => conf.selected);
@@ -209,7 +212,6 @@ export class StTableComponent implements OnInit {
             }
          }
       });
-
       this.selectedFilters.emit(filteredFilters);
    }
 

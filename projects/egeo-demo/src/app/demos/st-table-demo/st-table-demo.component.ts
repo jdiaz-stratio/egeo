@@ -70,6 +70,10 @@ export class StTableDemoComponent {
                {
                   id: '1',
                   name: 600456520145
+               },
+               {
+                  id: '2',
+                  name: 6005276845
                }
             ],
             showSettingBtn: true,
@@ -163,17 +167,16 @@ export class StTableDemoComponent {
    }
 
    public onSelectedFilters(event: Event): void {
-      console.log(event);
-      console.log(this.sortedData);
-
       if ((<any>event).length > 0) {
+         let filterElement = [];
          (<any>event).map((filter) => {
-            this.filterData = [].concat.apply([], (filter.filters.filterConfig.map((config) => {
+            filterElement.push([].concat.apply([], filter.filters.filterConfig.map((config) => {
                return _.filter(this.data, (user) => {
                   return user[filter.id] === config.name;
                });
             })));
          });
+         this.filterData = <any>_.intersectionBy(...filterElement, 'id');
       } else {
          this.filterData = this.data;
       }

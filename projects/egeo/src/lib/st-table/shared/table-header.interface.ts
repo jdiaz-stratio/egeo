@@ -13,6 +13,7 @@ export interface StFilterElement {
    id: String | number;
    name: String | number;
    selected?: boolean;
+   indexColumn?: number;
 }
 
 export interface StFilterHeader {
