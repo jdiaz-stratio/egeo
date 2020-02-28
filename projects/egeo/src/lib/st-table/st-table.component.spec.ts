@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import * as _ from 'lodash';
 
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableComponent } from './st-table.component';
@@ -29,17 +30,18 @@ let fakeFields: StTableHeader[] = [
       sortable: false
    },
    { id: 'lastName', label: 'Last name' },
-   { id: 'phone', label: 'Phone', sortable: true }
+   { id: 'phone', label: 'Phone', sortable: true },
+   { id: 'group', label: 'Group', sortable: true, filters: { filterable: true, filterConfig: [{ id: 0, name: '1111' }] } }
 ];
 
-describe('StTableComponent', () => {
+fdescribe('StTableComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
          imports: [CommonModule, RouterTestingModule, StCheckboxModule, StPopOverModule],
          declarations: [StTableComponent]
       })
-      // remove this block when the issue #12313 of Angular is fixed
+         // remove this block when the issue #12313 of Angular is fixed
          .overrideComponent(StTableComponent, {
             set: { changeDetection: ChangeDetectionStrategy.Default }
          })
@@ -80,6 +82,7 @@ describe('StTableComponent', () => {
       expect(headerItems[1].classList).not.toContain('st-table__header-item--sortable');
       expect(headerItems[2].classList).toContain('st-table__header-item--sortable');
       expect(headerItems[3].classList).toContain('st-table__header-item--sortable');
+      expect(headerItems[4].classList).toContain('st-table__header-item--sortable');
    });
 
    it('if table is not sortable but there are fields sortable, arrow is displayed for sortable fields', () => {
@@ -91,6 +94,18 @@ describe('StTableComponent', () => {
       expect(headerItems[1].classList).not.toContain('st-table__header-item--sortable');
       expect(headerItems[2].classList).not.toContain('st-table__header-item--sortable');
       expect(headerItems[3].classList).toContain('st-table__header-item--sortable');
+      expect(headerItems[4].classList).toContain('st-table__header-item--sortable');
+   });
+
+   it('if table is filterable, filterable class is only added to filterable fields', () => {
+      fixture.detectChanges();
+      let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.st-table__header-item');
+
+      expect(headerItems[0].classList).not.toContain('st-table__header-item--filterable');
+      expect(headerItems[1].classList).not.toContain('st-table__header-item--filterable');
+      expect(headerItems[2].classList).not.toContain('st-table__header-item--filterable');
+      expect(headerItems[3].classList).not.toContain('st-table__header-item--filterable');
+      expect(headerItems[4].classList).toContain('st-table__header-item--filterable');
    });
 
    it('If fields input is not introduced, it throws an error', () => {
@@ -103,7 +118,7 @@ describe('StTableComponent', () => {
       }
    });
 
-   it('only is displayed an arrow next to header of the field over which current filter is applied', () => {
+   it('only is displayed an arrow next to header of the field over which current order is applied', () => {
       component.sortable = true;
       component.currentOrder = undefined;
       fixture.detectChanges();
@@ -119,6 +134,25 @@ describe('StTableComponent', () => {
       expect(headerItems[3].querySelector('.icon-arrow-up')).not.toBeNull();
       expect(headerItems[3].classList).toContain('st-table__header-item--sortable');
    });
+
+   it('only is displayed an arrow next to header of the field over which current filter is applied', () => {
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('thead .st-table__filter-arrow')).toBeDefined();
+      let headerItems: HTMLTableHeaderCellElement[] = fixture.nativeElement.querySelectorAll('.st-table__header-item');
+
+      expect(fixture.nativeElement.querySelectorAll('thead .icon-arrow4_down').length).toBe(1);
+      expect(headerItems[0].querySelector('.icon-arrow4_down')).toBeNull();
+      expect(headerItems[0].classList).not.toContain('st-table__header-item--filterable');
+      expect(headerItems[1].querySelector('.icon-arrow4_down')).toBeNull();
+      expect(headerItems[1].classList).not.toContain('st-table__header-item--filterable');
+      expect(headerItems[2].querySelector('.icon-arrow4_down')).toBeNull();
+      expect(headerItems[2].classList).not.toContain('st-table__header-item--filterable');
+      expect(headerItems[3].querySelector('.icon-arrow4_down')).toBeNull();
+      expect(headerItems[3].classList).not.toContain('st-table__header-item--filterable');
+      expect(headerItems[4].querySelector('.icon-arrow4_down')).not.toBeNull();
+      expect(headerItems[4].classList).toContain('st-table__header-item--filterable');
+   });
+
 
    describe('Should return the class name for header items according to the current order and direction', () => {
       beforeEach(() => {
@@ -225,10 +259,71 @@ describe('StTableComponent', () => {
 
    });
 
+   describe('When user clicks on a filter arrow in the table header', () => {
+      beforeEach(() => {
+         spyOn(component.selectedFilters, 'emit');
+         spyOn(_.prototype, 'debounce').and.callFake(() => this);
+         fixture.detectChanges();
+
+      });
+
+      it('Should show a menu where to apply filters', () => {
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
+         headerItem[4].querySelector('.st-table__filter-arrow').click();
+         fixture.changeDetectorRef.markForCheck();
+         fixture.detectChanges();
+         let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[4];
+
+         if (!component.templateContentFilter) {
+            expect(popover).not.toBeNull();
+            expect(popover.querySelector('st-checkbox')).not.toBeNull();
+         }
+      });
+
+      it('and select an option should emit eventEmitter with selected filters', () => {
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
+         headerItem[4].querySelector('.st-table__filter-arrow').click();
+         fixture.changeDetectorRef.markForCheck();
+         fixture.detectChanges();
+         let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[4];
+         popover.querySelector('st-checkbox').querySelector('input').click();
+
+         fixture.changeDetectorRef.markForCheck();
+         fixture.detectChanges();
+         expect(component.selectedFilters.emit).toHaveBeenCalledWith([fakeFields[4]]);
+      });
+
+      it('and scroll down should move pop-over to adjust y coord', () => {
+
+      });
+   });
+
+   xdescribe('When user clicks on a filter arrow in the table header with a custom template', () => {
+
+      beforeEach(() => {
+         component.templateContentFilter = this.viewContainerRef.createEmbeddedView(this.contentRef);
+         fixture.detectChanges();
+      });
+      it('Should show a custom menu', () => {
+
+         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
+
+         headerItem[4].querySelector('.st-table__filter-arrow').click();
+         fixture.changeDetectorRef.markForCheck();
+         fixture.detectChanges();
+         let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[4];
+
+         if (component.templateContentFilter) {
+            expect(popover).not.toBeNull();
+            expect(popover.querySelector('span')).toBe('Hello 4');
+         }
+      });
+   });
+
    describe('Should be able to enable or disable the selection of all its rows', () => {
 
       it('By default, if "selectableAll" input is not specified, table is created without being able to select all its rows', () => {
-         expect(fixture.nativeElement.querySelector('st-checkbox')).toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-table__checkbox')).toBeNull();
       });
 
       it('If table does not allow to select all its rows, header will be displayed without a checkbox', () => {
@@ -236,7 +331,7 @@ describe('StTableComponent', () => {
 
          fixture.detectChanges();
 
-         expect(fixture.nativeElement.querySelector('st-checkbox')).toBeNull();
+         expect(fixture.nativeElement.querySelector('.st-table__checkbox')).toBeNull();
       });
 
       describe('If table allows to select all its rows', () => {
