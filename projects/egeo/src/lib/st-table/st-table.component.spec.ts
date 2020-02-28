@@ -34,7 +34,7 @@ let fakeFields: StTableHeader[] = [
    { id: 'group', label: 'Group', sortable: true, filters: { filterable: true, filterConfig: [{ id: 0, name: '1111' }] } }
 ];
 
-fdescribe('StTableComponent', () => {
+describe('StTableComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
