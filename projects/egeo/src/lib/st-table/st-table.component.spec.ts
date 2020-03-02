@@ -13,12 +13,14 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import * as _ from 'lodash';
+import { fromEvent, Observable } from 'rxjs';
 
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableComponent } from './st-table.component';
 import { StTableHeader } from './shared/table-header.interface';
 import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
 import { StPopOverModule } from '../st-pop-over/st-pop-over.module';
+import { StParentScrollModule } from '../directives/st-parent-scroll/st-parent-scroll.module';
 
 let fixture: ComponentFixture<StTableComponent>;
 let component: StTableComponent;
@@ -38,7 +40,7 @@ describe('StTableComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
-         imports: [CommonModule, RouterTestingModule, StCheckboxModule, StPopOverModule],
+         imports: [CommonModule, RouterTestingModule, StCheckboxModule, StPopOverModule, StParentScrollModule],
          declarations: [StTableComponent]
       })
          // remove this block when the issue #12313 of Angular is fixed
@@ -263,6 +265,8 @@ describe('StTableComponent', () => {
       beforeEach(() => {
          spyOn(component.selectedFilters, 'emit');
          spyOn(_.prototype, 'debounce').and.callFake(() => this);
+         //spyOn(component, 'onParentScroll').and.callFake(() => this);
+
          fixture.detectChanges();
 
       });
@@ -294,31 +298,50 @@ describe('StTableComponent', () => {
       });
 
       it('and scroll down should move pop-over to adjust y coord', () => {
-
-      });
-   });
-
-   xdescribe('When user clicks on a filter arrow in the table header with a custom template', () => {
-
-      beforeEach(() => {
-         component.templateContentFilter = this.viewContainerRef.createEmbeddedView(this.contentRef);
-         fixture.detectChanges();
-      });
-      it('Should show a custom menu', () => {
-
-         let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
-
-         headerItem[4].querySelector('.st-table__filter-arrow').click();
+         let event: Observable<Event> = fromEvent(fixture.nativeElement, 'scroll');
+         component.onParentScroll(event);
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
-         let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[4];
+         //    it('Should emit an event', () => {
+         //    spyOn(component.closeFilter, 'emit');
+         //    component.onCloseFilter();
+         //    fixture.detectChanges();
 
-         if (component.templateContentFilter) {
-            expect(popover).not.toBeNull();
-            expect(popover.querySelector('span')).toBe('Hello 4');
-         }
+         //    expect(component.closeFilter.emit).toHaveBeenCalledWith(true);
+         // });
+
+         // const container = fixture.debugElement.nativeNode;
+         // debugger
+         // container.dispatchEvent(new CustomEvent('scroll'));
+         // fixture.detectChanges();
+         //fixture.whenStable().then(() => {
+         expect(component.positionYPopover).toEqual(0);
+         //expect(component.parentScroll).toHaveBeenCalled();
+         //});
       });
    });
+
+   // xdescribe('When user clicks on a filter arrow in the table header with a custom template', () => {
+
+   //    beforeEach(() => {
+   //       component.templateContentFilter = this.viewContainerRef.createEmbeddedView(this.contentRef);
+   //       fixture.detectChanges();
+   //    });
+   //    it('Should show a custom menu', () => {
+
+   //       let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
+
+   //       headerItem[4].querySelector('.st-table__filter-arrow').click();
+   //       fixture.changeDetectorRef.markForCheck();
+   //       fixture.detectChanges();
+   //       let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[4];
+
+   //       if (component.templateContentFilter) {
+   //          expect(popover).not.toBeNull();
+   //          expect(popover.querySelector('span')).toBe('Hello 4');
+   //       }
+   //    });
+   // });
 
    describe('Should be able to enable or disable the selection of all its rows', () => {
 
