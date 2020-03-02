@@ -37,7 +37,7 @@ let fakeFields: StTableHeader[] = [
    { id: 'group', label: 'Group', sortable: true, filters: { filterable: true, filterConfig: [{ id: 0, name: '1111' }] } }
 ];
 
-fdescribe('StTableComponent', () => {
+describe('StTableComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
@@ -290,7 +290,7 @@ fdescribe('StTableComponent', () => {
          headerItem[4].querySelector('.st-table__filter-arrow').click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
-         let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[4];
+         let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[0];
 
          if (!component.templateContentFilter) {
             expect(popover).not.toBeNull();
@@ -303,7 +303,7 @@ fdescribe('StTableComponent', () => {
          headerItem[4].querySelector('.st-table__filter-arrow').click();
          fixture.changeDetectorRef.markForCheck();
          fixture.detectChanges();
-         let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[4];
+         let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[0];
          popover.querySelector('st-checkbox').querySelector('input').click();
 
          fixture.changeDetectorRef.markForCheck();
@@ -318,27 +318,7 @@ fdescribe('StTableComponent', () => {
       });
    });
 
-   // xdescribe('When user clicks on a filter arrow in the table header with a custom template', () => {
 
-   //    beforeEach(() => {
-   //       component.templateContentFilter = this.viewContainerRef.createEmbeddedView(this.contentRef);
-   //       fixture.detectChanges();
-   //    });
-   //    it('Should show a custom menu', () => {
-
-   //       let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
-
-   //       headerItem[4].querySelector('.st-table__filter-arrow').click();
-   //       fixture.changeDetectorRef.markForCheck();
-   //       fixture.detectChanges();
-   //       let popover = fixture.nativeElement.querySelectorAll('.st-table__popover-content')[4];
-
-   //       if (component.templateContentFilter) {
-   //          expect(popover).not.toBeNull();
-   //          expect(popover.querySelector('span')).toBe('Hello 4');
-   //       }
-   //    });
-   // });
 
    describe('Should be able to enable or disable the selection of all its rows', () => {
 

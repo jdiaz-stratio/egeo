@@ -26,19 +26,16 @@
                </i>
                {{field.label}}
             </label>
-            <st-pop-over class="st-table__popover" qaTag="pop-over-demo" [title]="getTitle(field)" [hidden]="hiddenFilter[i]"
-                [offset]="{x: 7, y: positionYPopover}" [showSettingBtn]="getShowSettingBtn(field)">
-               <i pop-over-button *ngIf="isFilterable(field)" class='st-table__filter-arrow icon-arrow4_down'
-                   (click)="onClickFilterColumn(i, $event)"></i>
+            <st-pop-over *ngIf="isFilterable(field)" class="st-table__popover" qaTag="pop-over-demo" [title]="getTitle(field)"
+                [hidden]="hiddenFilter[i]" [offset]="{x: 7, y: positionYPopover}" [showSettingBtn]="getShowSettingBtn(field)">
+               <i pop-over-button class='st-table__filter-arrow icon-arrow4_down' (click)="onClickFilterColumn(i, $event)"></i>
                <div pop-over-content class="st-table__popover-content">
-                  <div *ngIf="isFilterable(field)" >
-                     <ng-container [ngTemplateOutlet]="templateContentFilter" [ngTemplateOutletContext]="{index:i}"></ng-container>
-                     <div *ngIf="!templateContentFilter">
-                        <div *ngFor="let filter of field.filters.filterConfig; let indexFilter = index">
-                           <st-checkbox name="filter.name" [checked]="filter.selected"  [value]="false"  (change)="onChangeFilter(i, indexFilter, $event)">
-                              <span>{{filter.name}}</span>
-                           </st-checkbox>
-                        </div>
+                  <ng-container [ngTemplateOutlet]="templateContentFilter" [ngTemplateOutletContext]="{index:i}"></ng-container>
+                  <div *ngIf="!templateContentFilter">
+                     <div *ngFor="let filter of field.filters.filterConfig; let indexFilter = index">
+                        <st-checkbox name="filter.name" [checked]="filter.selected" [value]="false" (change)="onChangeFilter(i, indexFilter, $event)">
+                           <span>{{filter.name}}</span>
+                        </st-checkbox>
                      </div>
                   </div>
                </div>
