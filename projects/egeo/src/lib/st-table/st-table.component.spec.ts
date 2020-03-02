@@ -265,7 +265,7 @@ describe('StTableComponent', () => {
       beforeEach(() => {
          spyOn(component.selectedFilters, 'emit');
          spyOn(_.prototype, 'debounce').and.callFake(() => this);
-         //spyOn(component, 'onParentScroll').and.callFake(() => this);
+         // spyOn(component, 'onParentScroll').and.callFake(() => this);
 
          fixture.detectChanges();
 
@@ -314,10 +314,10 @@ describe('StTableComponent', () => {
          // debugger
          // container.dispatchEvent(new CustomEvent('scroll'));
          // fixture.detectChanges();
-         //fixture.whenStable().then(() => {
+         // fixture.whenStable().then(() => {
          expect(component.positionYPopover).toEqual(0);
-         //expect(component.parentScroll).toHaveBeenCalled();
-         //});
+         // expect(component.parentScroll).toHaveBeenCalled();
+         // });
       });
    });
 
