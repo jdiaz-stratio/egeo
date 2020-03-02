@@ -14,6 +14,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import * as _ from 'lodash';
 import { fromEvent, Observable } from 'rxjs';
+import { map, share } from 'rxjs/operators';
 
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableComponent } from './st-table.component';
@@ -36,7 +37,7 @@ let fakeFields: StTableHeader[] = [
    { id: 'group', label: 'Group', sortable: true, filters: { filterable: true, filterConfig: [{ id: 0, name: '1111' }] } }
 ];
 
-describe('StTableComponent', () => {
+fdescribe('StTableComponent', () => {
 
    beforeEach(async(() => {
       TestBed.configureTestingModule({
@@ -262,14 +263,27 @@ describe('StTableComponent', () => {
    });
 
    describe('When user clicks on a filter arrow in the table header', () => {
-      beforeEach(() => {
+      beforeEach((done) => {
+         fixture.nativeElement.style.overflow = 'scroll';
+         fixture.nativeElement.style.height = '1px';
+         fixture.nativeElement.scrollTop = 10;
+
+         setTimeout(() => {
+            fixture.detectChanges();
+            done();
+         });
+      });
+
+      beforeEach(async(() => {
+         const event: Event = new Event('scroll');
          spyOn(component.selectedFilters, 'emit');
          spyOn(_.prototype, 'debounce').and.callFake(() => this);
-         // spyOn(component, 'onParentScroll').and.callFake(() => this);
-
+         fixture.nativeElement.dispatchEvent(event);
          fixture.detectChanges();
-
-      });
+         fixture.whenStable().then(() => {
+            fixture.detectChanges();
+         });
+      }));
 
       it('Should show a menu where to apply filters', () => {
          let headerItem: HTMLTableHeaderCellElement = fixture.nativeElement.querySelectorAll('.st-table__header-item');
@@ -298,26 +312,9 @@ describe('StTableComponent', () => {
       });
 
       it('and scroll down should move pop-over to adjust y coord', () => {
-         let event: Observable<Event> = fromEvent(fixture.nativeElement, 'scroll');
-         component.onParentScroll(event);
-         fixture.changeDetectorRef.markForCheck();
-         fixture.detectChanges();
-         //    it('Should emit an event', () => {
-         //    spyOn(component.closeFilter, 'emit');
-         //    component.onCloseFilter();
-         //    fixture.detectChanges();
-
-         //    expect(component.closeFilter.emit).toHaveBeenCalledWith(true);
-         // });
-
-         // const container = fixture.debugElement.nativeNode;
-         // debugger
-         // container.dispatchEvent(new CustomEvent('scroll'));
-         // fixture.detectChanges();
-         // fixture.whenStable().then(() => {
-         expect(component.positionYPopover).toEqual(0);
-         // expect(component.parentScroll).toHaveBeenCalled();
-         // });
+         fixture.whenStable().then(() => {
+            expect(component.positionYPopover).toEqual(-10);
+         });
       });
    });
 
