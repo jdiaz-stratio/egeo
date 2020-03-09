@@ -6,6 +6,10 @@
 
 * st-header: Include new UX defined styles to header
 
+**New features:**
+
+* st-table: Includes new field 'filterable' to apply filters by column.
+
 **Others:**
 
 * Update icon font to 1.27

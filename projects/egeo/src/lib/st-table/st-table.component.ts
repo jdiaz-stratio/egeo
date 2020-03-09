@@ -8,11 +8,12 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ChangeDetectorRef } from '@angular/core';
 
 import { StEgeo, StRequired } from '../decorators/require-decorators';
 import { Order, ORDER_TYPE } from './shared/order';
 import { StTableHeader } from './shared/table-header.interface';
+import { cloneDeep as _cloneDeep, get as _get } from 'lodash';
 
 /**
  * @description {Component} [Table]
@@ -67,12 +68,16 @@ export class StTableComponent implements OnInit {
    @Input() qaTag: string;
    /** @Input {boolean} [header=true] Boolean to show or hide the header */
    @Input() header: boolean = true;
-
    /**
     * @Input {boolean} [sortable=true] Boolean to make sortable the table, To enable sorting of columns use
     * the new "sortable" field inside stTableHeader model
     */
    @Input() sortable: boolean = true;
+   /**
+    * @Input {boolean} [filterable=true] Boolean to make filterable the table, To enable filtering of columns use
+    * the new "filterable" field inside stTableHeader model (necesary define filterConfig).
+    */
+   @Input() filterable: boolean = false;
    /**
     * @Input {boolean} [selectableAll=false] Boolean to show or hide a checkbox in the header to select or
     *  deselect all rows
@@ -84,8 +89,14 @@ export class StTableComponent implements OnInit {
    /** @Input {string} [customClasses=] Classes for adding styles to table tag from outside. These can be: separated-rows */
    @Input() customClasses: string;
 
+
    /** @Input {boolean} [fixedHeader=false] Boolean to fix the table header */
    @Input() fixedHeader: boolean = false;
+
+   /** @Input {TemplateRef} [templateContentFilter=undefined] Reference to paint a custom template inside popover content */
+   @Input() templateContentFilter?: TemplateRef<any>;
+   /** @Input {boolean[]} [statusFilter=''] List of status filter by column, needed with templateContentFilter */
+   @Input() statusFilter?: boolean[];
 
    /** @Input {boolean} [selectedAll=false] It specifies if all rows are selected */
    @Input()
@@ -115,15 +126,60 @@ export class StTableComponent implements OnInit {
     */
    @Output() selectAll: EventEmitter<boolean> = new EventEmitter();
 
+   /** @Output {StTableHeader[]} [selectedFilters=''] Event emitted  when user interacts with filter button without a custom template */
+   @Output() selectedFilters: EventEmitter<StTableHeader[]> = new EventEmitter();
+
    public tableClass: any;
    public orderTypes: any = ORDER_TYPE;
+   public visibleFilter: number = -1;
 
    private _selectedAll: boolean;
    private _hasHoverMenu: boolean = false;
 
+   constructor(private _cd: ChangeDetectorRef) {}
 
    ngOnInit(): void {
       this.tableClass = this.getClasses();
+      if (this.filterable && !this.statusFilter) {
+         this.statusFilter = new Array(this.fields.length);
+         this.statusFilter.fill(false);
+      }
+   }
+
+   public getClasses(): any {
+      let classes: any = {};
+      if (this.fixedHeader) {
+         classes['st-table--fixed-header'] = true;
+      }
+      classes[this.customClasses] = this.customClasses;
+
+      return classes;
+   }
+
+   public getHeaderItemClass(field: StTableHeader): string {
+      let isOrderAsc = this.isSortedByFieldAndDirection(field, this.orderTypes.ASC);
+      return isOrderAsc ? 'icon-arrow-up' : 'icon-arrow-down';
+   }
+
+   public isSortable(field: StTableHeader): boolean {
+      return field && field.sortable !== undefined ? field.sortable : this.sortable;
+   }
+
+   public isSortedByField(field: StTableHeader): boolean {
+      return this.currentOrder && this.currentOrder.orderBy === field.id;
+   }
+
+   public isFilterable(field: StTableHeader): boolean {
+      return (this.filterable && _get(field, 'filters.filterConfig')) || (this.filterable && this.templateContentFilter && _get(field, 'filters'));
+   }
+
+   public onClickPopover(index: number): void {
+      if (this.visibleFilter === index) {
+         this.visibleFilter = -1;
+      } else {
+         this.visibleFilter = index;
+      }
+      this._cd.markForCheck();
    }
 
    public onChangeOrder(field: StTableHeader): void {
@@ -137,39 +193,29 @@ export class StTableComponent implements OnInit {
       }
    }
 
-   public getClasses(): any {
-      let classes: any = {};
-      if ( this.fixedHeader) {
-         classes['st-table--fixed-header'] = true;
-      }
-      classes[this.customClasses] = this.customClasses;
-
-      return classes;
-   }
-
-   public isSortable(field: StTableHeader): boolean {
-      return field && field.sortable !== undefined ? field.sortable : this.sortable;
-   }
-
    public onSelectAll(event: any): void {
       this.selectAll.emit(event.checked);
    }
 
-   public getHeaderItemClass(field: StTableHeader): string {
-      let isOrderAsc = this.isSortedByFieldAndDirection(field, this.orderTypes.ASC);
-      return isOrderAsc ? 'icon-arrow-up' : 'icon-arrow-down';
-   }
-
-   public isSortedByField(field: StTableHeader): boolean {
-      return this.currentOrder && this.currentOrder.orderBy === field.id;
-   }
-
-   private isSortedByFieldAndDirection(field: StTableHeader, orderType: ORDER_TYPE): boolean {
-      return this.isSortedByField(field) && this.currentOrder.type === orderType;
+   public onSelectedFilters(event: Event): void {
+      let selectedFilters = _cloneDeep(this.fields);
+      selectedFilters = selectedFilters.filter((field) => {
+         if (_get(field, 'filters.filterConfig')) {
+            field.filters.filterConfig = field.filters.filterConfig.filter((conf) => conf.selected);
+            if (field.filters.filterConfig.length > 0) {
+               return field;
+            }
+         }
+      });
+      this.selectedFilters.emit(selectedFilters);
    }
 
    private changeOrderDirection(): void {
       let newDirection = this.currentOrder.type === ORDER_TYPE.ASC ? ORDER_TYPE.DESC : ORDER_TYPE.ASC;
       this.currentOrder = new Order(this.currentOrder.orderBy, newDirection);
+   }
+
+   private isSortedByFieldAndDirection(field: StTableHeader, orderType: ORDER_TYPE): boolean {
+      return this.isSortedByField(field) && this.currentOrder.type === orderType;
    }
 }

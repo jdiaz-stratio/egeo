@@ -10,7 +10,7 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { StDemoGeneratorModule, StDocsModule, StTableModule, StCheckboxModule } from '@stratio/egeo';
+import { StDemoGeneratorModule, StDocsModule, StTableModule, StCheckboxModule, StToggleButtonsModule } from '@stratio/egeo';
 
 import { StTableDemoComponent } from './st-table-demo.component';
 
@@ -20,7 +20,8 @@ import { StTableDemoComponent } from './st-table-demo.component';
       StTableModule,
       StCheckboxModule,
       StDemoGeneratorModule.withComponents({ components: [StTableDemoComponent] }),
-      StDocsModule
+      StDocsModule,
+      StToggleButtonsModule
    ],
    declarations: [StTableDemoComponent]
 })

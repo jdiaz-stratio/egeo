@@ -21,9 +21,9 @@ export class StFormListDemoComponent {
    @ViewChild('formModel', {static: false}) public formModel: NgForm;
    @ViewChild('templateDrivenForm', {static: false}) public templateDrivenForm: NgForm;
    public configDoc: any = {
-      html: 'demo/st-draggable-card-demo/st-draggable-card-demo.component.html',
-      ts: 'demo/st-draggable-card-demo/st-draggable-card-demo.component.ts',
-      component: 'lib/st-draggable-card/st-draggable-card.component.ts'
+      html: 'demo/st-form-list-demo/st-form-list-demo.html',
+      ts: 'demo/st-form-list-demo/st-form-list-demo.ts',
+      component: 'lib/st-form-list/st-form-list.component.ts'
    };
    public reactiveForm: FormGroup;
 

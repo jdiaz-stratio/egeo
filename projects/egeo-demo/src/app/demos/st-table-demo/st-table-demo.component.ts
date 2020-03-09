@@ -8,15 +8,15 @@
  *
  * SPDX-License-Identifier: Apache-2.0.
  */
-import { Component } from '@angular/core';
-import { cloneDeep as _cloneDeep } from 'lodash';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Order, ORDER_TYPE, StTableHeader } from '@stratio/egeo';
+import { cloneDeep as _cloneDeep, filter as _filter, intersectionBy as _intersectionBy } from 'lodash';
 
 @Component({
    templateUrl: './st-table-demo.component.html',
    styleUrls: ['./st-table-demo.component.scss']
 })
-export class StTableDemoComponent {
+export class StTableDemoComponent implements OnInit {
    public configDoc: any = {
       html: 'demo/st-table-demo/st-table-demo.component.html',
       ts: 'demo/st-table-demo/st-table-demo.component.ts',
@@ -32,6 +32,53 @@ export class StTableDemoComponent {
       { id: 'name', label: 'Name' },
       { id: 'lastName', label: 'Last Name' },
       { id: 'phone', label: 'Phone' },
+      { id: 'company', label: 'Company' },
+      { id: 'completedProfile', label: 'Completed profile' }];
+
+   public filterFields: StTableHeader[] = [
+      { id: 'id', label: 'Id' },
+      { id: 'name', label: 'Name' },
+      {
+         id: 'lastName',
+         label: 'Last Name',
+         filters: {
+            filterConfig: [
+               {
+                  id: '0',
+                  name: 'López'
+               },
+               {
+                  id: '1',
+                  name: 'Lara'
+               }
+            ],
+            title: 'Filter By',
+            buttonText: 'Apply'
+         }
+      },
+      {
+         id: 'phone',
+         label: 'Phone',
+         filters: {
+            filterConfig: [
+               {
+                  id: '0',
+                  name: 60052520145
+               },
+               {
+                  id: '1',
+                  name: 600456520145
+               },
+               {
+                  id: '2',
+                  name: 6005276845
+               }
+            ],
+            showSettingBtn: true,
+            title: 'Filter by',
+            buttonText: 'Apply'
+         }
+      },
       { id: 'company', label: 'Company' },
       { id: 'completedProfile', label: 'Completed profile' }];
 
@@ -86,12 +133,24 @@ export class StTableDemoComponent {
          completedProfile: '70%'
       }
    ];
+   public filterData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
    public sortedData: Array<{ id: string, name: string, lastName: string, phone: number, company: string, completedProfile: string }>;
    public selectedCheckboxes: boolean[][] = [[], []];
+   public statusFilter: boolean[];
 
-
-   constructor() {
+   constructor(private _cd: ChangeDetectorRef) {
       this.sortedData = _cloneDeep(this.data);
+      this.filterData = _cloneDeep(this.data);
+   }
+
+   ngOnInit(): void {
+      this.statusFilter = new Array(this.fields.length);
+      this.statusFilter.fill(false);
+   }
+
+   public checkIcon(index: number): void {
+      this.statusFilter[index] = !this.statusFilter[index];
+      this._cd.markForCheck();
    }
 
    // Selectable tables
@@ -114,5 +173,29 @@ export class StTableDemoComponent {
       this.sortedData = [...this.data].sort((a, b) => {
          return a[order.orderBy].toString().localeCompare(b[order.orderBy].toString()) * reverseConst;
       });
+
+      this.filterData = [...this.data].sort((a, b) => {
+         return a[order.orderBy].toString().localeCompare(b[order.orderBy].toString()) * reverseConst;
+      });
+   }
+
+   public onSelectedFilters(event: Event): void {
+      if ((<any>event).length > 0) {
+         let filterElement = [];
+         (<any>event).map((filter) => {
+            filterElement.push([].concat.apply([], filter.filters.filterConfig.map((config) => {
+               return _filter(this.data, (user) => {
+                  return user[filter.id] === config.name;
+               });
+            })));
+         });
+         this.filterData = <any>_intersectionBy(...filterElement, 'id');
+      } else {
+         this.filterData = this.data;
+      }
+   }
+
+   public onFilter(index: number): void {
+      // do stuff to filter table
    }
 }

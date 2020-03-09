@@ -60,6 +60,17 @@
       color: $space-80;
       vertical-align: middle;
    }
+
+   &__filter-arrow {
+      bottom: -3px;
+      color: $space-80;
+      cursor: pointer;
+      font-size: 0.857rem;
+      font-weight: bold;
+      left: 5px;
+      position: relative;
+      vertical-align: middle;
+   }
 }
 
 // row theme

@@ -10,7 +10,9 @@
  */
 
 .content {
-    display: inline-block;
+   display: inline-block;
+   height: auto;
+   min-width: 210px;
 }
 
 .arrow {

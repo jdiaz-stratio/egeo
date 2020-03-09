@@ -13,13 +13,15 @@ import { NgModule } from '@angular/core';
 
 import { StTableCellComponent } from './shared/st-table-cell/st-table-cell.component';
 import { StTableRowComponent } from './shared/st-table-row/st-table-row.component';
+import { StPopoverFilterComponent } from './shared/st-popover-filter/st-popover-filter.component';
 import { StTableComponent } from './st-table.component';
 import { StCheckboxModule } from '../st-checkbox/st-checkbox.module';
+import { StPopOverModule } from '../st-pop-over/st-pop-over.module';
 
 @NgModule({
-   imports: [CommonModule, StCheckboxModule],
-   declarations: [StTableCellComponent, StTableComponent, StTableRowComponent],
-   exports: [StTableCellComponent, StTableComponent, StTableRowComponent]
+   imports: [CommonModule, StCheckboxModule, StPopOverModule],
+   declarations: [StPopoverFilterComponent, StTableCellComponent, StTableComponent, StTableRowComponent],
+   exports: [StPopoverFilterComponent, StTableCellComponent, StTableComponent, StTableRowComponent]
 })
 
 export class StTableModule {

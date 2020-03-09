@@ -38,12 +38,12 @@
        }
     }
     &__header {
-        font-weight: normal;
+        font-weight: 600;
         font-size: $egeo-font-size-12;
         line-height: $egeo-line-height-xxxsmall;
-        text-transform: uppercase;
+        text-transform: none;
         color: $space-70;
-        padding: 6px 15px 6px 30px;
+        padding: 6px 15px 6px 15px;
         display: flex;
 
        .title {

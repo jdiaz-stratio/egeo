@@ -11,6 +11,17 @@
 
 @import 'constants/index';
 
+st-table {
+   position: relative;
+}
+
+.st-table {
+   &__popover-button {
+      margin-top: 20px;
+      width: 100%;
+   }
+}
+
 td > .icon-ellipsis {
    cursor: pointer;
    font-size: 24px;
@@ -26,4 +37,27 @@ td > .icon-ellipsis {
       display: flex;
       height: 150px;
    }
+}
+
+.subtitle {
+   font-weight: 400;
+   font-size: $egeo-font-size-20;
+   font-style: normal;
+   font-stretch: normal;
+   line-height: $egeo-line-height-24;
+   letter-spacing: normal;
+   color: $neutral;
+   padding: 26px 0;
+   display: inline-block;
+}
+
+.paragraph {
+   font-weight: normal;
+   font-size: $egeo-font-size-18;
+   font-style: normal;
+   font-stretch: normal;
+   line-height: $egeo-line-height-22;
+   letter-spacing: normal;
+   color: $neutral;
+   padding-bottom: 20px;
 }
