@@ -136,7 +136,7 @@ describe('StTableComponent', () => {
       expect(headerItems[3].classList).toContain('st-table__header-item--sortable');
    });
 
-   it('only is displayed an arrow next to header of the field over which current filter is applied', () => {
+   it('only is displayed an arrow next to header of the field over which current filter is configured', () => {
       component.filterable = true;
       fixture.detectChanges();
       expect(fixture.nativeElement.querySelector('thead .st-table__filter-arrow')).toBeDefined();
