@@ -135,9 +135,7 @@ export class StModalService {
 
       this.dynamicModal.instance.click.subscribe(this.notify.bind(this));
       this.dynamicModal.instance.modalConfig = modalConfig;
-      if (disabledAnimation) {
-         this.dynamicModal.instance.disabledAnimation = disabledAnimation;
-      }
+      this.dynamicModal.instance.disabledAnimation = !!disabledAnimation;
 
       this.dynamicModal.changeDetectorRef.detectChanges();
    }
